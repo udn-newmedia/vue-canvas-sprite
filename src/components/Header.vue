@@ -145,6 +145,7 @@ export default {
 
 #hbutton-contain {
     position: absolute;
+    z-index: 99999;
     cursor: pointer;
     top: 0;
     right: 0;

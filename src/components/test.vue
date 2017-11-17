@@ -10,23 +10,23 @@
 				</div>
 			</div>
 			<div class="quizSection">
-				<div class="quiz" v-for="(quiz, index) in quizs">
-					<h2>{{quiz.ask}}</h2>
+				<div class="quiz" v-for="(quiz, index) in ajaxTest">
+					<h2>{{quiz.gsx$question.$t}}</h2>
 					<div class="optionBlock">
-						<p class="optionA" @click="nextQuiz">{{quiz.optionA}}</p>
-						<p class="optionB" @click="choseB(index)">{{quiz.optionB}}</p>
+						<p class="optionA" @click="nextQuiz">{{quiz.gsx$optiona.$t}}</p>
+						<p class="optionB" @click="choseB(index)">{{quiz.gsx$optionb.$t}}</p>
 					</div>
 				</div>
 			</div>
 			<div class="answerSection" @scroll="showScrollLeft($event)">
-				<div class="answer" v-for="answer in answers">
-					<div class="answerA" v-if="answer.showA">
-						<h2>{{answer.answerA.suggestion}}</h2>
-						<a :href="answer.answerA.link">{{answer.answerA.promotion}}</a>
+				<div class="answer" v-for="(test, index) in ajaxTest">
+					<div class="answerA" v-if="answers[index].showA">
+						<h2>{{test.gsx$ansasuggest.$t}}</h2>
+						<a :href="test.gsx$ansalink.$t">{{test.gsx$ansapromotion.$t}}</a>
 					</div>
 					<div class="answerB" v-else>
-						<h2>{{answer.answerB.suggestion}}</h2>
-						<a :href="answer.answerB.link">{{answer.answerB.promotion}}</a>
+						<h2>{{test.gsx$ansbsuggest.$t}}</h2>
+						<a :href="test.gsx$ansbsuggest.$t">{{test.gsx$ansbpromotion.$t}}</a>
 					</div>
 				</div>
 			</div>
@@ -42,118 +42,27 @@ export default {
 		return {
 			scrollSpeed: 1.33,
 			quizIndex: 0,
-			quizs: [
-				{
-					"ask": "家裡是否有高效能主機",
-					"optionA": "有",
-					"optionB": "沒有"
-				},
-				{
-					"ask": "謝謝的日文是哪一個？",
-					"optionA": "ありがとう",
-					"optionB": "あるがと"
-				},
-				{
-					"ask": "誰がこのすばの女神",
-					"optionA": "アークア",
-					"optionB": "恵ちゃん"
-				},
-				{
-					"ask": "我在雙週會表演的曲子是？",
-					"optionA": "Wings~ you are the hero",
-					"optionB": "Mother"
-				},
-				{
-					"ask": "像柯文哲的吉他演奏家是？",
-					"optionA": "中川砂人",
-					"optionB": "岡崎倫典"
-				},
-				{
-					"ask": "董事長叫什麼名字",
-					"optionA": "Donkey",
-					"optionB": "Duncan"
-				}
-			],
 			answers: [
 				{
 					"showA": true,
-					"answerA": {
-						"suggestion": "那要不要再換一台呢？",
-						"link": "https://shopping.udn.com/mall/Cc1a00.do",
-						"promotion": "詳細請點我吧",
-					},
-					"answerB": {
-						"suggestion": "那要不要買一台呢？",
-						"link": "https://shopping.udn.com/mall/Cc1a00.do",
-						"promotion": "詳細請點我吧",
-					},
 				},
 				{
 					"showA": true,
-					"answerA": {
-						"suggestion": "恭喜你答對了",
-						"link": "https://zh.wikibooks.org/wiki/Category:%E6%97%A5%E8%AA%9E",
-						"promotion": "點我了解進修資訊",
-					},
-					"answerB": {
-						"suggestion": "可惜答錯囉！",
-						"link": "https://zh.wikibooks.org/wiki/Category:%E4%BA%94%E5%8D%81%E9%9F%B3",
-						"promotion": "點我學習吧！",
-					},
 				},
 				{
 					"showA": true,
-					"answerA": {
-						"suggestion": "答對囉，雖然女神都是女神經病",
-						"link": "https://shopping.udn.com/mall/Cc1a00.do",
-						"promotion": "點我看神經病經典錄",
-					},
-					"answerB": {
-						"suggestion": "那要不要買一台呢？",
-						"link": "https://shopping.udn.com/mall/Cc1a00.do",
-						"promotion": "點我學學怎麼エクスプロージョン",
-					},
 				},
 				{
 					"showA": true,
-					"answerA": {
-						"suggestion": "WoW 我講那麼小聲也聽得到",
-						"link": "https://www.youtube.com/watch?v=yIp481buXzU",
-						"promotion": "聽聽看原作者的專輯吧"
-					},
-					"answerB": {
-						"suggestion": "可惜答錯囉",
-						"link": "https://www.youtube.com/watch?v=sn17Up7TzyA",
-						"promotion": "雖然答錯了但也聽聽這首Mother吧"
-					},
 				},
 				{
 					"showA": true,
-					"answerA": {
-						"suggestion": "可惜答錯囉",
-						"link": "http://a2.att.hudong.com/80/46/20300000009075131424469180850_s.jpg",
-						"promotion": "點我看看照片"
-					},
-					"answerB": {
-						"suggestion": "恭喜答對囉",
-						"link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSIvq79gJb3GY_8yuJbfd0Zc6f-o4G0-b9QdiO3oyDRygB-MRT",
-						"promotion": "點我看看是不是真的像"
-					},
 				},
 				{
 					"showA": true,
-					"answerA": {
-						"suggestion": "答錯囉你要再來一次新人訓練",
-						"link": "http://a3.att.hudong.com/13/71/01300000065995121218711701774_s.jpg",
-						"promotion": "這才是Donkey!"
-					},
-					"answerB": {
-						"suggestion": "恭喜你答對了",
-						"link": "http://img.appledaily.com.tw/images/ReNews/20141209/640_b4443698ce9edcf93755f08d656daf88.jpg",
-						"promotion": "阿不就好棒棒"
-					},
 				}
 			],
+			ajaxTest: {},
 			canvasWidth: 108,
 			canvasHeight: 140,			
 			canvasSprite: {
@@ -177,12 +86,17 @@ export default {
 			return this.canvasSprite.spriteHeight / this.canvasSprite.rows
 		}
 	},
+	created: function() {
+		this.canvasSprite.name.src = elderPic
+		this.getData()
+	},
 	mounted: function() {
+		console.log(this.interValDrawElder);
 		if(this.interValDrawElder == 0){
 			this.interValDrawElder = setInterval(this.drawElder, 125);
 			console.log(this.interValDrawElder)
 		}
-		this.canvasSprite.name.src = elderPic
+		console.log(this.ajaxTest)
 	},
 	methods: {
 		showScrollLeft: function(e) {
@@ -194,6 +108,7 @@ export default {
 		choseB: function(index) {
 			this.quizIndex++
 			this.answers[index].showA = false;
+			console.log(this.answers[index].showA)
 		},		
 		touchMove: function(e) {
 			console.log(e)
@@ -206,7 +121,17 @@ export default {
 			sprite.srcX = sprite.curFrame * this.srcWidth;
 			ctx.clearRect(0, 0, this.srcWidth, this.srcHeight);
 			ctx.drawImage(sprite.name, sprite.srcX, sprite.srcY, this.srcWidth, this.srcHeight, 0, 0, this.srcWidth, this.srcHeight);
-		}
+		},
+		getData: function() {
+			const vm = this;
+			const sheetUrl = 'https://spreadsheets.google.com/feeds/list/1loEISDptaHu1MqFcPmN7zW6aSgAr6tbkypQ2APZDzsk/1/public/values?alt=json'
+			axios.get(sheetUrl)
+			.then(function(reponse){
+				vm.ajaxTest = reponse.data.feed.entry
+				console.log(vm.ajaxTest)
+				console.log(reponse)
+			})		
+		},
 	}
 }
 </script>
