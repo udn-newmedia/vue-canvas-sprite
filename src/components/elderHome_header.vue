@@ -2,7 +2,6 @@
 	<header>
 		<div class="logo">
 			<a href="./index.html"><img :src="udnLogo" alt="聯合報" title="聯合報"></a>
-			<a slot="logo" href="./index.html" class="hidden-xs hidden-sm"><img src="https://udn.com/upf/newmedia/image/nmd-logo.svg" alt="新媒體中心" title="新媒體中心"></a>
 		</div>
 		<div class="blank"></div>
 		<div class="menu-btn hidden-lg" :class="{menuIcon_isOpen : menu_isOpen}" @click="menuOpen">
@@ -10,31 +9,35 @@
 			<span></span>
 			<span></span>
 			<span></span>
-		</div>			
+		</div>		
+		<div class="comment-btn" @click="commentOpen" :class="{comment_Open: comment_isOpen}">
+			<img :src="commentIcon" title="comment">
+		</div>					
 		<nav class="menuContainer" :class="{itemContainer_isOpen: menu_isOpen}">
 			<ul>
-				<li v-for="menuItem in menuItems">
-					<p><a :href="menuItem.link">{{menuItem.title}}</a></p>
+				<li>
+					<a href="./index.html">再玩一次</a>
 				</li>
+				<li>
+					<a @click="menuClose">需求解密</a>
+				</li>				
 			</ul>
 			<div class="menu_logo hidden-lg hidden-md">
 				<Logo/>
 			</div>			
 		</nav>
-		<div class="comment-btn hidden-lg" @click="commentOpen" :class="{comment_Open: comment_isOpen}">
-			<img :src="commentIcon" title="comment">
-		</div>			
-		<div class="commentContainer hidden-lg" :class="{itemContainer_isOpen: comment_isOpen}">
+		<div class="commentContainer" :class="{itemContainer_isOpen: comment_isOpen}">
 			<FBComment href="https://udn.com/upf/newmedia/2017_data/farewell/index.html"/>
 		</div>
 	</header>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 import Logo from '../components/Logo.vue'
 import udnLogo from '../assets/udn-logo_black.png'
 import commentIcon from '../assets/ic_textsms_black_24px.svg'
-import commentIcon2 from '../assets/ic_textsms_white_24px.svg'
 import FBComment from '../components/FBComment.vue'
 
 export default {
@@ -50,19 +53,17 @@ export default {
     	commentIcon: commentIcon,
     	menu_isOpen: false,
     	comment_isOpen: false,
-    	menuItems: [
-    		{
-    			"link": ".",
-    			"title": "再玩一次"
-    		},
-    		{
-    			"link": ".",
-    			"title": "需求解密"
-    		}
-    	],
     }
   },
+  computed: {
+	...mapGetters([
+  	  'quizIndex',
+  	]),
+  },  
   methods: {
+	...mapActions([
+		'handle_lookDemand',
+	]),  	
   	menuOpen () {
   		this.comment_isOpen ? this.comment_isOpen = false : this.comment_isOpen = false;
   		this.menu_isOpen ? this.menu_isOpen = false : this.menu_isOpen = true;
@@ -71,9 +72,14 @@ export default {
   		this.comment_isOpen ? this.comment_isOpen = false : this.comment_isOpen = true;
   		this.menu_isOpen ? this.menu_isOpen = false : this.menu_isOpen = false;
   	},
+  	menuClose (){
+  		this.menu_isOpen = false;
+  		this.handle_lookDemand();
+  		// console.log("good")
+  	},
   },
   mounted: function() {
-  	console.log(this)
+  	// console.log(this)
   }
 }
 </script>
@@ -87,7 +93,6 @@ export default {
 		width: 100%;
 		height: 50px;
 		display: flex;
-		background-color: red;
 	}
 	.logo{
 		z-index: 200;
@@ -99,7 +104,9 @@ export default {
 		margin-left: 0;
 		margin-right: auto;
 		display: flex;
+		opacity: 1;
 		order: 0;
+		transition: opacity .3s ease-out;
 		a{
 			display: flex;
 			justify-content: center;
@@ -111,6 +118,9 @@ export default {
 				max-height: 100%;
 			}
 		}
+	}
+	.logo:hover{
+		opacity: 1;
 	}
 	.blank{
 		position: absolute;
@@ -128,8 +138,12 @@ export default {
 		margin-bottom: auto;
 		margin-left: auto;
 		margin-right: 5px;
-		transition: .6s ease-in-out;
+		transition: opacity .6s ease-in-out, transform .3s ease-in-out;
 		order: 1;
+		cursor: pointer;
+		&:active{
+			transform: scale(.1);
+		}
 	}
 	.comment_Open{
 		opacity: .3;
@@ -141,7 +155,6 @@ export default {
 		left: 0;
 		width: 100%;
 		height: 100vh;
-		background-color: #FFF;
 		overflow: scroll;
 		transform: translate(100%, 0);
 		transition: .6s;
@@ -215,21 +228,23 @@ export default {
 			padding: 15px;
 			margin: 0;
 			li{
+				position: relative;
 				width: 100%;
 				height: 50px;
-				list-style: none;
-				display: flex;
-				justify-content: center;
-				align-items: center;					
+				list-style: none;		
 				border: 1px solid black;
 				border-radius: 6px;
 				margin: 10px 0;
-				p{
-					margin: 0;
-					a{
-						color: black;
-					}
-				}	
+				cursor: pointer;
+				a{
+					position: absolute;
+					width: 100%;
+					height: 100%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					text-decoration: none;
+				}
 			}
 		}
 	}	
@@ -237,16 +252,18 @@ export default {
 		transform: translate(0, 0);
 	}
 	.menu_logo{
-		position: absolute;
-		left: 10%;
-		bottom: 15px;
-		width: 80%;
+		position: relative;
+		padding: 0 15px;
 	}
 @media screen and (min-width: 1024px) {
 	header{
-		height: 80px;
-		top: calc(100% - 80px);
-		border-top: 2px solid black;
+		height: 50px;
+		// top: calc(100% - 80px);
+		// border-bottom: 2px solid black;
+		// border-top: 2px solid black;
+	}
+	.logo{
+		opacity: .5;
 	}
 	.menuContainer{
 		position: relative;
@@ -260,13 +277,23 @@ export default {
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			padding-right: 15px;
+			padding-right: 0;
 			li{
-				float: left;
-				width: 120px;
+				width: 100px;
+				height: 35px;
 				margin-left: 15px;
 			}
 		}
+	}
+	.comment-btn{
+		width: 40px;
+		height: 40px;
+		margin-left: 15px;
 	}		
+	.commentContainer{
+		padding-top: 0;
+		// background-clip: content-box;
+		background-color: rgba(black, .7);
+	}
 }
 </style>

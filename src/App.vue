@@ -1,46 +1,32 @@
 <template>
     <div id="app">
-        <elderHome_header></elderHome_header>
-        <elderHome_fullpage></elderHome_fullpage>
+        <elderHomeHeader></elderHomeHeader>
+        <elderHomeFullpage></elderHomeFullpage>
     </div>
 </template>
 <script>
-import { Indicator, ContentContainer, Quote, Editor, Relate, FBComment, Share, Logo, Foot } from 'udn-newmedia-vue-components';
-import HeadBar from './components/Header.vue'
-import FullPage from './components/fullpage.vue'
-import test from './components/test.vue'
-import elderHome_header from './components/elderHome_header.vue'
-import elderHome_fullpage from './components/elderHome_fullpage.vue'
+// import { Indicator, ContentContainer, Quote, Editor, Relate, FBComment, Share, Logo, Foot } from 'udn-newmedia-vue-components';
+// import HeadBar from './components/Header.vue'
+// import FullPage from './components/fullpage.vue'
+// import test from './components/test.vue'
+import elderHomeHeader from './components/elderHome_header.vue'
+import elderHomeFullpage from './components/elderHome_fullpage.vue'
+// import Utils from 'udn-newmedia-utils'
 
 export default {
     name: 'app',
     components: {
-        Indicator,
-        ContentContainer,
-        Quote,
-        Editor,
-        Relate,
-        FBComment,
-        Share,
-        Logo,
-        Foot,
-        HeadBar,
-        FullPage,
-        test,
-        elderHome_header,
-        elderHome_fullpage,
-    }
+        elderHomeHeader,
+        elderHomeFullpage,
+    },
 };
 
 </script>
 <style lang="scss" scoped>
-// #app {
-//     padding-top: 50px;
-// }
-// @media screen and (max-width: 1024px) {
-//     #app {
-//         padding-top: 46px;
-//     }
-// }
-
+#app{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
 </style>

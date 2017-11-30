@@ -11,5 +11,7 @@ export default {
 </script>
 
 <style scoped>
-    
+    .fb-comment-block{
+    	background-color: #fff;
+    }
 </style>

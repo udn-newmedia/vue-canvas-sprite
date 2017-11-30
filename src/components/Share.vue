@@ -37,6 +37,7 @@ export default {
 <style scoped>
     .share-block{
         height: 28px;
+        margin-top: 0 !important;
     }
     .fb-like-block{
         float: left;
