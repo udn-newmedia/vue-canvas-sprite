@@ -248,28 +248,6 @@ export default {
 			this.handle_quizIndex()
 			this.quizs[index].answer.showA = false
 		},
-		gottaQuiz: function(index) {
-			switch(index) {
-				case 0:
-					this.quizIndex = 1;
-					break;
-				case 1:
-					this.quizIndex = 3;
-					break;
-				case 2: 
-					this.quizIndex = 5;
-					break;
-				case 3:
-					this.quizIndex = 7;
-					break;
-				case 4:
-					this.quizIndex = 9;
-					break;
-				case 5:
-					this.quizIndex = 11;
-					break;											
-			}
-		},
 		touchMove: function(e) {
 			console.log(e)
 		},
@@ -283,12 +261,6 @@ export default {
 			}
 		}
 	},	
-	mounted: function() {
-		
-	},
-	beforeUpdate: function () {
-		// console.log("quizIndex: "+this.quizIndex)
-	},
 	updated: function() {
 		console.log(this.quizIndex)
 		if(this.quizIndex >= 13){

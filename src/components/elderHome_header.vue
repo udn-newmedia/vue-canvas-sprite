@@ -253,7 +253,7 @@ export default {
 	}
 	.menu_logo{
 		position: relative;
-		padding: 0 15px;
+		padding-left: 45px;
 	}
 @media screen and (min-width: 1024px) {
 	header{
