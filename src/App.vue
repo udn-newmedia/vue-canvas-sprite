@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" :style="{height: viewHeight + 'px'}">
         <elderHomeHeader></elderHomeHeader>
         <elderHomeFullpage></elderHomeFullpage>
     </div>
@@ -19,13 +19,20 @@ export default {
         elderHomeHeader,
         elderHomeFullpage,
     },
+    data () {
+        return{
+            viewHeight: 0,
+        }
+    },
+    created() {
+        this.viewHeight = window.innerHeight
+    },
 };
 
 </script>
 <style lang="scss" scoped>
 #app{
     width: 100%;
-    height: 100vh;
     position: relative;
     overflow: hidden;
 }

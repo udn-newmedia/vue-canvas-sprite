@@ -26,7 +26,10 @@
 				<Logo/>
 			</div>			
 		</nav>
-		<div class="commentContainer" :class="{itemContainer_isOpen: comment_isOpen}">
+		<div class="commentContainer"
+			:class="{itemContainer_isOpen: comment_isOpen}"
+			:style="{height: viewHeight+'px'}"
+			>
 			<FBComment href="https://udn.com/upf/newmedia/2017_data/farewell/index.html"/>
 		</div>
 	</header>
@@ -53,6 +56,7 @@ export default {
     	commentIcon: commentIcon,
     	menu_isOpen: false,
     	comment_isOpen: false,
+    	viewHeight: 0,
     }
   },
   computed: {
@@ -78,8 +82,8 @@ export default {
   		// console.log("good")
   	},
   },
-  mounted: function() {
-  	// console.log(this)
+  created: function() {
+  	this.viewHeight = window.innerHeight
   }
 }
 </script>
@@ -154,8 +158,7 @@ export default {
 		top: 0;
 		left: 0;
 		width: 100%;
-		height: 100vh;
-		overflow: scroll;
+		overflow-y: scroll;
 		transform: translate(100%, 0);
 		transition: .6s;
 	}
