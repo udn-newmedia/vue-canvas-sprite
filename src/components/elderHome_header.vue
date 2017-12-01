@@ -79,7 +79,6 @@ export default {
   	menuClose (){
   		this.menu_isOpen = false;
   		this.handle_lookDemand();
-  		// console.log("good")
   	},
   },
   created: function() {
@@ -159,6 +158,7 @@ export default {
 		left: 0;
 		width: 100%;
 		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
 		transform: translate(100%, 0);
 		transition: .6s;
 	}
