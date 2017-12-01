@@ -8,7 +8,8 @@
 		<div class="forShare">
 			<Share href="../../index.html"/>	
 		</div>
-		<div class="shopping" v-for="(product, index) in products">
+		<div class="shopping"
+			 v-for="(product, index) in products">
 			<div class="shopCategory">
 				<img :src="product.cataImg" alt="">
 				<h2>{{product.catagory}}</h2>
@@ -21,7 +22,7 @@
 				>
 					<li v-for="item in product.productItem">
 						<div class="itemImg">
-							<img :src="item.itemImg">
+							<img :src="item.itemImg"/>
 							<span>{{item.itemSpec}}</span>
 						</div>	
 						<div class="itemTitle">
@@ -31,9 +32,13 @@
 						<a class="shoppingNow" href="https://goo.gl/J9kyha" target="_blank">快來買</a>
 					</li>											
 				</ul>
-				<div class="slideNav" :style="{opacity: isSlide}">
-					<span @click.stop="handleLeft(index)" class="leftArrow">﹤</span>
-					<span @click.stop="handleRight(index)" class="rightArrow">﹥</span>
+				<div class="slideNav">
+					<span class="leftArrow" 
+						@click.stop="handleLeft(index)" 
+						:style="{transform: 'translate('+ isSlide * -100 +'%, 0)', opacity: product.noLast}">﹤</span>
+					<span class="rightArrow"
+						@click.stop="handleRight(index)"
+						:style="{transform: 'translate('+ isSlide * 100 +'%, 0)', opacity: product.noNext}">﹥</span>
 				</div>				
 			</div>
 			<hr>
@@ -66,7 +71,7 @@ export default {
   },
   data () {
     return {
-    	isSlide: 1,
+    	isSlide: 0,
     	forTouchStartCX: 0,
     	forTouchEndCX: 0,
     	forTouchStartCY: 0,
@@ -74,6 +79,8 @@ export default {
     	products: [
     		{
     			'shopSlideIndex': 0,
+    			'noLast': .3,
+    			'noNext': 1,
     			'catagory': '臥室',
     			'cataImg': 'https://i.imgur.com/nhgYU4J.png',
     			'productItem': [
@@ -99,6 +106,8 @@ export default {
     		},
     		{
     			'shopSlideIndex': 0,
+    			'noLast': .3,
+    			'noNext': 1,    			
     			'catagory': '用餐',
     			'cataImg': 'https://i.imgur.com/nhgYU4J.png',
     			'productItem': [
@@ -124,6 +133,8 @@ export default {
     		},
     		{
     			'shopSlideIndex': 0,
+    			'noLast': .3,
+    			'noNext': 1,    			
     			'catagory': '戶外(助行)',
     			'cataImg': 'https://i.imgur.com/nhgYU4J.png',
     			'productItem': [
@@ -149,6 +160,8 @@ export default {
     		},
     		{
     			'shopSlideIndex': 0,
+    			'noLast': .3,
+    			'noNext': 1,    			
     			'catagory': '浴廁',
     			'cataImg': 'https://i.imgur.com/nhgYU4J.png',
     			'productItem': [
@@ -177,17 +190,15 @@ export default {
   },
   methods: {
   	handleLeft(index) {
-  		
   		this.products[index].shopSlideIndex === 0 ?
-  			this.products[index].shopSlideIndex = 0:
-  			(this.products[index].shopSlideIndex -- , this.isSlide = 0)
+  			(this.products[index].shopSlideIndex = 0):
+  			(this.products[index].shopSlideIndex -- , this.isSlide = 1, this.products[index].noLast = 1)
 
   	},
   	handleRight(index) {
-  		
   		this.products[index].shopSlideIndex === 2 ?
-  			this.products[index].shopSlideIndex = 2:
-  			(this.products[index].shopSlideIndex ++ , this.isSlide = 0)
+  			(this.products[index].shopSlideIndex = 2):
+  			(this.products[index].shopSlideIndex ++ , this.isSlide = 1, this.products[index].noNext = 1)
   	},
   	handleTouchStart(index) {
   		this.forTouchStartCX = Math.round(event.changedTouches[0].clientX)
@@ -206,9 +217,19 @@ export default {
   		}
   	},
   	handleTransitionEnd() {
-  		this.isSlide = 1
+  		this.isSlide = 0
   	}
   },
+  updated() {
+  	for(let i = 0; i < this.products.length; i++){
+  		this.products[i].shopSlideIndex === 0 ?
+  			this.products[i].noLast = .3 :
+  			this.products[i].noLast = 1;
+  		this.products[i].shopSlideIndex === 2 ?
+  			this.products[i].noNext = .3 :
+  			this.products[i].noNext = 1;
+  	}
+  }
 }
 </script>
 
@@ -243,7 +264,7 @@ export default {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 50px;
+	margin-bottom: 25px;
 	h2{
 		text-align: center;
 	}
@@ -350,6 +371,7 @@ export default {
 		justify-content: center;
 		cursor: pointer;
 		background-color: #fff;
+		transition: transform .4s ease-in-out;
 	}
 	.leftArrow{
 		top: 0;

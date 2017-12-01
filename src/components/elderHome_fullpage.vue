@@ -1,7 +1,17 @@
 <template>
-	<div id="scrollPage">
+	<main id="scrollPage">
 		<div id="elderLogo">
-			<img src="../assets/elderHome_logo.png">
+			<img src="../assets/elderHome_logo.png" alt="大人宅">
+		</div>
+		<div id="grandma"
+			 :style="{left: landing.grandma + '%'}"
+		>
+			<img src="../assets/grandma.png" alt="the elder">
+		</div>
+		<div id="herDog"
+			 :style="{left: landing.herDog + '%'}"
+		>
+			<img src="../assets/herGod.png" alt="her dog">
 		</div>
 		<div class="scrollContainer" :style="{transition: scrollSpeed+'s', transform: 'translateX('+ quizIndex * -100 + '%)'}">
 			<div class="scane" @scroll="showScrollLeft" @mousewheel.stop="handleMouseWheel">
@@ -55,12 +65,12 @@
 			</div>
 			<elderHomeDemand></elderHomeDemand>
 		</div>
-	</div>
+	</main>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import Utils from 'udn-newmedia-utils'
-import elderPic from '../assets/walk-anime.png';
+// import Utils from 'udn-newmedia-utils'
+// import elderPic from '../assets/walk-anime.png';
 import Share from '../components/Share.vue';
 import elderHomeDemand from '../components/elderHome_demand.vue'
 
@@ -77,6 +87,10 @@ export default {
 			showStep: true,
 			showIntro: 0,
 			abstractX: 100,
+			landing:{
+				grandma: -45,
+				herDog: -50,
+			},
 			quizs: [
 				{
 					"answered": false,
@@ -239,6 +253,9 @@ export default {
 					this.quizs[index-1].answered = true
 					this.quizs[index-1].answering = false
 				}
+			} else if(this.quizIndex === 13) {
+				this.scrollSpeed = 3	
+				this.landing.herDog = 100
 			}
 		},
 		choseA: function(index) {
@@ -247,9 +264,6 @@ export default {
 		choseB: function(index) {
 			this.handle_quizIndex()
 			this.quizs[index].answer.showA = false
-		},
-		touchMove: function(e) {
-			console.log(e)
 		},
 		handleMouseWheel: function(e){
 			let w = window.innerWidth
@@ -261,8 +275,15 @@ export default {
 			}
 		}
 	},	
+	mounted() {
+		setTimeout(()=>{
+		this.landing.grandma = 45
+		this.landing.herDog = 50
+		}, 333)
+
+	},
 	updated: function() {
-		console.log(this.quizIndex)
+		// console.log(this.quizIndex)
 		if(this.quizIndex >= 13){
 			this.showStep = false
 			this.countQuiz = false
@@ -301,6 +322,48 @@ export default {
 		width: 50px;
 		height: 50px;
 		margin: auto;
+	}
+}
+#grandma{
+	position: absolute;
+	z-index: auto;
+	bottom: 62px;
+	left: -45%;
+	transition: left 4s ease-out 1.5s;
+	img{
+		display: block;
+		width: 100%;
+		margin-left: -50%;
+		max-height: auto;
+	}
+}
+#herDog{
+	position: absolute;
+	z-index: auto;
+	bottom: 62px;
+	left: -50%;
+	transition: left 2.5s ease-out;
+	animation-name: rush;
+	animation-duration: 8s;
+	animation-iteration-count: infinite;
+	img{
+		display: block;
+		width: 100%;
+		max-height: auto;
+	}
+}
+@keyframes rush {
+	0%{
+		transform: translate(0, 0);
+	}
+	40%{
+		transform: translate(0, 0);
+	}
+	60%{
+		transform: translate(50%, 0);
+	}
+	100%{
+		transform: translate(0, 0);
 	}
 }
 .scane {
@@ -370,6 +433,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	position: relative;
+	margin-top: 50px;
 	h2 {
 		flex-shrink: 0;
 		width: 100%;
@@ -423,6 +487,7 @@ export default {
 	height: 100%;
 	max-width: 880px;
 	margin: 0 auto;
+	margin-top: 50px;
 	h2 {
 		padding: 0 15px;
 	}	
@@ -480,6 +545,7 @@ export default {
 		border-radius: 50%;
 		margin: 0 10px;
 		opacity: .3;
+		transition: .6s;
 	}
 	.answered{
 		opacity: 1;
@@ -524,17 +590,16 @@ export default {
 		padding-top: 50px;
 	}
 	.optionBlock{
-		margin-top: 5%;
 		p{
 			max-width: 250px;
 			max-height: 150px;
 		}		
 		.lampLine{
+			display: none;
 			position: absolute;
 			top: -300%;
 			left: 50%;
 			margin-left: -1px;
-			display: block;
 			width: 2px;
 			height: 300%;
 			background-color: black;
