@@ -3,8 +3,11 @@
 		<div class="logo">
 			<a href="./index.html"><img :src="udnLogo" alt="聯合報" title="聯合報"></a>
 		</div>
+		<div id="elderLogo">
+			<img src="../assets/elderHome_logo.png" alt="大人宅">
+		</div>		
 		<div class="blank"></div>
-		<div class="menu-btn hidden-lg" :class="{menuIcon_isOpen : menu_isOpen}" @click="menuOpen">
+		<div class="menu-btn hidden-lg hidden-md" :class="{menuIcon_isOpen : menu_isOpen}" @click="menuOpen">
 			<span></span>
 			<span></span>
 			<span></span>
@@ -125,6 +128,20 @@ export default {
 	.logo:hover{
 		opacity: 1;
 	}
+	#elderLogo{
+		position: absolute;
+		z-index: 150;
+		top: 5px;
+		left: 0;
+		width: 100%;
+		background-color: #fff;
+		img{
+			display: block;
+			width: 55px;
+			height: 55px;
+			margin: auto;
+		}
+	}	
 	.blank{
 		position: absolute;
 		z-index: 120;
@@ -235,9 +252,8 @@ export default {
 				width: 100%;
 				height: 50px;
 				list-style: none;		
-				border: 1px solid black;
-				border-radius: 6px;
 				margin: 10px 0;
+				border-bottom: .6px solid rgba(black, .2);
 				cursor: pointer;
 				a{
 					position: absolute;
@@ -246,7 +262,6 @@ export default {
 					display: flex;
 					align-items: center;
 					justify-content: center;
-					text-decoration: none;
 				}
 			}
 		}
@@ -261,9 +276,6 @@ export default {
 @media screen and (min-width: 1024px) {
 	header{
 		height: 50px;
-		// top: calc(100% - 80px);
-		// border-bottom: 2px solid black;
-		// border-top: 2px solid black;
 	}
 	.logo{
 		opacity: .5;
@@ -282,9 +294,10 @@ export default {
 			align-items: center;
 			padding-right: 0;
 			li{
-				width: 100px;
+				width: 80px;
 				height: 35px;
-				margin-left: 15px;
+				margin-left: 0;
+				border-bottom: none;
 			}
 		}
 	}
@@ -295,7 +308,6 @@ export default {
 	}		
 	.commentContainer{
 		padding-top: 0;
-		// background-clip: content-box;
 		background-color: rgba(black, .7);
 	}
 }
