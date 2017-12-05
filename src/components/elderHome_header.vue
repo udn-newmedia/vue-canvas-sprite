@@ -7,16 +7,21 @@
 			<img src="../assets/elderHome_logo.png" alt="大人宅">
 		</div>		
 		<div class="blank"></div>
-		<div class="menu-btn hidden-lg hidden-md" :class="{menuIcon_isOpen : menu_isOpen}" @click="menuOpen">
+		<div class="menu-btn hidden-lg hidden-md" 
+			 :class="{menuIcon_isOpen : menu_isOpen}"
+			 @click="menuOpen">
 			<span></span>
 			<span></span>
 			<span></span>
 			<span></span>
 		</div>		
-		<div class="comment-btn" @click="commentOpen" :class="{comment_Open: comment_isOpen}">
+		<div class="comment-btn" 
+			 @click="commentOpen" 
+			 :class="{comment_Open: comment_isOpen}">
 			<img :src="commentIcon" title="comment">
 		</div>					
-		<nav class="menuContainer" :class="{itemContainer_isOpen: menu_isOpen}">
+		<nav class="menuContainer"
+			 :class="{itemContainer_isOpen: menu_isOpen}">
 			<ul>
 				<li>
 					<a href="./index.html">再玩一次</a>
@@ -30,9 +35,8 @@
 			</div>			
 		</nav>
 		<div class="commentContainer"
-			:class="{itemContainer_isOpen: comment_isOpen}"
-			:style="{height: viewHeight+'px'}"
-			>
+			 :class="{itemContainer_isOpen: comment_isOpen}"
+			 :style="{height: viewHeight+'px'}">
 			<FBComment href="https://udn.com/upf/newmedia/2017_data/farewell/index.html"/>
 		</div>
 	</header>

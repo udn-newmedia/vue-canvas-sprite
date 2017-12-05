@@ -10,8 +10,11 @@
 		>
 			<img src="../assets/herGod.png" alt="her dog">
 		</div>
-		<div class="scrollContainer" :style="{transition: scrollSpeed+'s', transform: 'translateX('+ quizIndex * -100 + '%)'}">
-			<div class="scane" @scroll="showScrollLeft" @mousewheel.stop="handleMouseWheel">
+		<div class="scrollContainer"
+			 :style="{transition: scrollSpeed+'s', transform: 'translateX('+ quizIndex * -100 + '%)'}">
+			<div class="scane"
+				 @scroll="showScrollLeft"
+				 @mousewheel.stop="handleMouseWheel">
 				<div class="banner">
 					<div>
 						<h1>讓家<br/>準備好與你一起變老</h1>
@@ -25,7 +28,8 @@
 						打造適合高齡居住的「大人宅」，成為迎接高齡社會關鍵。<br/>
 						你的老後一日，會是甚麼模樣？			
 					</p>
-					<div class="forShare" :style="{opacity: showIntro}">
+					<div class="forShare"
+						 :style="{opacity: showIntro}">
 						<Share href="../../index.html"/>	
 					</div>
 					<div id="start" @click.once="nextQuiz(0)">
@@ -33,15 +37,18 @@
 					</div>
 				</div>
 			</div>
-			<div class="quizSection" v-for="(quiz, index) in quizs">
+			<div class="quizSection"
+				 v-for="(quiz, index) in quizs">
 				<div class="question">
 					<h2>{{quiz.question.ask}}</h2>
 					<div class="optionBlock">
-						<p class="optionA" @click.once="choseA(index)">
+						<p class="optionA"
+						   @click.once="choseA(index)">
 							{{quiz.question.optionA}}
 							<span class="lampLine"></span>
 						</p>
-						<p class="optionB" @click.once="choseB(index)">
+						<p class="optionB"
+						   @click.once="choseB(index)">
 							{{quiz.question.optionB}}
 							<span class="lampLine"></span>
 						</p>
@@ -57,8 +64,12 @@
 					</div>		
 				</div>							
 			</div>
-			<div class="quizCount" v-if="showStep" :style="{transition: scrollSpeed+'s', transform: 'translate('+quizIndex*100+'%)'}">
-				<span v-if="countQuiz" v-for="(navi, index) in quizs" :class="{answered: navi.answered, answering: navi.answering}"></span>
+			<div class="quizCount"
+				 v-if="showStep"
+				 :style="{transition: scrollSpeed+'s', transform: 'translate('+quizIndex*100+'%)'}">
+				<span v-if="countQuiz"
+					  v-for="(navi, index) in quizs" 
+					  :class="{answered: navi.answered, answering: navi.answering}"></span>
 			</div>
 			<elderHomeDemand></elderHomeDemand>
 		</div>
@@ -212,7 +223,7 @@ export default {
 		if(this.quizIndex >= this.quizs.length*2 +1){
 			this.showStep = false
 			this.countQuiz = false
-			this.scrollSpeed = 3
+			this.scrollSpeed = 4
 		}
 	}
 }
@@ -230,6 +241,7 @@ export default {
 	.scrollContainer {
 		flex-shrink: 0;
 		display: flex;
+		z-index: 30;
 		width: 100%;
 		height: 100%;
 		transform: translate(-100%, 0);
@@ -237,21 +249,21 @@ export default {
 }
 #grandma{
 	position: absolute;
-	z-index: auto;
-	bottom: 62px;
+	z-index: 20;
+	bottom: 42px;
 	left: -45%;
 	transition: left 4s ease-out 1.5s;
 	img{
 		display: block;
-		width: 100%;
+		width: 80%;
 		margin-left: -50%;
 		max-height: auto;
 	}
 }
 #herDog{
 	position: absolute;
-	z-index: auto;
-	bottom: 62px;
+	z-index: 25;
+	bottom: 42px;
 	left: -50%;
 	transition: left 2.5s ease-out;
 	// animation-name: rush;
@@ -259,7 +271,7 @@ export default {
 	// animation-iteration-count: infinite;
 	img{
 		display: block;
-		width: 100%;
+		width: 80%;
 		max-height: auto;
 	}
 }
@@ -294,7 +306,7 @@ export default {
 	align-items: center;
 	overflow: hidden;
 	div{
-		margin-top: 20%;
+		margin-top: 30%;
 		h1{
 			text-shadow: none;
 		}		
@@ -315,8 +327,9 @@ export default {
 		width: 100%;
 		color: black;
 		padding: 0 15px;
-		margin-top: 10%;
+		margin-top: 20%;
 		transition: 1.2s ease-in-out;
+		line-height: 1.5;
 	}
 }
 #start{
@@ -406,6 +419,7 @@ export default {
 	margin-top: 10px;
 	h2 {
 		padding: 0 15px;
+		margin-bottom: 10px;
 	}	
 }
 .answer_article{
@@ -434,14 +448,14 @@ export default {
 	bottom: 0;
 	left: 0;
 	width: 100%;
-	height: 60px !important;
+	height: 40px !important;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border-top: 4px solid black;
 	span{
-		width: 10px;
-		height: 10px;
+		width: 8px;
+		height: 8px;
 		background-color: black;
 		border-radius: 50%;
 		margin: 0 10px;
@@ -450,12 +464,10 @@ export default {
 	}
 	.answered{
 		opacity: 1;
-		width: 10px;
-		height: 10px;
 	}
 	.answering{
-		width: 15px;
-		height: 15px;
+		width: 12px;
+		height: 12px;
 	}
 }
 .forShare{
@@ -482,6 +494,19 @@ export default {
 			width: 880px;
 		}
 	}
+	#grandma{
+		img{
+			width: 100%;
+		}
+	}
+	#herDog{
+		// animation-name: rush;
+		// animation-duration: 8s;
+		// animation-iteration-count: infinite;
+		img{
+			width: 100%;
+		}
+	}	
 	.forShare{
 		width: 880px;
 		margin: 0 auto;

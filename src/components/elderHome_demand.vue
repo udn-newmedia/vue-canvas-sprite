@@ -3,6 +3,7 @@
 		<h2 class="demandTitle">需求解密</h2>	
 		<article class="explain">
 			<p>國民健康署調查顯示，近六成長輩，最近一次發生跌傷的地點，都是在家裡。其中跌倒最常見的三個地點，就包括浴廁、臥室與客廳，跌倒當下，多是因純粹在室內走動。</p>
+			<p><br/></p>
 			<p>跌倒除造成外傷，也讓銀髮族因害怕再跌倒，自我限制行動，導致老化加速，也惡化原有的慢性疾病等，提早預防，不僅減少跌倒發生率，也維持長輩日常生活品質。</p>										
 		</article>		
 		<div class="forShare">
@@ -251,7 +252,7 @@ export default {
 .demand{
 	flex-shrink: 0;
 	position: relative;
-	z-index: 5;
+	z-index: 50;
 	top: 0;
 	left: 0;
 	width: 100%;
