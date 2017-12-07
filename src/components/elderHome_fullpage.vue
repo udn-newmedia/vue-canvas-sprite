@@ -3,7 +3,7 @@
 		<div id="grandma"
 			 :style="{left: landing.grandma + '%'}"
 		>
-			<img src="../assets/stage/grandma.gif" alt="the elder">
+			<img :src="grandMa" alt="the elder">
 		</div>
 		<div id="herDog"
 			 :style="{left: landing.herDog + '%'}"
@@ -21,7 +21,7 @@
 						<h1>讓家<br/>準備好與你一起變老</h1>
 						<p>安全居家 長輩樂活 家人快活</p>						
 					</div>
-					<div class="chair"></div>				
+					<div class="chair" :style="{backgroundImage: 'url('+ op +')'}"></div>				
 				</div>
 				<div class="abstract">
 					<p :style="{transform: 'translate('+ abstractX +'%, 0)'}">
@@ -55,7 +55,8 @@
 							<span class="lampLine"></span>
 						</p>
 					</div>
-					<div class="stage" :class="quiz.name">
+					<div class="stage" :class="quiz.name"
+						 :style="{backgroundImage: 'url('+ quiz.background +')'}">
 						<img v-for="(img, index) in quiz.img" 
 							 :class="img.class" :src="img.src"
 							 :alt="img.alt" :title="img.title"
@@ -99,7 +100,10 @@ import Share from '../components/Share.vue';
 import elderHomeDemand from '../components/elderHome_demand.vue'
 
 import imgHorizen from '../assets/h_line.png'
+import imgGrandma from '../assets/stage/grandma.gif'
+import imgOpening from '../assets/stage/opening.gif'
 
+import roomBg from '../assets/stage/room/roomBg.jpg'
 import bed from '../assets/stage/room/bed.png'
 import handsup from '../assets/stage/room/handsup.png'
 import lamp from'../assets/stage/room/lamp.png'
@@ -107,6 +111,7 @@ import locker from'../assets/stage/room/locker.png'
 import slipper from'../assets/stage/room/slipper.png'
 import weighter from'../assets/stage/room/weighter.png'
 
+import mealBg from '../assets/stage/meal/mealBg.jpg'
 import earBowl from '../assets/stage/meal/earBowl.png'
 import fork from '../assets/stage/meal/fork.png'
 import iceBox from '../assets/stage/meal/iceBox.png'
@@ -117,12 +122,14 @@ import vega from '../assets/stage/meal/vega.png'
 import toma1 from '../assets/stage/meal/toma1.png'
 import toma2 from '../assets/stage/meal/toma2.png'
 
+import outDoorBg from '../assets/stage/outDoor/outDoorBg.jpg'
 import bus from '../assets/stage/outDoor/bus.png'
 import cart from '../assets/stage/outDoor/cart.png'
 import crutch from '../assets/stage/outDoor/crutch.png'
 import signal from '../assets/stage/outDoor/signal.png'
 import parkChair from '../assets/stage/outDoor/parkChair.png'
 
+import bathBg from '../assets/stage/bathroom/bathBg.jpg'
 import wash from '../assets/stage/bathroom/wash.png'
 import tub from '../assets/stage/bathroom/tub.png'
 import toothBrush from '../assets/stage/bathroom/toothBrush.png'
@@ -145,6 +152,8 @@ export default {
 			abstractX: 100,
 			isLast: 40,
 			horizen: imgHorizen,
+			grandMa: imgGrandma,
+			op: imgOpening,
 			canScroll: false,
 			landing:{
 				grandma: -45,
@@ -154,6 +163,7 @@ export default {
 				{
 					"name": 'room',
 					"display": "none",
+					"background": roomBg,
 					"answered": false,
 					"answering": false,
 					"question": {
@@ -210,6 +220,7 @@ export default {
 				{
 					"name": "meal",
 					"display": "none",
+					"background": mealBg,
 					"answered": false,
 					"answering": false,
 					"question": {
@@ -284,6 +295,7 @@ export default {
 				{
 					"name": "outDoor",
 					"display": "none",
+					"background": outDoorBg,
 					"answered": false,
 					"answering": false,
 					"question": {
@@ -334,6 +346,7 @@ export default {
 				{
 					"name": "bathroom",
 					"display": "none",
+					"background": bathBg,
 					"answered": false,
 					"answering": false,
 					"question": {
@@ -484,14 +497,12 @@ export default {
 	.scrollContainer {
 		flex-shrink: 0;
 		display: flex;
-		// z-index: 40;
 		width: 100%;
 		height: 100%;
 		transform: translate(-100%, 0);
 	}
 }
 #grandma{
-	// display: none;
 	position: absolute;
 	z-index: 48;
 	bottom: 42px;
@@ -564,7 +575,6 @@ export default {
 		height: 60%;
 		bottom: 39px;
 		background-repeat: no-repeat;
-		background-image: url('../assets/stage/opening.gif');
 		background-size: cover;
 		background-position: center bottom;
 		border: none;
@@ -633,6 +643,7 @@ export default {
 	height: 50%;
 	margin: 0 auto;
 	overflow: hidden;
+	z-index: 0;
 	img{
 		position: absolute;
 		left: 50%;
@@ -645,7 +656,7 @@ export default {
 	}
 }
 .bathroom{
-	background: transparent url('../assets/stage/bathroom/bathBg.jpg') center no-repeat;
+	background: transparent center no-repeat;
 	background-size: contain;
 	.bathChair{
 		width: 30%;
@@ -702,7 +713,7 @@ export default {
 	}
 }
 .outDoor{
-	background: transparent url('../assets/stage/outDoor/outDoorBg.jpg') center no-repeat;
+	background: transparent center no-repeat;
 	background-size: contain;
 	.bus{
 		width: 60%;
@@ -750,7 +761,7 @@ export default {
 	}
 }
 .meal{
-	background: transparent url('../assets/stage/meal/mealBg.jpg') center no-repeat;
+	background: transparent center no-repeat;
 	background-size: contain;
 	.earBowl{
 		width: 25%;
@@ -818,7 +829,7 @@ export default {
 	}
 }
 .room{
-	background: transparent url('../assets/stage/room/roomBg.jpg') center no-repeat;
+	background: transparent center no-repeat;
 	background-size: contain;
 	.bed{
 		width: 60%;
@@ -967,8 +978,8 @@ export default {
 	height: 30%;
 	display: flex;
 	justify-content: center;
-	align-items: center;
 	position: relative;
+	z-index: 1;
 	p {
 		position: relative;
 		display: flex;
@@ -978,7 +989,7 @@ export default {
 		padding: 10px;
 		width: 40%;
 		height: 60%;
-		border: 2px solid black;
+		border: 1px solid black;
 		border-radius: 20px;
 		cursor: pointer;
 		line-height: 1.5;
@@ -1090,7 +1101,6 @@ export default {
 			bottom: 59px;
 			left: 10%;
 			background-repeat: no-repeat;
-			background-image: url('../assets/stage/opening.gif');
 			background-size: contain;
 			background-position: center bottom;
 			border: none;
