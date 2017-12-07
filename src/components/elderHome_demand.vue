@@ -3,7 +3,6 @@
 		<h2 class="demandTitle">需求解密</h2>	
 		<article class="explain">
 			<p>國民健康署調查顯示，近六成長輩，最近一次發生跌傷的地點，都是在家裡。其中跌倒最常見的三個地點，就包括浴廁、臥室與客廳，跌倒當下，多是因純粹在室內走動。</p>
-			<p><br/></p>
 			<p>跌倒除造成外傷，也讓銀髮族因害怕再跌倒，自我限制行動，導致老化加速，也惡化原有的慢性疾病等，提早預防，不僅減少跌倒發生率，也維持長輩日常生活品質。</p>										
 		</article>		
 		<div class="forShare">
@@ -32,7 +31,7 @@
 						</div>
 						<a class="shoppingNow" target="_blank"
 						   :href="item.itemLink"
-						>快來買</a>
+						>選購去</a>
 					</li>											
 				</ul>
 				<div class="slideNav">
@@ -65,6 +64,11 @@ import U006494015 from '../assets/product/U006494015.jpg'
 import U004267546 from '../assets/product/U004267546.jpg'
 import U010038120 from '../assets/product/U010038120.jpg'
 
+import bathroom from '../assets/stage/demand/bathroom.jpg'
+import outDoor from '../assets/stage/demand/outdoor.jpg'
+import room from '../assets/stage/demand/room.jpg'
+import meal from '../assets/stage/demand/meal.jpg'
+
 
 export default {
 
@@ -85,7 +89,7 @@ export default {
     			'noLast': .3,
     			'noNext': 1,
     			'catagory': '臥室',
-    			'cataImg': 'https://i.imgur.com/nhgYU4J.png',
+    			'cataImg': room,
     			'productItem': [
     				{
     					'itemName': '大字幕體脂計',
@@ -115,7 +119,7 @@ export default {
     			'noLast': .3,
     			'noNext': 1,    			
     			'catagory': '用餐',
-    			'cataImg': 'https://i.imgur.com/nhgYU4J.png',
+    			'cataImg': meal,
     			'productItem': [
     				{
     					'itemName': '成人防水圍兜',
@@ -145,7 +149,7 @@ export default {
     			'noLast': .3,
     			'noNext': 1,    			
     			'catagory': '戶外(助行)',
-    			'cataImg': 'https://i.imgur.com/nhgYU4J.png',
+    			'cataImg': outDoor,
     			'productItem': [
     				{
     					'itemName': '休閒手杖',
@@ -175,7 +179,7 @@ export default {
     			'noLast': .3,
     			'noNext': 1,    			
     			'catagory': '浴廁',
-    			'cataImg': 'https://i.imgur.com/nhgYU4J.png',
+    			'cataImg': bathroom,
     			'productItem': [
     				{
     					'itemName': 'V字型扶手',
@@ -220,6 +224,7 @@ export default {
   		this.forTouchStartCY = Math.round(event.changedTouches[0].clientY)
   	},
   	handleTouchEnd(index) {
+  		event.preventDefault()
   		this.forTouchEndCX = Math.round(event.changedTouches[0].clientX)
   		this.forTouchEndCY = Math.round(event.changedTouches[0].clientY)
   		const touchRangeY = Math.abs(this.forTouchStartCY - this.forTouchEndCY) 
@@ -269,6 +274,9 @@ export default {
 .explain{
 	width: 100%;
 	padding: 0 15px;
+	p{
+		line-height: 1.5;
+	}
 }
 .forShare{
 	padding: 0 15px;
@@ -279,7 +287,7 @@ export default {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 25px;
+	margin: 25px 0;
 	h2{
 		text-align: center;
 	}
@@ -291,12 +299,15 @@ export default {
 }
 .shopCategory{
 	margin: 0 auto;
-	padding-top: 15px;
 	width: 60%;
 	height: 30%;
 	img{
-		width: 100%;
-		height: 60%;
+		display: block;
+		max-height: 80%;
+	}
+	h2{
+		margin: 0;
+		height: 20%;
 	}
 }
 .shopWindow{
@@ -411,13 +422,14 @@ export default {
 	margin-left: -60px;
 	border: 1px solid rgba(black, .2);
 	color: rgba(black, .2);
+	transition: .6s;
 	&:hover{
 		color: rgba(black, 1);
 	}
 }
 @media screen and (min-width: 1024px) {
 	.demandTitle{
-		margin-top: 125px;
+		margin-top: 80px;
 		width: 100%;
 		text-align: center;	
 	}
