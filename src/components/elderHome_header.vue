@@ -24,10 +24,10 @@
 			 :class="{itemContainer_isOpen: menu_isOpen}">
 			<ul>
 				<li>
-					<a href="./index.html">再玩一次</a>
+					<a href="./index.html">重頭開始</a>
 				</li>
 				<li>
-					<a @click="menuClose">需求解密</a>
+					<a @click="menuClose">我的大人宅</a>
 				</li>				
 			</ul>
 			<div class="menu_logo hidden-lg hidden-md">

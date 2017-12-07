@@ -3,12 +3,12 @@
 		<div id="grandma"
 			 :style="{left: landing.grandma + '%'}"
 		>
-			<img :src="grandMa" alt="the elder">
+			<img :src="grandMa" alt="奶奶">
 		</div>
 		<div id="herDog"
 			 :style="{left: landing.herDog + '%'}"
 		>
-			<img src="../assets/herGod.png" alt="her dog">
+			<img :src="dog" alt="her dog">
 		</div>			
 		<div class="scrollContainer"
 			 :style="{transition: scrollSpeed+'s', transform: 'translateX('+ quizIndex * -100 + '%)', zIndex: isLast}"
@@ -102,6 +102,7 @@ import elderHomeDemand from '../components/elderHome_demand.vue'
 import imgHorizen from '../assets/h_line.png'
 import imgGrandma from '../assets/stage/grandma.gif'
 import imgOpening from '../assets/stage/opening.gif'
+import imgDog from '../assets/stage/dog.gif'
 
 import roomBg from '../assets/stage/room/roomBg.jpg'
 import bed from '../assets/stage/room/bed.png'
@@ -154,6 +155,7 @@ export default {
 			horizen: imgHorizen,
 			grandMa: imgGrandma,
 			op: imgOpening,
+			dog: imgDog,
 			canScroll: false,
 			landing:{
 				grandma: -45,
@@ -167,7 +169,7 @@ export default {
 					"answered": false,
 					"answering": false,
 					"question": {
-						"ask": "起床",
+						"ask": "早安！經過一夜好眠，開啟新的一天，我要···",
 						"optionA": "一張開眼就跳下床，展現活力！",
 						"optionB": "賴床一下好了"
 					},
@@ -175,45 +177,45 @@ export default {
 						"showA": true,
 						"answerA": '這樣不行啦！',
 						"answerB": '沒錯！',
-						"anay1": '八里療養院職能治療科主任張自強叮嚀，早晨是很多心腦血管疾病的高發階段，加上入冬後，身體從離開被窩，到接觸外面空氣，極大的冷熱落差，銀髮族應格外當心。',
-						"anay2": '建議長輩，清晨張開眼後，雙手各握拳、放開十下，腳趾與膝蓋也分別彎曲、伸直十下左右，讓四肢暖和後，再起身坐好、坐穩，才扶著床、櫃等可支撐的輔助物下床。',
+						"anay1": '八里療養院職能治療科主任張自強叮嚀，早晨是心腦血管疾病高發時段，且入冬後，身體離開被窩接觸到外面空氣，冷熱溫差更大，銀髮族應格外當心。',
+						"anay2": '張自強建議長輩，每日醒來後，雙手各握拳、放開10下，腳趾與膝蓋也彎曲、伸直10下，讓四肢暖和後，再起身坐好、坐穩，才扶著床櫃等，可支撐的輔助物下床。',
 					},
 					'img': [
 						{
 							"class": "bed",
 							"src": bed,
 							"alt": '床',
-							"title": "床",
+							"title": null,
 						},
 						{	
 							"class": "handsup",
 							"src": handsup,
-							"alt": '起身輔具',
-							"title": "起身輔具",
+							"alt": '起身輔助拉環',
+							"title": "起身輔助拉環",
 						},
 						{
 							"class": "lamp",
 							"src": lamp,
 							"alt": '檯燈',
-							"title": "檯燈",
+							"title": null,
 						},
 						{
 							"class": "locker",
 							"src": locker,
 							"alt": '櫃子',
-							"title": "櫃子",
+							"title": null,
 						},
 						{
 							"class": "slipper",
 							"src": slipper,
 							"alt": '拖鞋',
-							"title": "拖鞋",
+							"title": null,
 						},
 						{
 							"class": "weighter",
 							"src": weighter,
-							"alt": '體重計',
-							"title": "體重計",
+							"alt": '體脂計',
+							"title": "體脂計",
 						},							
 					],					
 				},
@@ -224,7 +226,7 @@ export default {
 					"answered": false,
 					"answering": false,
 					"question": {
-							"ask": "用餐",
+							"ask": "午餐時間，該吃甚麼好呢？",
 							"optionA": "年紀大了，粗茶淡飯，清淡最好",
 							"optionB": "食量變小，更要重視營養攝取夠不夠"
 						},
@@ -232,63 +234,63 @@ export default {
 						"showA": true,
 						"answerA": '觀念過時啦！',
 						"answerB": '正確！',
-						"anay1": '別再只吃白飯配湯！營養師陳郁旋表示，粗茶淡飯，反而會加速老化。建議長輩，食量變小，更要維持飲食的多樣性。',
-						"anay2": '預防老化的兩大重點，魚與肉都要穩定、均衡攝取，不要只吃其中一樣。再者，與其奉行少鹽少油，更建議活用有益健康的香辛料增加食慾，並依烹調方式選用不同的、新鮮未經精煉的好油。',
+						"anay1": '別再只吃白飯配湯！營養師陳郁旋表示，粗茶淡飯，容易造成營養不良，反而會加速老化。若家中長輩食量變小，則建議少量多餐，補足身體所需營養。',
+						"anay2": '此外，與其奉行少鹽少油，她更建議活用天然食物的特性調味，增加食慾，例如九層塔、番茄、香菇等，並依烹調方式，選用新鮮未經精煉的好油。',
 					},
 					'img': [		
 						{
 							"class": "earBowl",
 							"src": earBowl,
-							"alt": '耳朵杯',
-							"title": '耳朵杯',
+							"alt": '手柄湯碗',
+							"title": '手柄湯碗',
 						},
 						{	
 							"class": "fork",
 							"src": fork,
-							"alt": '叉子',
-							"title": "叉子",
+							"alt": '可彎矽膠餐具',
+							"title": "可彎矽膠餐具",
 						},
 						{
 							"class": "iceBox",
 							"src": iceBox,
 							"alt": '冰箱',
-							"title": '冰箱',
+							"title": null,
 						},
 						{
 							"class": "rag",
 							"src": rag,
 							"alt": '抹布',
-							"title": '抹布',
+							"title": null,
 						},
 						{
 							"class": "spoon",
 							"src": spoon,
-							"alt": '湯匙',
-							"title": "湯匙",
+							"alt": '可彎矽膠餐具',
+							"title": "可彎矽膠餐具",
 						},
 						{
 							"class": "pot",
 							"src": pot,
 							"alt": '鍋子',
-							"title": "鍋子",
+							"title": null,
 						},
 						{
 							"class": "vega",
 							"src": vega,
 							"alt": '蔬菜',
-							"title": "蔬菜",
+							"title": null,
 						},
 						{
 							"class": "toma1",
 							"src": toma1,
 							"alt": '番茄',
-							"title": '番茄',
+							"title": null,
 						},
 						{
 							"class": "toma2",
 							"src": toma2,
 							"alt": '番茄',
-							"title": '番茄',
+							"title": null,
 						},																									
 					],					
 				},
@@ -299,7 +301,7 @@ export default {
 					"answered": false,
 					"answering": false,
 					"question": {
-							"ask": "外出(助行)",
+							"ask": "清爽的午後，來活動一下筋骨好了！",
 							"optionA": "努力維持運動習慣，保持活力！",
 							"optionB": "好懶得動，在家還比較安全"
 						},
@@ -307,39 +309,39 @@ export default {
 						"showA": true,
 						"answerA": '給你一百個讚！',
 						"answerB": '不行啦！',
-						"anay1": '物理治療師彭品維說，增強體健、減緩退化，關鍵還是在維持運動的好習慣，最簡單的就是快走，游泳也很推薦，就算只是泡在水裡踩踩腿，水的壓力、浮力都能幫助長輩血液循環，也更適合走路會關節疼痛者。',
-						"anay2": '八里療養院職能治療科主任張自強補充，長輩外出建議穿鮮艷、螢光色系衣物，也建議使用助行輔具，老人家若抗拒，則可考慮拐杖傘，或平地用登山杖等形象較正面、健康的輔具。',
+						"anay1": '物理治療師彭品維說，減緩身體機能老化，關鍵還是在維持運動的好習慣，除了最簡單的快走，也推薦游泳，就算只是泡在水裡踩踩腿，水的壓力、浮力都能幫助血液循環，也更適合關節疼痛者。',
+						"anay2": '八里療養院職能治療科主任張自強也補充，長輩外出建議穿鮮艷、螢光色系衣物，也建議使用助行輔具，老人家若抗拒，則可考慮拐杖傘，或平地用登山杖等，形象較正面、健康的輔具。',
 					},
 					'img' :[
 						{
 							"class": "bus",
 							"src": bus,
 							"alt": '公車',
-							"title": '公車',
+							"title": null,
 						},
 						{
 							"class": "cart",
 							"src": cart,
-							"alt": '助步手推車',
-							"title": '助步手推車',
+							"alt": '助行購物推車',
+							"title": '助行購物推車',
 						},
 						{
 							"class": "crutch",
 							"src": crutch,
-							"alt": '柺杖',
-							"title": '柺杖',
+							"alt": '手杖',
+							"title": '手杖',
 						},
 						{
 							"class": "signal",
 							"src": signal,
 							"alt": '紅綠燈',
-							"title": '紅綠燈',
+							"title": null,
 						},
 						{
 							"class": "parkChair",
 							"src": parkChair,
 							"alt": '公園椅',
-							"title": '公園椅',
+							"title": null,
 						},						
 					]
 				},
@@ -350,53 +352,53 @@ export default {
 					"answered": false,
 					"answering": false,
 					"question": {
-							"ask": "浴廁",
-							"optionA": "爸媽都還勇健，還不需要身心障礙扶手",
+							"ask": "洗個熱呼呼的熱水澡，但浴室老是濕濕滑滑的···",
+							"optionA": "我身體勇健，不需要身心障礙扶手",
 							"optionB": "醜又如何，扶手不只要裝，還要選最亮色！"
 						},
 					"answer": {
 						"showA": true,
 						"answerA": '不是這樣的！',
 						"answerB": '沒錯！',
-						"anay1": '八里療養院職能治療科主任張自強表示，無論家中長輩是不是身心障礙者，都建議在浴廁空間安裝身心障礙扶手。物理治療師彭品維補充，最關鍵兩處就是馬桶側邊、淋浴空間（浴缸等）。',
-						"anay2": '彭品維表示，浴廁空間潮濕，對長輩來說是有安全疑慮的高風險空間，除了堅固的扶手，也建議在所有水會噴濺到的地面、浴缸底部都安裝市售止滑墊。張自強補充，輔助設施對比色盡量明顯，以確保長輩在視覺與色彩辨識能力較差的狀況下，仍能有效的在危險時刻抓到設施。',
+						"anay1": '張自強表示，無論長輩是不是身心障礙者，都建議在浴廁安裝身心障礙扶手，尤其馬桶側邊，與淋浴空間如浴缸等，設施與牆面對比色盡量明顯，以確保長輩在視覺能力較差的狀況下，仍能有效的在危及時刻抓到扶手。',
+						"anay2": '物理治療師彭品維也建議，除了扶手，最好也在所有水會噴濺到的地面、浴缸底部都貼上止滑墊。',
 					},
 					'img': [
 						{
 							"class": "wash",
 							"src": wash,
-							"alt": '洗手台',
-							"title": "洗手台",
+							"alt": '起身支撐扶手',
+							"title": "起身支撐扶手",
 						},
 						{	
 							"class": "tub",
 							"src": tub,
 							"alt": '浴缸',
-							"title": "浴缸",
+							"title": null,
 						},
 						{
 							"class": "toothBrush",
 							"src": toothBrush,
 							"alt": '牙刷',
-							"title": "牙刷",
+							"title": null,
 						},
 						{
 							"class": "tessiue",
 							"src": tessiue,
 							"alt": '衛生紙',
-							"title": "衛生紙",
+							"title": null,
 						},
 						{
 							"class": "bubble",
 							"src": bubble,
 							"alt": '泡泡',
-							"title": "泡泡",
+							"title": null,
 						},
 						{
 							"class": "bathChair",
 							"src": bathChair,
-							"alt": '洗澡椅',
-							"title": "洗澡椅",
+							"alt": '收納式淋浴椅',
+							"title": "收納式淋浴椅",
 						},							
 					],					
 				},																						
@@ -430,10 +432,12 @@ export default {
 				if(index > 0) {
 					this.quizs[index-1].answered = true
 					this.quizs[index-1].answering = false
+					this.quizs[index-1].display = 'none'
 				}
 			} else if(this.quizIndex === this.quizs.length*2 +1) {
-				this.scrollSpeed = 3	
+				this.scrollSpeed = 2.5	
 				this.landing.herDog = 100
+				this.quizs[index].display = 'block'
 			} else {
 				this.handle_lookDemand()
 			}			
@@ -465,7 +469,7 @@ export default {
 	},	
 	mounted() {
 		setTimeout(()=>{
-		this.landing.grandma = 30
+		this.landing.grandma = 50
 		this.landing.herDog = 50
 		}, 133)
 	},
@@ -508,23 +512,21 @@ export default {
 	bottom: 42px;
 	left: -45%;
 	transition: left 6s linear;
-	opacity: .6;
+	width: 35%;
+	margin-left: -25%;
 	img{
-		width: 50%;
-		margin: 0;
+		display: block;
 	}
 }
 #herDog{
-	// display: none;
 	position: absolute;
 	z-index: 49;
 	bottom: 42px;
 	left: -50%;
 	transition: left 2.5s ease-out;
-	opacity: .6;
+	width: 35%;
 	img{
 		display: block;
-		width: 80%;
 	}
 }
 @keyframes rush {
@@ -559,7 +561,7 @@ export default {
 	overflow: hidden;
 	position: relative;
 	.titleBox{
-		margin-top: 20%;
+		margin-top: 15%;
 		z-index: 1;
 		h1{
 			text-shadow: none;
@@ -593,7 +595,7 @@ export default {
 		width: 100%;
 		color: black;
 		padding: 0 15px;
-		margin-top: 20%;
+		margin-top: 15%;
 		transition: 1.2s ease-in-out;
 		line-height: 1.5;
 	}
@@ -606,6 +608,7 @@ export default {
 	border-radius: 20px;
 	margin-left: auto;
 	margin-right: 15px;
+	z-index: 60;
 	span{
 		width: 100%;
 		height: 100%;
@@ -856,7 +859,7 @@ export default {
 		visibility: visible;
 	}
 	.lamp{
-		width: 35%;
+		width: 30%;
 		margin-left: -35%;
 		margin-bottom: 30%;
 		z-index: 5;
@@ -977,7 +980,7 @@ export default {
 }
 .optionBlock {
 	width: 100%;
-	height: 30%;
+	height: 20%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -991,7 +994,7 @@ export default {
 		margin: 0 10px;
 		padding: 10px;
 		width: 40%;
-		height: 60%;
+		height: 100%;
 		border: 1px solid black;
 		border-radius: 20px;
 		cursor: pointer;
@@ -1084,6 +1087,26 @@ export default {
 .forShare{
 	transition: 3s;
 	padding: 0 15px;
+}@media screen and (max-width: 374px){
+	.titleBox{
+		h1{
+			font-size: 30px;
+		}
+		p{
+			font-size: 18px;
+		}
+	}
+	p{
+		font-size: 15px;
+	}
+	h2{
+		font-size: 24px;
+	}
+	.stage {
+		img{
+			bottom: 10%;
+		}
+	}
 }
 @media screen and (min-width: 1024px) {
 	#scrollPage{
@@ -1119,17 +1142,12 @@ export default {
 	}
 	#grandma{
 		bottom: 62px;
-		opacity: .7;
-		img{
-			width: 12vw;
-			margin-left: 40%;
-		}
+		width: 10%;
+		margin-left: -15%;
 	}
 	#herDog{
 		bottom: 62px;
-		img{
-			width: 100%;
-		}
+		width: 10%;
 	}	
 	.forShare{
 		width: 880px;
@@ -1298,6 +1316,5 @@ export default {
 			margin-bottom: 5%;
 		}
 	}
-
 }
 </style>
