@@ -811,7 +811,9 @@ export default {
 		width: 60%;
 		margin-left: -5%;
 		margin-bottom: 5%;
-		visibility: visible;
+		opacity: 0;
+		transform: translate(50px, 0);
+		animation-name: slideTo0;
 	}
 	.toma1{
 		width: 15%;
@@ -978,6 +980,7 @@ export default {
 	height: 30%;
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	position: relative;
 	z-index: 1;
 	p {
@@ -1118,7 +1121,8 @@ export default {
 		bottom: 62px;
 		opacity: .7;
 		img{
-			width: 90%;
+			width: 12vw;
+			margin-left: 40%;
 		}
 	}
 	#herDog{
@@ -1138,6 +1142,7 @@ export default {
 		padding-top: 50px;
 	}
 	.optionBlock{
+		align-items: flex-start;
 		p{
 			max-width: 20%;
 			max-height: 60%;
