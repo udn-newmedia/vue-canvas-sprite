@@ -21,7 +21,10 @@
 						<h1>讓家<br/>準備好與你一起變老</h1>
 						<p>安全居家 長輩樂活 家人快活</p>						
 					</div>
-					<div class="chair" :style="{backgroundImage: 'url('+ op +')'}"></div>				
+					<div class="chair" :style="{backgroundImage: 'url('+ op +')'}"></div>	
+					<div class="horizen" style="background-color: #eb6202">
+						<img :src="horizen">
+					</div>								
 				</div>
 				<div class="abstract">
 					<p :style="{transform: 'translate('+ abstractX +'%, 0)'}">
@@ -36,7 +39,10 @@
 					</div>
 					<div id="start" @click.once="nextQuiz(0)">
 						<span>開始遊戲</span>
-					</div>				
+					</div>
+					<div class="horizen" style="background-color: #ebd202">
+						<img :src="horizen">
+					</div>									
 				</div>				
 			</div>
 			<div class="quizSection"
@@ -53,7 +59,7 @@
 						   @click.once="choseB(index)">
 							{{quiz.question.optionB}}
 							<span class="lampLine"></span>
-						</p>
+						</p>						
 					</div>
 					<div class="stage" :class="quiz.name"
 						 :style="{backgroundImage: 'url('+ quiz.background +')'}">
@@ -62,7 +68,7 @@
 							 :alt="img.alt" :title="img.title"
 							 :style="{display: quiz.display}">
 					</div>
-					<div class="horizen" style="background-color: black">
+					<div class="horizen" :style="{backgroundColor: quiz.question.horizen}">
 						<img :src="horizen">
 					</div>					
 				</div>
@@ -74,13 +80,10 @@
 						<p class="answer_article">{{quiz.answer.anay2}}</p>
 						<p class="toNext" @click.once="nextQuiz(index +1)">→</p>
 					</div>	
-					<div class="horizen" style="background-color: green">
+					<div class="horizen" :style="{backgroundColor: quiz.answer.horizen}">
 						<img :src="horizen">
 					</div>						
 				</div>							
-			</div>
-			<div class="horizen" style="background-color: black">
-				<img :src="horizen">
 			</div>
 			<div class="quizCount"
 				 v-if="showStep"
@@ -171,12 +174,14 @@ export default {
 					"question": {
 						"ask": "早安！經過一夜好眠，開啟新的一天，我要···",
 						"optionA": "一張開眼就跳下床，展現活力！",
-						"optionB": "賴床一下好了"
+						"optionB": "賴床一下好了",
+						"horizen": "#e4544d",
 					},
 					"answer": {
 						"showA": true,
 						"answerA": '這樣不行啦！',
 						"answerB": '沒錯！',
+						"horizen": "#ea68a2",
 						"anay1": '八里療養院職能治療科主任張自強叮嚀，早晨是心腦血管疾病高發時段，且入冬後，身體離開被窩接觸到外面空氣，冷熱溫差更大，銀髮族應格外當心。',
 						"anay2": '張自強建議長輩，每日醒來後，雙手各握拳、放開10下，腳趾與膝蓋也彎曲、伸直10下，讓四肢暖和後，再起身坐好、坐穩，才扶著床櫃等，可支撐的輔助物下床。',
 					},
@@ -228,12 +233,14 @@ export default {
 					"question": {
 							"ask": "午餐時間，該吃甚麼好呢？",
 							"optionA": "年紀大了，粗茶淡飯，清淡最好",
-							"optionB": "食量變小，更要重視營養攝取夠不夠"
+							"optionB": "食量變小，更要重視營養攝取夠不夠",
+							"horizen": "#23ac39",
 						},
 					"answer": {
 						"showA": true,
 						"answerA": '觀念過時啦！',
 						"answerB": '正確！',
+						"horizen": "#638c0b",
 						"anay1": '別再只吃白飯配湯！營養師陳郁旋表示，粗茶淡飯，容易造成營養不良，反而會加速老化。若家中長輩食量變小，則建議少量多餐，補足身體所需營養。',
 						"anay2": '此外，與其奉行少鹽少油，她更建議活用天然食物的特性調味，增加食慾，例如九層塔、番茄、香菇等，並依烹調方式，選用新鮮未經精煉的好油。',
 					},
@@ -303,12 +310,14 @@ export default {
 					"question": {
 							"ask": "清爽的午後，來活動一下筋骨好了！",
 							"optionA": "努力維持運動習慣，保持活力！",
-							"optionB": "好懶得動，在家還比較安全"
+							"optionB": "好懶得動，在家還比較安全",
+							"horizen": "#e1bc33",
 						},
 					"answer": {
 						"showA": true,
 						"answerA": '給你一百個讚！',
 						"answerB": '不行啦！',
+						"horizen": "#cfa972",
 						"anay1": '物理治療師彭品維說，減緩身體機能老化，關鍵還是在維持運動的好習慣，除了最簡單的快走，也推薦游泳，就算只是泡在水裡踩踩腿，水的壓力、浮力都能幫助血液循環，也更適合關節疼痛者。',
 						"anay2": '八里療養院職能治療科主任張自強也補充，長輩外出建議穿鮮艷、螢光色系衣物，也建議使用助行輔具，老人家若抗拒，則可考慮拐杖傘，或平地用登山杖等，形象較正面、健康的輔具。',
 					},
@@ -354,12 +363,14 @@ export default {
 					"question": {
 							"ask": "洗個熱呼呼的熱水澡，但浴室老是濕濕滑滑的···",
 							"optionA": "我身體勇健，不需要身心障礙扶手",
-							"optionB": "醜又如何，扶手不只要裝，還要選最亮色！"
+							"optionB": "醜又如何，扶手不只要裝，還要選最亮色！",
+							"horizen": "#04a1e9",
 						},
 					"answer": {
 						"showA": true,
 						"answerA": '不是這樣的！',
 						"answerB": '沒錯！',
+						"horizen": "#00b7ee",
 						"anay1": '張自強表示，無論長輩是不是身心障礙者，都建議在浴廁安裝身心障礙扶手，尤其馬桶側邊，與淋浴空間如浴缸等，設施與牆面對比色盡量明顯，以確保長輩在視覺能力較差的狀況下，仍能有效的在危及時刻抓到扶手。',
 						"anay2": '物理治療師彭品維也建議，除了扶手，最好也在所有水會噴濺到的地面、浴缸底部都貼上止滑墊。',
 					},
@@ -645,7 +656,8 @@ export default {
 	max-width: 880px;
 	height: 50%;
 	margin: 0 auto;
-	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: visible;
 	z-index: 0;
 	img{
 		position: absolute;
@@ -672,7 +684,7 @@ export default {
 	}
 	.bubble{
 		width: 80%;
-		top: 0;
+		top: 10%;
 		margin-left: -40%;
 		z-index: 7;
 		visibility: visible;
@@ -1108,6 +1120,19 @@ export default {
 		}
 	}
 }
+@media screen and (min-width: 768px) and (max-width: 1023px){
+	.optionBlock{
+		align-items: center;
+		height: 20%;
+		p{
+			max-width: 30%;
+			max-height: 60%;
+		}			
+	}
+	.stage{
+		height: 60%;
+	}
+}
 @media screen and (min-width: 1024px) {
 	#scrollPage{
 		padding-top: 0px;
@@ -1161,8 +1186,9 @@ export default {
 	}
 	.optionBlock{
 		align-items: flex-start;
+		height: 30%;
 		p{
-			max-width: 20%;
+			max-width: 15%;
 			max-height: 60%;
 		}		
 		.lampLine{
