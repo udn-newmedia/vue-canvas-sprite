@@ -597,7 +597,7 @@ export default {
 	bottom: 29px;
 	left: -45%;
 	transition: left 6s linear;
-	width: 35%;
+	width: 30%;
 	margin-left: -25%;
 	img{
 		display: block;
@@ -609,7 +609,7 @@ export default {
 	bottom: 30px;
 	left: -50%;
 	transition: left 2.5s ease-out;
-	width: 35%;
+	width: 30%;
 	img{
 		display: block;
 	}
