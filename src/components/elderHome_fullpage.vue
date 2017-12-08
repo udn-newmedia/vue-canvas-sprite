@@ -3,8 +3,7 @@
 		 :style="{
 					backgroundColor: startBgc,
 					backgroundImage: 'url('+ gradLine +')',
-		 		}"
-		 @transitionend="handle_grad">
+		 		}">
 		<div id="grandma" :style="{left: landing.grandma + '%'}">
 			<img :src="grandMa" alt="奶奶">
 		</div>
