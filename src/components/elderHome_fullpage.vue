@@ -810,7 +810,7 @@ export default {
 		width: 60%;
 		z-index: 3;
 		margin-left: -40%;
-		margin-bottom: 20%;
+		margin-bottom: 15%;
 		animation-name: slideTo0;
 		// animation-iteration-count: infinite;
 		transform: translate(-50px, 50px);
@@ -820,14 +820,14 @@ export default {
 		width: 17%;
 		z-index: 3;
 		margin-left: -35%;
-		margin-bottom: 15%;
+		margin-bottom: 10%;
 		animation-delay: .6s;
 		animation-name: dropIn;		
 	}
 	.cart{
 		width: 20%;
 		margin-left: -5%;
-		margin-bottom: 15%;
+		margin-bottom: 10%;
 		z-index: 5;
 		animation-name: grow;
 		animation-delay: 2s;
@@ -836,14 +836,14 @@ export default {
 	.parkChair{
 		width: 30%;
 		margin-left: 10%;
-		margin-bottom: 17%;
+		margin-bottom: 12%;
 		z-index: 10;
 		visibility: visible;
 	}
 	.signal{
 		z-index: 0;
 		width: 65%;
-		margin-bottom: 20%;
+		margin-bottom: 10%;
 		margin-left: -5%;
 		animation-delay: 1.4s;
 		animation-name: dropIn;
@@ -1194,20 +1194,34 @@ export default {
 	padding: 0 15px;
 }
 @media screen and (max-width: 374px){
-	.titleBox{
-		h1{
-			font-size: 30px;
-		}
-		p{
-			font-size: 18px;
-		}
-	}
 	p{
 		font-size: 15px;
 	}
-	h2{
-		font-size: 24px;
+	.banner{
+		.titleBox{
+			margin-top: 5%;
+			h1{
+				font-size: 30px;
+			}
+			p{
+				font-size: 18px;
+			}
+		}
+		p{
+			font-size: 15px;
+		}
+		h2{
+			font-size: 24px;
+		}		
 	}
+	#grandma{
+		width: 25%;
+		bottom: 32px;
+	}
+	#herDog{
+		width: 25%;
+		bottom: 34px;	
+	}	
 	.stage {
 		img{
 			bottom: 0;
@@ -1217,7 +1231,6 @@ export default {
 @media screen and (min-width: 768px) and (max-width: 1023px){
 	.optionBlock{
 		align-items: center;
-		// height: 20%;
 		p{
 			max-width: 30%;
 			max-height: 60%;
