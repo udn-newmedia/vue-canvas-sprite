@@ -1192,7 +1192,8 @@ export default {
 .forShare{
 	transition: 3s;
 	padding: 0 15px;
-}@media screen and (max-width: 374px){
+}
+@media screen and (max-width: 374px){
 	.titleBox{
 		h1{
 			font-size: 30px;
@@ -1208,7 +1209,6 @@ export default {
 		font-size: 24px;
 	}
 	.stage {
-		margin-top: 5%;
 		img{
 			bottom: 0;
 		}
@@ -1263,12 +1263,12 @@ export default {
 		padding-top: 5%;
 	}
 	#grandma{
-		bottom: 50px;
+		bottom: 42px;
 		width: 10%;
 		margin-left: -15%;
 	}
 	#herDog{
-		bottom: 51px;
+		bottom: 43px;
 		width: 10%;
 	}	
 	.forShare{
@@ -1277,13 +1277,15 @@ export default {
 	}
 	#start{
 		margin-right: calc(50% - 440px)
-	}		
+	}
+	.question{
+		padding-bottom: 50px;
+	}	
 	.quizSection{
 		padding-top: 50px;
 	}
 	.optionBlock{
 		align-items: flex-start;
-		// height: 20%;
 		p{
 			padding: 0 20px;
 			max-width: 20%;
@@ -1292,10 +1294,10 @@ export default {
 		}		
 	}
 	.quizCount{
-		height: 60px;
+		height: 50px;
 	}
 	.horizen{
-		bottom: 55px;
+		bottom: 45px;
 	}
 	.stage{
 		overflow: visible;
