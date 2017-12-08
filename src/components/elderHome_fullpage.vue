@@ -881,7 +881,6 @@ export default {
 		animation-delay: .7s;
 		animation-name: grow;
 		transform-origin: 50% 100%;		
-		visibility: visible;
 	}
 	.spoon{
 		width: 13%;
