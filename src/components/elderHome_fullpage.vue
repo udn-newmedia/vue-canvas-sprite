@@ -701,15 +701,17 @@ export default {
 	align-items: center;
 	span{
 		position: relative;
-		top: -10px;
+		top: -5px;
 	}
 	.arrow{
 		position: absolute;
 		top: 50%;
 		left: 50%;
+		display: block;
 		font-size: 30px;
 		margin-left: -15px;
-		margin-top: -10px;
+		margin-top: -5px;
+		animation: next 1s linear infinite;	
 	}
 }
 .quizSection {
