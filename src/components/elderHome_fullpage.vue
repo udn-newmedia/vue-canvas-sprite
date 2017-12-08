@@ -1239,6 +1239,37 @@ export default {
 			bottom: 0;
 		}
 	}
+	.room{
+		.bed{
+			width: 35%;
+			margin-left: -5%;
+		}
+		.handsup{
+			width: 25%;
+			margin-left: -25%;
+			margin-bottom: 5%;
+		}
+		.weighter{
+			width: 15%;
+			margin-left: -10%;
+			margin-bottom: 10%;
+		}
+		.lamp{
+			width: 15%;
+			margin-left: -15%;
+			margin-bottom: 20%;
+		}
+		.locker{
+			width: 20%;
+			margin-left: 0;
+			margin-bottom: 10%;
+		}
+		.slipper{
+			width: 20%;
+			margin-left: 15%;
+			margin-bottom: 5%;
+		}
+	}	
 }
 @media screen and (min-width: 768px) and (max-width: 1023px){
 	.optionBlock{
