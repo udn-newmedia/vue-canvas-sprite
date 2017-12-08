@@ -17,7 +17,7 @@
 			<div class="shopWindow">
 				<ul :style="{transform: 'translate('+ product.shopSlideIndex* -100 +'%, 0)'}"
 					@touchstart="handleTouchStart(index)"
-					@touchend="handleTouchEnd(index)"
+					@touchend="handleTouchEnd(index)"				
 					@transitionend="handleTransitionEnd"
 				>
 					<li v-for="(item, index) in product.productItem">
@@ -30,7 +30,7 @@
 							<p>{{item.itemDescrip}}</p>
 						</div>
 						<a class="shoppingNow" target="_blank"
-						   :href="item.itemLink"
+						   :href="item.itemLink" 
 						   @click="linkToUdnBuy(item.itemLink, item.itemName)"
 						>選購去</a>
 					</li>											
@@ -71,7 +71,6 @@ import bathroom from '../assets/stage/demand/bathroom.jpg'
 import outDoor from '../assets/stage/demand/outdoor.jpg'
 import room from '../assets/stage/demand/room.jpg'
 import meal from '../assets/stage/demand/meal.jpg'
-
 
 export default {
 
@@ -243,7 +242,6 @@ export default {
   		this.forTouchStartCY = Math.round(event.changedTouches[0].clientY)
   	},
   	handleTouchEnd(index) {
-  		event.preventDefault()
   		this.forTouchEndCX = Math.round(event.changedTouches[0].clientX)
   		this.forTouchEndCY = Math.round(event.changedTouches[0].clientY)
   		const touchRangeY = Math.abs(this.forTouchStartCY - this.forTouchEndCY) 
@@ -255,7 +253,8 @@ export default {
   			}	
   		}
   	},
-  	linkToUdnBuy(link, name) {x
+  	linkToUdnBuy(link, name) {
+  		console.log(link, name)
 		ga("send", {
 		    "hitType": "event",
 		    "eventCategory": "商品超連結", 
@@ -315,6 +314,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	margin: 25px 0;
+	z-index: 1000;
 	h2{
 		text-align: center;
 	}
@@ -352,7 +352,7 @@ export default {
 		padding: 0;
 		margin: 0 auto;
 		display: flex;
-		// justify-content: space-around;
+		-webkit-touch-callout: none;
 		align-items: center;
 		transition: transform .7s ease-in-out;
 		li{
@@ -455,6 +455,12 @@ export default {
 	}
 }
 @media screen and (max-width: 374px) {
+	h2{
+		font-size: 24px;
+	}
+	h3{
+		font-size: 20px;
+	}
 	p{
 		font-size: 15px;
 	}

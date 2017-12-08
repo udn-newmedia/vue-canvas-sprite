@@ -279,7 +279,7 @@ export default {
 		height: 100vh;
 		padding: 50px 0 0 0 ;
 		background-clip: content-box;
-		background-color: transparent;
+		background-color: #fff;
 		transition: .6s;
 		transform: translate(100%, 0);
 		ul{
@@ -324,6 +324,7 @@ export default {
 		height: 100%;
 		padding: 0;
 		transform: translate(0, 0);
+		background-color: transparent;
 		ul{
 			height: 100%;
 			display: flex;

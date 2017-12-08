@@ -1002,13 +1002,6 @@ export default {
 		transform: scale(1.05) translate(-10px,0) rotate(-2deg);
 	}
 }
-@keyframes rotateTo0 {
-	to{
-		visibility: visible;
-		transform: rotate(0);
-		opacity: 1;
-	}
-}
 @keyframes slideTo0 {
 	to{
 		visibility: visible;
@@ -1197,8 +1190,9 @@ export default {
 		font-size: 24px;
 	}
 	.stage {
+		margin-top: 5%;
 		img{
-			bottom: 10%;
+			bottom: 0;
 		}
 	}
 }
