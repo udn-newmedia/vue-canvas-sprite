@@ -1,17 +1,22 @@
 <template>
-	<main id="scrollPage">
-		<div id="grandma"
-			 :style="{left: landing.grandma + '%'}"
-		>
+	<main id="scrollPage"
+		 :style="{
+					backgroundColor: startBgc,
+					backgroundImage: 'url('+ gradLine +')',
+		 		}"
+		 @transitionend="handle_grad">
+		<div id="grandma" :style="{left: landing.grandma + '%'}">
 			<img :src="grandMa" alt="奶奶">
 		</div>
-		<div id="herDog"
-			 :style="{left: landing.herDog + '%'}"
-		>
-			<img :src="dog" alt="her dog">
+		<div id="herDog" :style="{left: landing.herDog + '%'}">
+			<img :src="dog" alt="狗">
 		</div>			
 		<div class="scrollContainer"
-			 :style="{transition: scrollSpeed+'s', transform: 'translateX('+ quizIndex * -100 + '%)', zIndex: isLast}"
+			 :style="{ 
+			 			transition: scrollSpeed+'s',
+			 		    transform: 'translateX('+ quizIndex * -100 + '%)',
+			 		    zIndex: isLast,
+			 		}"
 			 >		 
 			<div class="scane"
 				 @scroll="showScrollLeft"
@@ -30,14 +35,15 @@
 					<p :style="{transform: 'translate('+ abstractX +'%, 0)'}">
 						國健署統計，每年「三個老人一個跌」，
 						輕則受傷恐懼、畫地限縮活動空間，加速退化，重則從此失能，需要家人照顧一輩子。
-						打造適合高齡居住的「大人宅」，成為迎接高齡社會關鍵。<br/>
+						打造適合高齡居住的「大人宅」，成為迎接高齡社會關鍵。
+						<br/>
 						你的老後一日，會是甚麼模樣？			
 					</p>
 					<div class="forShare"
 						 :style="{opacity: showIntro}">
 						<Share href="../../index.html"/>	
 					</div>
-					<div id="start" @click.once="nextQuiz(0)">
+					<div id="start" @click.once="startGame">
 						<span>開始遊戲</span>
 					</div>
 					<div class="horizen" style="background-color: #ebd202">
@@ -52,13 +58,11 @@
 					<div class="optionBlock">
 						<p class="optionA"
 						   @click.once="choseA(index)">
-							{{quiz.question.optionA}}
-							<span class="lampLine"></span>
+						    {{quiz.question.optionA}}
 						</p>
 						<p class="optionB"
 						   @click.once="choseB(index)">
-							{{quiz.question.optionB}}
-							<span class="lampLine"></span>
+						    {{quiz.question.optionB}}
 						</p>						
 					</div>
 					<div class="stage" :class="quiz.name"
@@ -68,7 +72,8 @@
 							 :alt="img.alt" :title="img.title"
 							 :style="{display: quiz.display}">
 					</div>
-					<div class="horizen" :style="{backgroundColor: quiz.question.horizen}">
+					<div class="horizen"
+						 :style="{backgroundColor: quiz.question.horizen}">
 						<img :src="horizen">
 					</div>					
 				</div>
@@ -78,7 +83,7 @@
 						<h2 v-else>{{quiz.answer.answerB}}</h2>
 						<p class="answer_article">{{quiz.answer.anay1}}</p>
 						<p class="answer_article">{{quiz.answer.anay2}}</p>
-						<p class="toNext" @click.once="nextQuiz(index +1)">→</p>
+						<p class="toNext" @click.once="toNext(index)">→</p>
 					</div>	
 					<div class="horizen" :style="{backgroundColor: quiz.answer.horizen}">
 						<img :src="horizen">
@@ -107,7 +112,7 @@ import imgGrandma from '../assets/stage/grandma.gif'
 import imgOpening from '../assets/stage/opening.gif'
 import imgDog from '../assets/stage/dog.gif'
 
-import roomBg from '../assets/stage/room/roomBg.jpg'
+import roomBg from '../assets/stage/room/roomBg.png'
 import bed from '../assets/stage/room/bed.png'
 import handsup from '../assets/stage/room/handsup.png'
 import lamp from'../assets/stage/room/lamp.png'
@@ -115,7 +120,7 @@ import locker from'../assets/stage/room/locker.png'
 import slipper from'../assets/stage/room/slipper.png'
 import weighter from'../assets/stage/room/weighter.png'
 
-import mealBg from '../assets/stage/meal/mealBg.jpg'
+import mealBg from '../assets/stage/meal/mealBg.png'
 import earBowl from '../assets/stage/meal/earBowl.png'
 import fork from '../assets/stage/meal/fork.png'
 import iceBox from '../assets/stage/meal/iceBox.png'
@@ -126,20 +131,21 @@ import vega from '../assets/stage/meal/vega.png'
 import toma1 from '../assets/stage/meal/toma1.png'
 import toma2 from '../assets/stage/meal/toma2.png'
 
-import outDoorBg from '../assets/stage/outDoor/outDoorBg.jpg'
+import outDoorBg from '../assets/stage/outDoor/outDoorBg.png'
 import bus from '../assets/stage/outDoor/bus.png'
 import cart from '../assets/stage/outDoor/cart.png'
 import crutch from '../assets/stage/outDoor/crutch.png'
 import signal from '../assets/stage/outDoor/signal.png'
 import parkChair from '../assets/stage/outDoor/parkChair.png'
 
-import bathBg from '../assets/stage/bathroom/bathBg.jpg'
+import bathBg from '../assets/stage/bathroom/bathBg.png'
 import wash from '../assets/stage/bathroom/wash.png'
 import tub from '../assets/stage/bathroom/tub.png'
 import toothBrush from '../assets/stage/bathroom/toothBrush.png'
 import tessiue from '../assets/stage/bathroom/tessiue.png'
 import bubble from '../assets/stage/bathroom/bubble.png'
 import bathChair from '../assets/stage/bathroom/bathChair.png'
+import gradLine from '../assets/stage/p3.png'
 
 export default {
 	name: 'elderHome_fullpage',
@@ -149,7 +155,9 @@ export default {
 	},
 	data: function() {
 		return {
-			scrollSpeed: .7,
+			gradLine: gradLine,
+			startBgc: '#fff',
+			scrollSpeed: .8,
 			countQuiz: false,
 			showStep: true,
 			showIntro: 0,
@@ -419,18 +427,26 @@ export default {
   	computed: {
 		...mapGetters([
 	  	  'quizIndex',
+	  	  'platform',
+	  	  'headerBgc',
 	  	]),
   	},
 	methods: {
 		...mapActions([
 			'handle_quizIndex',
 			'handle_lookDemand',
+			'handle_headerBgc'
 		]),
 		showScrollLeft: function(e) {
-			const scrollW = e.target.scrollLeft - e.target.clientWidth
-			if(e.target.scrollLeft > scrollW*.7){
+			const scrollW = e.target.clientWidth - e.target.scrollLeft
+			if(e.target.scrollLeft > scrollW * 7){
 				this.showIntro = 1
 				this.abstractX = 0
+				this.startBgc = '#fff799'
+			} else {
+				this.showIntro = 0
+				this.abstractX = 100
+				this.startBgc = '#fff'				
 			}
 		},	
 		nextQuiz: function(index) {
@@ -448,17 +464,48 @@ export default {
 			} else if(this.quizIndex === this.quizs.length*2 +1) {
 				this.scrollSpeed = 2.5	
 				this.landing.herDog = 100
-				this.quizs[index].display = 'block'
+				this.quizs[index-1].display = 'none'
+				this.handle_headerBgc()
 			} else {
 				this.handle_lookDemand()
-			}			
+			}
+		},
+		startGame: function() {
+			this.nextQuiz(0)
+	        ga("send", {
+	            "hitType": "event",
+	            "eventCategory": "button", 
+	            "eventAction": "點擊開始遊戲",	 
+	            "eventLabel": "[" + this.platform + "][點擊開始遊戲]"
+	        });		
+		},
+		toNext: function(index) {
+			this.nextQuiz(index + 1)
+	        ga("send", {
+	            "hitType": "event",
+	            "eventCategory": "button", 
+	            "eventAction": "點擊下一題按鈕",	 
+	            "eventLabel": "[" + this.platform + "][點擊下一題按鈕]"
+	        });			
 		},
 		choseA: function(index) {
 			this.handle_quizIndex()
+	        ga("send", {
+	            "hitType": "event",
+	            "eventCategory": "button", 
+	            "eventAction": "選擇左邊答案",	 
+	            "eventLabel": "[" + this.platform + "][選擇左邊答案]"
+	        });	
 		},
 		choseB: function(index) {
 			this.handle_quizIndex()
-			this.quizs[index].answer.showA = false
+			this.quizs[index].answer.showA = false;
+	        ga("send", {
+	            "hitType": "event",
+	            "eventCategory": "button", 
+	            "eventAction": "選擇右邊答案",	 
+	            "eventLabel": "[" + this.platform + "][選擇右邊答案]"
+	        });			
 		},
 		handleMouseWheel: function(e){
 			let w = window.innerWidth
@@ -471,6 +518,12 @@ export default {
 					if(this.canScroll === true){
 						this.canScroll = false
 						this.nextQuiz(0)
+				        ga("send", {
+				            "hitType": "event",
+				            "eventCategory": "wheel", 
+				            "eventAction": "藉由滾輪開始遊戲",	 
+				            "eventLabel": "[" + this.platform + "][藉由滾輪開始遊戲]"
+				        });						
 					}
 				}				
 			} else if (e.deltaY < -3 && e.deltaX < 5){
@@ -490,12 +543,30 @@ export default {
 		}
 	},
 	updated: function() {
-		console.log('updated')
 		if(this.quizIndex >= this.quizs.length*2 +1){
 			this.showStep = false
 			this.countQuiz = false
 			this.scrollSpeed = 4
-		}	
+		}			
+		switch(this.quizIndex){
+			case 0:
+				break
+			case 2:
+				this.startBgc = '#eb6777'
+				break;
+			case 4:
+				this.startBgc = '#a2ce47'
+				break;
+			case 6: 
+				this.startBgc = '#fff45c'
+				break;
+			case 8:
+				this.startBgc = '#7ecef4'
+				break;
+			default:
+				this.startBgc = '#fff'
+				break;
+		}			
 	}
 }
 </script>
@@ -509,6 +580,8 @@ export default {
 	overflow: hidden;
 	padding-top: 50px;
 	display: flex;
+	transition: background-color 400ms linear;
+	background-size: contain;
 	.scrollContainer {
 		flex-shrink: 0;
 		display: flex;
@@ -520,7 +593,7 @@ export default {
 #grandma{
 	position: absolute;
 	z-index: 48;
-	bottom: 42px;
+	bottom: 29px;
 	left: -45%;
 	transition: left 6s linear;
 	width: 35%;
@@ -532,7 +605,7 @@ export default {
 #herDog{
 	position: absolute;
 	z-index: 49;
-	bottom: 42px;
+	bottom: 30px;
 	left: -50%;
 	transition: left 2.5s ease-out;
 	width: 35%;
@@ -658,7 +731,8 @@ export default {
 	margin: 0 auto;
 	overflow-x: hidden;
 	overflow-y: visible;
-	z-index: 0;
+	z-index: 10;
+	background-color: rgba(#fff, .7);
 	img{
 		position: absolute;
 		left: 50%;
@@ -679,8 +753,7 @@ export default {
 		margin-bottom: 10%;
 		z-index: 0;
 		transform: rotate(-25deg);
-		opacity: 0;
-		animation-name: rotateTo0;
+		animation-name: dropIn;
 	}
 	.bubble{
 		width: 80%;
@@ -700,7 +773,8 @@ export default {
 		margin-left: -30%;
 		margin-bottom: 8%;
 		z-index: 4;
-		visibility: visible;
+		animation-name: grow;
+		transform-origin: center bottom;
 	}
 	.toothBrush{
 		width: 13%;
@@ -716,7 +790,8 @@ export default {
 		margin-bottom: 10%;
 		z-index: 6;
 		transform: translate(300px, 0);
-		animation-name: slideTo0;
+		animation-name: grow;
+		transform-origin: center bottom;
 		animation-delay: .6s;
 	}	
 	.wash{
@@ -746,18 +821,16 @@ export default {
 		margin-left: -35%;
 		margin-bottom: 15%;
 		animation-delay: .6s;
-		animation-name: rollIn;		
+		animation-name: dropIn;		
 	}
 	.cart{
 		width: 20%;
 		margin-left: -5%;
 		margin-bottom: 15%;
 		z-index: 5;
-		animation-name: slideTo0;
+		animation-name: grow;
 		animation-delay: 2s;
-		// animation-iteration-count: infinite;
-		transform: translate(-50px, 0);
-		opacity: 0;
+		transform-origin: center bottom;
 	}
 	.parkChair{
 		width: 30%;
@@ -782,12 +855,11 @@ export default {
 		width: 25%;
 		margin-left: -15%;
 		z-index: 10;
-		animation-name: rotateTo0;
-		animation-duration: 2s;
-		animation-delay: 1.6s;
-		transform: rotate(15deg);
-		transform-origin: 50% 50%;
-		opacity: 0;
+		animation-name: grow;
+		animation-duration: .4s;
+		animation-delay: 1.2s;
+		transform-origin: 50% 100%;
+		opacity: 1;
 	}
 	.iceBox{
 		width: 40%;
@@ -807,6 +879,9 @@ export default {
 		width: 15%;
 		margin-left: -10%;
 		z-index: 6;
+		animation-delay: .7s;
+		animation-name: grow;
+		transform-origin: 50% 100%;		
 		visibility: visible;
 	}
 	.spoon{
@@ -859,9 +934,8 @@ export default {
 		margin-left: -48%;
 		margin-bottom: 5%;
 		z-index: 9;
-		transform: translate(-50px, 0);
-		animation-name: slideTo0;
-		opacity: 0;
+		animation-duration: 1s;
+		animation-name: dropIn;
 	}
 	.weighter{
 		width: 35%;
@@ -875,11 +949,11 @@ export default {
 		margin-left: -35%;
 		margin-bottom: 30%;
 		z-index: 5;
-		opacity: 0;
-		animation-name: rotateTo0;
+		opacity: 1;
+		animation-name: grow;
 		animation-delay: 1.2s;
 		transform: rotate(-45deg);
-		transform-origin: bottom;
+		transform-origin: right bottom;
 	}
 	.locker{
 		width: 40%;
@@ -894,11 +968,10 @@ export default {
 		margin-left: 25%;
 		margin-bottom: 15%;
 		z-index: 6;
-		transform-origin: bottom;
+		transform-origin: left bottom;
 		animation-delay: 1.6s;
-		animation-name: rotateTo0;
-		transform: rotate(45deg);
-		opacity: 0;
+		animation-name: grow;
+		opacity: 1;
 	}
 }
 @keyframes dropIn{
@@ -906,14 +979,17 @@ export default {
     transform:  translate(0px,-200%)  scaleX(1.00) scaleY(1.00) ;
     visibility: visible;
   }
-  30% {
-    transform:  translate(0px,0px)  scaleX(0.70) scaleY(2.00) ;
+  27% {
+    transform:  translate(0px,0px)  scaleX(1) scaleY(1.05) ;
+  }
+  39% {
+  	transform:  translate(0px,-70px)  scaleX(1) scaleY(1) ;
   }
   56% {
-    transform:  translate(0px,0px)  scaleX(2.00) scaleY(0.60) ;
+    transform:  translate(0px,0px)  scaleX(1.00) scaleY(1) ;
   }
   76% {
-    transform:  translate(0px,0px)  scaleX(0.60) scaleY(1.2) ;
+    transform:  translate(0px,-10px)  scaleX(1) scaleY(1.02) ;
   }
   100% {
     transform:  translate(0px,0px)  scaleX(1.00) scaleY(1.00);
@@ -954,6 +1030,19 @@ export default {
 		visibility: visible;	
 	}
 }
+@keyframes grow {
+	0%{
+		transform: scale(0);
+		visibility: visible;
+	}
+	80%{
+		transform: scale(1.05);
+	}
+	100%{
+		transform: scale(1);
+		visibility: visible;
+	}
+}
 @keyframes rollIn {
 	0%{
 		transform: translate(300px, 0) rotate(360deg);
@@ -987,7 +1076,7 @@ export default {
 	img{
 		display: block;
 		width: 100%;
-		height: 100%;
+		height: 105%;
 	}
 }
 .optionBlock {
@@ -997,24 +1086,23 @@ export default {
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	z-index: 1;
+	z-index: 0;
 	p {
 		position: relative;
 		display: flex;
 		justify-content: center;
 		align-items: center;				
 		margin: 0 10px;
-		padding: 10px;
+		padding: 0 10px;
 		width: 40%;
 		height: 100%;
-		border: 1px solid black;
-		border-radius: 20px;
+		border: 2px solid #898989;
 		cursor: pointer;
 		line-height: 1.5;
+		box-shadow: 1px 2px 6px 3px rgba(0,0,0,0.1);
 	}
 	p:hover {
-		color: #fff;
-		background-color: #000;
+		background-color: rgba(#898989, .2);
 	}
 	.lampLine{
 		display: none;
@@ -1031,14 +1119,12 @@ export default {
 	z-index: auto;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
 	max-width: 880px;
 	margin: 0 auto;
-	margin-top: 10px;
 	h2 {
 		padding: 0 15px;
 		margin-bottom: 10px;
@@ -1049,25 +1135,23 @@ export default {
 	line-height: 1.5;
 }
 .toNext{
-	position: absolute;
-	z-index: 30;
-	top: 65%;
-	right: 15px;
-	width: 60px;
-	height: 60px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	position: relative;
+	z-index: 30;
+	width: 60px;
+	height: 60px;
+	margin-right: 15px;
+	margin-left: auto;
 	cursor: pointer;
 	transition: .8s;
-	background-color: transparent;
+	border: 1px solid gray;
 	border-radius: 50%;
 	color: black;
 	font-size: 2em;
 	&:hover{
-		color: #fff;
 		background-color: lightgrey;
-		border: 1px solid gray;
 	}
 }
 .quizCount{
@@ -1165,13 +1249,16 @@ export default {
 			width: 880px;
 		}
 	}
+	.answerPage{
+		padding-top: 5%;
+	}
 	#grandma{
-		bottom: 62px;
+		bottom: 50px;
 		width: 10%;
 		margin-left: -15%;
 	}
 	#herDog{
-		bottom: 62px;
+		bottom: 51px;
 		width: 10%;
 	}	
 	.forShare{
@@ -1186,22 +1273,13 @@ export default {
 	}
 	.optionBlock{
 		align-items: flex-start;
-		height: 30%;
+		height: 25%;
 		p{
-			max-width: 15%;
+			padding: 0 20px;
+			max-width: 20%;
 			max-height: 60%;
+			box-shadow: 1px 2px 6px 3px rgba(0,0,0,0.1);
 		}		
-		.lampLine{
-			display: none;
-			position: absolute;
-			top: -300%;
-			left: 50%;
-			margin-left: -1px;
-			width: 2px;
-			height: 300%;
-			background-color: black;
-			transform-origin: top;
-		}
 	}
 	.quizCount{
 		height: 60px;

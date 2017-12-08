@@ -8,6 +8,8 @@ Vue.use(Vuex)
 
 const state = {
   quizIndex: 0,
+  platform: null,
+  headerBgc: 'transparent'
 }
 
 const store = new Vuex.Store({

@@ -1,17 +1,16 @@
 <template>
-    <div id="app" :style="{height: viewHeight + 'px'}">
+    <div id="app"
+         :style="{
+            height: viewHeight + 'px',
+        }">
         <elderHomeHeader></elderHomeHeader>
         <elderHomeFullpage></elderHomeFullpage>
     </div>
 </template>
 <script>
-// import { Indicator, ContentContainer, Quote, Editor, Relate, FBComment, Share, Logo, Foot } from 'udn-newmedia-vue-components';
-// import HeadBar from './components/Header.vue'
-// import FullPage from './components/fullpage.vue'
-// import test from './components/test.vue'
+import { mapGetters, mapActions } from 'vuex'
 import elderHomeHeader from './components/elderHome_header.vue'
 import elderHomeFullpage from './components/elderHome_fullpage.vue'
-// import Utils from 'udn-newmedia-utils'
 
 export default {
     name: 'app',
@@ -24,9 +23,27 @@ export default {
             viewHeight: 0,
         }
     },
+    computed: {
+        ...mapGetters([
+          'platform',
+          'quizIndex',
+        ]),
+    },
+    methods: {
+        ...mapActions([
+            'detectDevice',
+        ]),  
+    },
     created() {
         this.viewHeight = window.innerHeight
+        this.detectDevice()
     },
+    mounted() {
+        console.log(this.platform)
+    },
+    updated() {
+
+    }
 };
 
 </script>

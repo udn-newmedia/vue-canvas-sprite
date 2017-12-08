@@ -20,7 +20,7 @@
 					@touchend="handleTouchEnd(index)"
 					@transitionend="handleTransitionEnd"
 				>
-					<li v-for="item in product.productItem">
+					<li v-for="(item, index) in product.productItem">
 						<div class="itemImg">
 							<img :src="item.itemImg"/>
 							<span>{{item.itemSpec}}</span>
@@ -31,6 +31,7 @@
 						</div>
 						<a class="shoppingNow" target="_blank"
 						   :href="item.itemLink"
+						   @click="linkToUdnBuy(item.itemLink, item.itemName)"
 						>選購去</a>
 					</li>											
 				</ul>
@@ -49,6 +50,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 import contentContainer from '../components/ContentContainer.vue'
 import Share from '../components/Share.vue'
 import U009319399 from '../assets/product/U009319399.jpg'
@@ -207,17 +210,33 @@ export default {
     	],
     }
   },
+  computed: {
+	...mapGetters([
+  	  'platform',
+  	]),
+  },
   methods: {
   	handleLeft(index) {
   		this.products[index].shopSlideIndex === 0 ?
   			(this.products[index].shopSlideIndex = 0):
   			(this.products[index].shopSlideIndex -- , this.isSlide = 1, this.products[index].noLast = 1)
-
+		ga("send", {
+		    "hitType": "event",
+		    "eventCategory": "button", 
+		    "eventAction": "點擊按鈕看下一個商品",	 
+		    "eventLabel": "[" + this.platform + "][點擊按鈕看下一個商品]"
+		});		
   	},
   	handleRight(index) {
   		this.products[index].shopSlideIndex === 2 ?
   			(this.products[index].shopSlideIndex = 2):
   			(this.products[index].shopSlideIndex ++ , this.isSlide = 1, this.products[index].noNext = 1)
+		ga("send", {
+		    "hitType": "event",
+		    "eventCategory": "button", 
+		    "eventAction": "點擊按鈕看上一個商品",	 
+		    "eventLabel": "[" + this.platform + "][點擊按鈕看上一個商品]"
+		});
   	},
   	handleTouchStart(index) {
   		this.forTouchStartCX = Math.round(event.changedTouches[0].clientX)
@@ -235,6 +254,14 @@ export default {
   				this.handleRight(index)
   			}	
   		}
+  	},
+  	linkToUdnBuy(link, name) {x
+		ga("send", {
+		    "hitType": "event",
+		    "eventCategory": "商品超連結", 
+		    "eventAction": name,	 
+		    "eventLabel": "[" + this.platform + "]["+ link +"]"
+		});
   	},
   	handleTransitionEnd() {
   		this.isSlide = 0

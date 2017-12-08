@@ -6,7 +6,7 @@
 		<div id="elderLogo">
 			<img src="../assets/elderHome_logo.png" alt="大人宅">
 		</div>		
-		<div class="blank"></div>
+		<div class="blank" :style="{backgroundColor: headerBgc}"></div>
 		<div class="menu-btn hidden-lg hidden-md" 
 			 :class="{menuIcon_isOpen : menu_isOpen}"
 			 @click="menuOpen">
@@ -24,7 +24,7 @@
 			 :class="{itemContainer_isOpen: menu_isOpen}">
 			<ul>
 				<li>
-					<a href="./index.html">重頭開始</a>
+					<a @click="playAgain" href="./index.html">重頭開始</a>
 				</li>
 				<li>
 					<a @click="menuClose">我的大人宅</a>
@@ -69,27 +69,63 @@ export default {
   computed: {
 	...mapGetters([
   	  'quizIndex',
+  	  'platform',
+  	  'headerBgc'
   	]),
   },  
   methods: {
 	...mapActions([
 		'handle_lookDemand',
+		'handle_headerBgc',
 	]),  	
   	menuOpen () {
   		this.comment_isOpen ? this.comment_isOpen = false : this.comment_isOpen = false;
   		this.menu_isOpen ? this.menu_isOpen = false : this.menu_isOpen = true;
+		ga("send", {
+		    "hitType": "event",
+		    "eventCategory": "button", 
+		    "eventAction": "漢堡",	 
+		    "eventLabel": "[" + this.platform + "][點擊漢堡按鈕]"
+		});
   	},
   	commentOpen () {
   		this.comment_isOpen ? this.comment_isOpen = false : this.comment_isOpen = true;
   		this.menu_isOpen ? this.menu_isOpen = false : this.menu_isOpen = false;
+		ga("send", {
+		    "hitType": "event",
+		    "eventCategory": "button", 
+		    "eventAction": "討論",	 
+		    "eventLabel": "[" + this.platform + "][點擊討論按鈕]"
+		});	
   	},
-  	menuClose (){
+  	menuClose () {
   		this.menu_isOpen = false;
   		this.handle_lookDemand();
+  		this.handle_headerBgc();
+		ga("send", {
+		    "hitType": "event",
+		    "eventCategory": "button", 
+		    "eventAction": "打造大人宅",	 
+		    "eventLabel": "[" + this.platform + "][打造大人宅]"
+		}); 		
   	},
+  	playAgain () {
+		ga("send", {
+		    "hitType": "event",
+		    "eventCategory": "button", 
+		    "eventAction": "重頭開始",	 
+		    "eventLabel": "[" + this.platform + "][重頭開始]"
+		});
+  	}
   },
-  created: function() {
+  created: function () {
   	this.viewHeight = window.innerHeight
+  },
+  beforeUpdated: function () {
+  	console.log('updated header')
+  		this.quizIndex === 9 ? 
+  			this.headerBgc = '#fff' :
+  			this.headerBgc = 'transparent'
   }
 }
 </script>
@@ -101,7 +137,7 @@ export default {
 		top: 0;
 		left: 0;
 		width: 100%;
-		height: 50px;
+		height: 60px;
 		display: flex;
 	}
 	.logo{
@@ -138,7 +174,7 @@ export default {
 		top: 5px;
 		left: 0;
 		width: 100%;
-		background-color: #fff;
+		background-color: transparent;
 		img{
 			display: block;
 			width: 55px;
@@ -151,7 +187,6 @@ export default {
 		z-index: 120;
 		width: 100%;
 		height: 100%;
-		background-color: #FFF;
 	}
 	.comment-btn{
 		position: relative;
@@ -244,7 +279,7 @@ export default {
 		height: 100vh;
 		padding: 50px 0 0 0 ;
 		background-clip: content-box;
-		background-color: #fff;
+		background-color: transparent;
 		transition: .6s;
 		transform: translate(100%, 0);
 		ul{
@@ -266,6 +301,7 @@ export default {
 					display: flex;
 					align-items: center;
 					justify-content: center;
+					color: black;
 				}
 			}
 		}
@@ -278,9 +314,6 @@ export default {
 		padding-left: 45px;
 	}
 @media screen and (min-width: 1024px) {
-	header{
-		height: 50px;
-	}
 	.logo{
 		opacity: .5;
 	}
