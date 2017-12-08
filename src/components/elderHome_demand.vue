@@ -493,7 +493,6 @@ export default {
 		}
 	}
 	.shopCategory{
-		// margin: 0 auto;
 		padding-top: 0;
 		width: 25%;
 		height: 100%;

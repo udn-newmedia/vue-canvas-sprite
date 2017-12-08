@@ -55,6 +55,7 @@
 				<div class="question">
 					<h2>{{quiz.question.ask}}</h2>
 					<div class="optionBlock">
+						<span>擇一選項以繼續</span>
 						<p class="optionA"
 						   @click.once="choseA(index)">
 						    {{quiz.question.optionA}}
@@ -82,7 +83,7 @@
 						<h2 v-else>{{quiz.answer.answerB}}</h2>
 						<p class="answer_article">{{quiz.answer.anay1}}</p>
 						<p class="answer_article">{{quiz.answer.anay2}}</p>
-						<p class="toNext" @click.once="toNext(index)">→</p>
+						<p class="toNext" @click.once="toNext(index)"><span>→</span></p>
 					</div>	
 					<div class="horizen" :style="{backgroundColor: quiz.answer.horizen}">
 						<img :src="horizen">
@@ -716,6 +717,7 @@ export default {
 	flex-direction: column;
 	position: relative;
 	padding-top: 10px;
+	padding-bottom: 40px;
 	h2 {
 		flex-shrink: 0;
 		width: 100%;
@@ -726,7 +728,7 @@ export default {
 	position: relative;
 	width: 100%;
 	max-width: 880px;
-	height: 50%;
+	flex: 3;
 	margin: 0 auto;
 	overflow-x: hidden;
 	overflow-y: visible;
@@ -1072,10 +1074,12 @@ export default {
 }
 .optionBlock {
 	width: 100%;
-	height: 20%;
+	flex: 1;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	align-content: center;
+	flex-wrap: wrap;
 	position: relative;
 	z-index: 0;
 	p {
@@ -1095,8 +1099,11 @@ export default {
 	p:hover {
 		background-color: rgba(#898989, .2);
 	}
-	.lampLine{
-		display: none;
+	span{
+		display: block;
+		width: 100%;
+		text-align: center;
+		font-size: 16px;
 	}
 }
 .answer {
@@ -1141,8 +1148,19 @@ export default {
 	border-radius: 50%;
 	color: black;
 	font-size: 2em;
-	&:hover{
-		background-color: lightgrey;
+	span{
+		display: block;
+		width: 30px;
+		font-size: 26px;
+		animation: next 1s linear infinite;	
+	}
+}
+@keyframes next {
+	from{
+		transform: translate(0, 0);
+	}
+	to{
+		transform: translate(5px, 0);
 	}
 }
 .quizCount{
@@ -1199,7 +1217,7 @@ export default {
 @media screen and (min-width: 768px) and (max-width: 1023px){
 	.optionBlock{
 		align-items: center;
-		height: 20%;
+		// height: 20%;
 		p{
 			max-width: 30%;
 			max-height: 60%;
@@ -1265,7 +1283,7 @@ export default {
 	}
 	.optionBlock{
 		align-items: flex-start;
-		height: 25%;
+		// height: 20%;
 		p{
 			padding: 0 20px;
 			max-width: 20%;
