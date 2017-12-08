@@ -44,6 +44,7 @@
 					</div>
 					<div id="start" @click.once="startGame">
 						<span>開始遊戲</span>
+						<span class='arrow'>→</span>
 					</div>
 					<div class="horizen" style="background-color: #ebd202">
 						<img :src="horizen">
@@ -685,21 +686,30 @@ export default {
 	}
 }
 #start{
+	position: relative;
 	cursor: pointer;
-	width: 100px;
-	height: 30px;
+	width: 80px;
+	height: 80px;
 	border: 2px solid black;
-	border-radius: 20px;
+	border-radius: 50%;
 	margin-left: auto;
 	margin-right: 15px;
 	z-index: 60;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	span{
-		width: 100%;
-		height: 100%;
-		margin: 0;
-		display: flex;
-		justify-content: center;
-		align-items: center;
+		position: relative;
+		top: -10px;
+	}
+	.arrow{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		font-size: 30px;
+		margin-left: -15px;
+		margin-top: -10px;
 	}
 }
 .quizSection {
