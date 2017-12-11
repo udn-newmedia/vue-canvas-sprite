@@ -31,7 +31,7 @@
 					<img :src="horizen">
 				</div>
 				<div class="abstract">
-					<p :style="{transform: 'translate('+ abstractX +'%, 0)'}">
+					<p :style="{opacity: showIntro}">
 						國健署統計，每年「三個老人一個跌」，
 						輕則受傷恐懼、畫地限縮活動空間，加速退化，重則從此失能，需要家人照顧一輩子。
 						打造適合高齡居住的「大人宅」，成為迎接高齡社會關鍵。

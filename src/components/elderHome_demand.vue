@@ -245,7 +245,7 @@ export default {
   		this.forTouchEndCX = Math.round(event.changedTouches[0].clientX)
   		this.forTouchEndCY = Math.round(event.changedTouches[0].clientY)
   		const touchRangeY = Math.abs(this.forTouchStartCY - this.forTouchEndCY) 
-  		if(touchRangeY < 20) {
+  		if(touchRangeY < 10) {
   			if(this.forTouchEndCX > this.forTouchStartCX){
   				this.handleLeft(index)
   			} else if (this.forTouchEndCX < this.forTouchStartCX){
