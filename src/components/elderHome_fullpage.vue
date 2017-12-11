@@ -24,7 +24,7 @@
 					<div class="titleBox">
 						<h1>讓家<br/>準備好與你一起變老</h1>
 						<p>安全居家 長輩樂活 家人快活</p>
-						<p class="toNext" @click.once="handleIntroArrow"><span>→</span></p>			
+						<p class="toNext" @click.once="handleIntroArrow" :style="{opacity: arrowOpacity}"><span>→</span></p>			
 					</div>
 					<div class="chair" :style="{backgroundImage: 'url('+ op +')'}"></div>					
 				</div>
