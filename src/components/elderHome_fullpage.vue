@@ -27,7 +27,7 @@
 					</div>
 					<div class="chair" :style="{backgroundImage: 'url('+ op +')'}"></div>					
 				</div>
-				<div class="horizen" style="background-color: #eb6202">
+				<div class="horizen" style="background-color: #eb6202;position: fixed">
 					<img :src="horizen">
 				</div>
 				<div class="abstract">
@@ -47,7 +47,7 @@
 						<span class='arrow'>→</span>
 					</div>					
 				</div>	
-				<div class="horizen" style="background-color: #ebd202;left: 100%;">
+				<div class="horizen" style="background-color: #ebd202;left: 100%;position: fixed">
 					<img :src="horizen">
 				</div>				
 			</div>
@@ -1175,7 +1175,7 @@ export default {
 	}
 }
 .quizCount{
-	position: fixed;
+	position: absolute;
 	bottom: 0;
 	left: 0;
 	width: 100%;
@@ -1384,9 +1384,11 @@ export default {
 	}
 	.question{
 		padding-bottom: 50px;
+		h2{
+			margin-top: 30px;
+		}
 	}	
 	.optionBlock{
-		align-items: flex-start;
 		p{
 			width: 20%;
 			padding: 0 20px;
