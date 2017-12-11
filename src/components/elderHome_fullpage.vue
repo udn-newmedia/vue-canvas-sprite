@@ -630,11 +630,12 @@ export default {
 }
 .scane {
 	flex-shrink: 0;
+	position: relative;
 	display: flex;
 	width: 100%;
 	height: 100%;
 	overflow-x: scroll;
-	overflow-y: hidden;
+	overflow-y: hidden;		
 }
 .banner{
 	flex-shrink: 0;
@@ -645,7 +646,6 @@ export default {
 	align-items: center;
 	overflow: hidden;
 	position: relative;
-	padding-bottom: 40px;
 	.titleBox{
 		margin-top: 15%;
 		z-index: 1;
@@ -674,7 +674,6 @@ export default {
 	height: 100%;		
 	overflow: hidden;
 	position: relative;
-	padding-bottom: 40px;
 	p{
 		position: relative;
 		top: 0;
@@ -720,12 +719,12 @@ export default {
 	flex-shrink: 0;
 	z-index: 40;
 	height: 100%;
-	display: flex;
+	width: 100vw;
 	position: relative;
 }
 .question {
 	flex-shrink: 0;
-	width: 100vw;
+	width: 100%;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -777,7 +776,7 @@ export default {
 .stage{
 	position: relative;
 	width: 100%;
-	height: 60%;
+	flex: 1;
 	max-width: 880px;
 	margin: 0 auto;
 	overflow-x: hidden;
@@ -1111,11 +1110,10 @@ export default {
 .horizen{
 	position: absolute;
 	z-index: auto;
-	width: 100%;
+	width: 100vw;
 	height: 10px;
 	bottom: 35px;
 	left: 0;
-	transition: 1s;
 	img{
 		display: block;
 		width: 100%;
@@ -1244,6 +1242,7 @@ export default {
 	.optionBlock{
 		p{
 			line-height: 1;
+			width: 40%;
 		}
 		span{
 			font-size: 12px;
@@ -1264,9 +1263,6 @@ export default {
 	}
 	.quizCount{
 		height: 25px;
-	}
-	.horizen{
-		bottom: 25px;
 	}
 .room{
 	background: transparent center no-repeat;
@@ -1337,11 +1333,11 @@ export default {
 }
 @media screen and (min-width: 1024px) {
 	#scrollPage{
-		padding-top: 0px;
+		padding-top: 50px;
 	}
 	.banner{
 		.titleBox{
-			margin-top: 10%;
+			margin-top: 5%;
 			p{
 				padding: 0;
 			}
@@ -1389,21 +1385,19 @@ export default {
 	.question{
 		padding-bottom: 50px;
 	}	
-	.quizSection{
-		padding-top: 50px;
-	}
+	// .quizSection{
+	// 	padding-top: 50px;
+	// }
 	.optionBlock{
 		align-items: flex-start;
 		p{
+			width: 20%;
 			padding: 0 20px;
 			box-shadow: 1px 2px 6px 3px rgba(0,0,0,0.1);
 		}		
 	}
 	.quizCount{
 		height: 50px;
-	}
-	.horizen{
-		bottom: 45px;
 	}
 	.stage{
 		overflow: visible;
