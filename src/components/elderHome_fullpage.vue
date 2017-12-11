@@ -10,16 +10,16 @@
 		<div id="herDog" :style="{left: landing.herDog + '%'}">
 			<img :src="dog" alt="狗">
 		</div>
-		<div id="introArrow" :style="{opacity: arrowOpacity}">
-			<img :src="introArrow">
-		</div>	
 		<div class="scrollContainer"
 			 :style="{ 
 			 			transition: scrollSpeed+'s',
 			 		    transform: 'translateX('+ quizIndex * -100 + '%)',
 			 		    zIndex: isLast,
 			 		}"
-			 >		 
+			 >	
+			<div id="introArrow" :style="{opacity: arrowOpacity}">
+				<img :src="introArrow">
+			</div>				 	 
 			<div class="scane"
 				 @scroll="showScrollLeft"
 				 @mousewheel.stop="handleMouseWheel">
@@ -625,7 +625,7 @@ export default {
 	right: 15px;
 	animation: next .8s linear infinite;
 	transition: 2s;
-	width: 20%;
+	width: 75px;
 }
 @keyframes rush {
 	0%{
@@ -1389,6 +1389,10 @@ export default {
 		bottom: 55px;
 		width: 10%;
 	}	
+	#introArrow{
+		width: 10%;
+		right: 10%;
+	}
 	.forShare{
 		width: 880px;
 		margin: 0 auto;
