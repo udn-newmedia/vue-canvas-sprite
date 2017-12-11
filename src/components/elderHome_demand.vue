@@ -244,13 +244,15 @@ export default {
   	handleTouchEnd(index) {
   		this.forTouchEndCX = Math.round(event.changedTouches[0].clientX)
   		this.forTouchEndCY = Math.round(event.changedTouches[0].clientY)
-  		const touchRangeY = Math.abs(this.forTouchStartCY - this.forTouchEndCY) 
-  		if(touchRangeY < 10) {
-  			if(this.forTouchEndCX > this.forTouchStartCX){
-  				this.handleLeft(index)
-  			} else if (this.forTouchEndCX < this.forTouchStartCX){
-  				this.handleRight(index)
-  			}	
+  		const touchRangeY = Math.abs(this.forTouchStartCY - this.forTouchEndCY)
+  		if(window.innerWidth < 1024) {
+	  		if(touchRangeY < 5) {
+	  			if(this.forTouchEndCX > this.forTouchStartCX){
+	  				this.handleLeft(index)
+	  			} else if (this.forTouchEndCX < this.forTouchStartCX){
+	  				this.handleRight(index)
+	  			}	
+	  		}
   		}
   	},
   	linkToUdnBuy(link, name) {
@@ -275,6 +277,9 @@ export default {
   			this.products[i].noNext = .3 :
   			this.products[i].noNext = 1;
   	}
+  },
+  mounted() {
+  	console.log(window.innerWidth)
   }
 }
 </script>

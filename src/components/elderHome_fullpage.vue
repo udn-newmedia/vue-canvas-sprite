@@ -25,7 +25,7 @@
 						<h1>讓家<br/>準備好與你一起變老</h1>
 						<p>安全居家 長輩樂活 家人快活</p>
 					<div id="introArrow" :style="{opacity: arrowOpacity}">
-						<img :src="introArrow">
+						→
 					</div>				 	 											
 					</div>
 					<div class="chair" :style="{backgroundImage: 'url('+ op +')'}"></div>					
@@ -626,6 +626,7 @@ export default {
 	animation: next .8s linear infinite;
 	transition: 2s;
 	width: 75px;
+	font-size: 2em;
 }
 @keyframes rush {
 	0%{
@@ -742,6 +743,7 @@ export default {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	position: relative;
 	padding-top: 10px;
 	padding-bottom: 40px;
@@ -750,7 +752,7 @@ export default {
 		justify-content: center;
 		align-items: center;
 		width: 100%;
-		text-align: center;
+		padding: 0 15px;
 	}
 }
 .optionBlock {
@@ -762,7 +764,8 @@ export default {
 	align-content: center;
 	flex-wrap: wrap;
 	position: relative;
-	z-index: 0;
+	z-index: 20;
+	background-color: transparent;
 	p {
 		position: relative;
 		display: flex;
@@ -790,7 +793,7 @@ export default {
 .stage{
 	position: relative;
 	width: 100%;
-	flex: 1;
+	height: 60%;
 	max-width: 880px;
 	margin: 0 auto;
 	overflow-x: hidden;
@@ -1393,6 +1396,7 @@ export default {
 	#introArrow{
 		width: 30%;
 		right: -30%;
+		font-size: 2em;
 	}
 	.forShare{
 		width: 880px;
