@@ -55,8 +55,8 @@
 				 v-for="(quiz, index) in quizs">
 				<div class="question">
 					<h2>{{quiz.question.ask}}</h2>
+					<span class="hint">擇一選項以繼續</span>
 					<div class="optionBlock">
-						<span>擇一選項以繼續</span>
 						<p class="optionA"
 						   @click.once="choseA(index)">
 						    {{quiz.question.optionA}}
@@ -606,7 +606,7 @@ export default {
 #herDog{
 	position: absolute;
 	z-index: 49;
-	bottom: 30px;
+	bottom: 31px;
 	left: -50%;
 	transition: left 2.5s ease-out;
 	width: 30%;
@@ -645,6 +645,7 @@ export default {
 	align-items: center;
 	overflow: hidden;
 	position: relative;
+	padding-bottom: 40px;
 	.titleBox{
 		margin-top: 15%;
 		z-index: 1;
@@ -673,6 +674,7 @@ export default {
 	height: 100%;		
 	overflow: hidden;
 	position: relative;
+	padding-bottom: 40px;
 	p{
 		position: relative;
 		top: 0;
@@ -731,16 +733,52 @@ export default {
 	padding-top: 10px;
 	padding-bottom: 40px;
 	h2 {
-		flex-shrink: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		width: 100%;
 		text-align: center;
 	}
 }
+.optionBlock {
+	width: 100%;
+	height: 20%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	flex-wrap: wrap;
+	position: relative;
+	z-index: 0;
+	p {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: center;				
+		margin: 0 10px;
+		padding: 0 10px;
+		width: 35%;
+		height: 100%;
+		border: 2px solid #898989;
+		cursor: pointer;
+		line-height: 1.5;
+		box-shadow: 1px 2px 6px 3px rgba(0,0,0,0.1);
+	}
+	p:hover {
+		background-color: rgba(#898989, .2);
+	}
+}
+.hint{
+	display: block;
+	width: 100%;
+	text-align: center;
+	font-size: 16px;
+}
 .stage{
 	position: relative;
 	width: 100%;
+	height: 60%;
 	max-width: 880px;
-	flex: 3;
 	margin: 0 auto;
 	overflow-x: hidden;
 	overflow-y: visible;
@@ -1084,41 +1122,6 @@ export default {
 		height: 105%;
 	}
 }
-.optionBlock {
-	width: 100%;
-	flex: 1;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
-	flex-wrap: wrap;
-	position: relative;
-	z-index: 0;
-	p {
-		position: relative;
-		display: flex;
-		justify-content: center;
-		align-items: center;				
-		margin: 0 10px;
-		padding: 0 10px;
-		width: 40%;
-		height: 100%;
-		min-height: 50px;
-		border: 2px solid #898989;
-		cursor: pointer;
-		line-height: 1.5;
-		box-shadow: 1px 2px 6px 3px rgba(0,0,0,0.1);
-	}
-	p:hover {
-		background-color: rgba(#898989, .2);
-	}
-	span{
-		display: block;
-		width: 100%;
-		text-align: center;
-		font-size: 16px;
-	}
-}
 .answer {
 	position: relative;
 	z-index: 0;
@@ -1373,7 +1376,7 @@ export default {
 		margin-left: -15%;
 	}
 	#herDog{
-		bottom: 43px;
+		bottom: 44px;
 		width: 10%;
 	}	
 	.forShare{
@@ -1393,8 +1396,6 @@ export default {
 		align-items: flex-start;
 		p{
 			padding: 0 20px;
-			max-width: 20%;
-			max-height: 60%;
 			box-shadow: 1px 2px 6px 3px rgba(0,0,0,0.1);
 		}		
 	}
