@@ -16,8 +16,8 @@
 			</div>
 			<div class="shopWindow">
 				<ul :style="{transform: 'translate('+ product.shopSlideIndex* -100 +'%, 0)'}"
-					@touchstart.stop="handleTouchStart(index)"
-					@touchend.stop="handleTouchEnd(index)"				
+					@touchstart="handleTouchStart(index)"
+					@touchend="handleTouchEnd(index)"				
 					@transitionend="handleTransitionEnd"
 				>
 					<li v-for="(item, index) in product.productItem">
@@ -246,7 +246,7 @@ export default {
   		this.forTouchEndCY = Math.round(event.changedTouches[0].clientY)
   		const touchRangeY = Math.abs(this.forTouchStartCY - this.forTouchEndCY)
   		if(window.innerWidth < 1024) {
-	  		if(touchRangeY < 5) {
+	  		if(touchRangeY < 10) {
 	  			if(this.forTouchEndCX > this.forTouchStartCX){
 	  				this.handleLeft(index)
 	  			} else if (this.forTouchEndCX < this.forTouchStartCX){
@@ -256,7 +256,6 @@ export default {
   		}
   	},
   	linkToUdnBuy(link, name) {
-  		console.log(link, name)
 		ga("send", {
 		    "hitType": "event",
 		    "eventCategory": "商品超連結", 

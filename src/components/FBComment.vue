@@ -10,8 +10,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     .fb-comment-block{
+    	width: 100%;
     	background-color: #fff;
     }
 </style>

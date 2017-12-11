@@ -36,7 +36,9 @@
 		</nav>
 		<div class="commentContainer"
 			 :class="{itemContainer_isOpen: comment_isOpen}"
-			 :style="{height: viewHeight+'px'}">
+			 :style="{height: viewHeight+'px'}"
+			 @transitionend="handleEnd"
+			 @click="commentOpen">
 			<FBComment href="https://udn.com/upf/newmedia/2017_data/farewell/index.html"/>
 		</div>
 	</header>
@@ -91,6 +93,10 @@ export default {
   	commentOpen () {
   		this.comment_isOpen ? this.comment_isOpen = false : this.comment_isOpen = true;
   		this.menu_isOpen ? this.menu_isOpen = false : this.menu_isOpen = false;
+  		if(window.innerWidth >= 1024){
+	  		this.headerBgc === 'transparent' ? 
+	  			this.headerBgc = this.handle_headerBgc() : null  			
+	  	}
 		ga("send", {
 		    "hitType": "event",
 		    "eventCategory": "button", 
@@ -116,17 +122,18 @@ export default {
 		    "eventAction": "重頭開始",	 
 		    "eventLabel": "[" + this.platform + "][重頭開始]"
 		});
+  	},
+  	handleEnd () {
+  		if(window.innerWidth >= 1024) {
+	  		this.comment_isOpen ? 
+	  			null : this.handle_headerBgc()  			
+  		}
+
   	}
   },
   created: function () {
   	this.viewHeight = window.innerHeight
   },
-  beforeUpdated: function () {
-  	console.log('updated header')
-  		this.quizIndex === 9 ? 
-  			this.headerBgc = '#fff' :
-  			this.headerBgc = 'transparent'
-  }
 }
 </script>
 
@@ -347,8 +354,11 @@ export default {
 		margin-left: 15px;
 	}		
 	.commentContainer{
-		padding-top: 0;
-		background-color: rgba(black, .7);
+		padding-top: 55px;
+		padding-left: 60%;
+		.fb-comment-block{
+			margin-top: 0;
+		}
 	}
 }
 </style>

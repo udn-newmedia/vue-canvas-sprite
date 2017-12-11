@@ -10,5 +10,6 @@ export const detectDevice = state => {
 	state.platform = Utils.detectPlatform()
 }
 export const handle_headerBgc = state => {
-	state.headerBgc = '#fff'
+	state.headerBgc === '#fff' ?
+		state.headerBgc = 'transparent' : state.headerBgc = '#fff'		
 }

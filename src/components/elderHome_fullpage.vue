@@ -24,9 +24,7 @@
 					<div class="titleBox">
 						<h1>讓家<br/>準備好與你一起變老</h1>
 						<p>安全居家 長輩樂活 家人快活</p>
-					<div id="introArrow" :style="{opacity: arrowOpacity}">
-						→
-					</div>				 	 											
+						<p class="toNext" @click.once="handleIntroArrow"><span>→</span></p>			
 					</div>
 					<div class="chair" :style="{backgroundImage: 'url('+ op +')'}"></div>					
 				</div>
@@ -535,6 +533,9 @@ export default {
 				e.srcElement.parentElement.scrollLeft -= w/21
 			}			
 		},
+		handleIntroArrow(e) {
+			document.getElementsByClassName('scane')[0].scrollLeft = window.innerWidth
+		}
 	},	
 	mounted() {
 		setTimeout(()=>{
@@ -625,9 +626,13 @@ export default {
 	right: 20px;
 	animation: next .8s linear infinite;
 	transition: 2s;
-	width: 75px;
+	width: 55px;
+	height: 55px;
+	border: 1px solid black;
+	border-radius: 50%;
 	font-size: 36px;
 	text-align: right;
+	cursor: pointer;
 }
 @keyframes rush {
 	0%{
@@ -1395,7 +1400,6 @@ export default {
 		width: 10%;
 	}	
 	#introArrow{
-		width: 30%;
 		right: 0;
 		font-size: 36px;
 		text-align: right;
