@@ -27,7 +27,7 @@
 					</div>
 					<div class="chair" :style="{backgroundImage: 'url('+ op +')'}"></div>					
 				</div>
-				<div class="horizen" style="background-color: #eb6202;position: fixed">
+				<div class="horizen" style="background-color: #f8b551;position: fixed;width: 100%;">
 					<img :src="horizen">
 				</div>
 				<div class="abstract">
@@ -47,9 +47,6 @@
 						<span class='arrow'>→</span>
 					</div>					
 				</div>	
-				<div class="horizen" style="background-color: #ebd202;left: 100%;position: fixed">
-					<img :src="horizen">
-				</div>				
 			</div>
 			<div class="quizSection"
 				 v-for="(quiz, index) in quizs">
@@ -553,16 +550,16 @@ export default {
 			case 0:
 				break
 			case 2:
-				this.startBgc = '#eb6777'
+				this.startBgc = '#ffc9e0'
 				break;
 			case 4:
-				this.startBgc = '#a2ce47'
+				this.startBgc = '#cce198'
 				break;
 			case 6: 
-				this.startBgc = '#fff45c'
+				this.startBgc = '#fff799'
 				break;
 			case 8:
-				this.startBgc = '#7ecef4'
+				this.startBgc = '#aee5ff'
 				break;
 			default:
 				this.startBgc = '#fff'
@@ -649,6 +646,7 @@ export default {
 		margin-top: 15%;
 		z-index: 1;
 		h1{
+			font-weight: bold;
 			text-shadow: none;
 		}		
 		p{
@@ -755,7 +753,7 @@ export default {
 		align-items: center;				
 		margin: 0 10px;
 		padding: 0 10px;
-		width: 35%;
+		width: 40%;
 		height: 100%;
 		border: 2px solid #898989;
 		cursor: pointer;

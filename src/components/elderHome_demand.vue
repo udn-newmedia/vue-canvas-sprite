@@ -16,8 +16,8 @@
 			</div>
 			<div class="shopWindow">
 				<ul :style="{transform: 'translate('+ product.shopSlideIndex* -100 +'%, 0)'}"
-					@touchstart="handleTouchStart(index)"
-					@touchend="handleTouchEnd(index)"				
+					@touchstart.stop="handleTouchStart(index)"
+					@touchend.stop="handleTouchEnd(index)"				
 					@transitionend="handleTransitionEnd"
 				>
 					<li v-for="(item, index) in product.productItem">
@@ -448,10 +448,10 @@ export default {
 	height: 40px;
 	margin-left: -60px;
 	border: 1px solid rgba(black, .2);
-	color: rgba(black, .2);
+	color: rgba(black, .8);
 	transition: .6s;
 	&:hover{
-		color: rgba(black, 1);
+		border-color: black;
 	}
 }
 @media screen and (max-width: 374px) {

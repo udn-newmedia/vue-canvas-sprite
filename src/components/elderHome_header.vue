@@ -137,7 +137,7 @@ export default {
 		top: 0;
 		left: 0;
 		width: 100%;
-		height: 60px;
+		height: 55px;
 		display: flex;
 	}
 	.logo{
@@ -150,7 +150,7 @@ export default {
 		margin-left: 0;
 		margin-right: auto;
 		display: flex;
-		opacity: 1;
+		opacity: .7;
 		order: 0;
 		transition: opacity .3s ease-out;
 		a{
@@ -177,8 +177,8 @@ export default {
 		background-color: transparent;
 		img{
 			display: block;
-			width: 55px;
-			height: 55px;
+			width: 50px;
+			height: 50px;
 			margin: auto;
 		}
 	}	
@@ -198,6 +198,7 @@ export default {
 		margin-left: auto;
 		margin-right: 5px;
 		transition: opacity .6s ease-in-out, transform .3s ease-in-out;
+		opacity: .7;
 		order: 1;
 		cursor: pointer;
 		&:active{
@@ -228,6 +229,7 @@ export default {
 		margin-bottom: auto;
 		margin-left: 5px;
 		margin-right: 5px;
+		opacity: .7;
 		order: 2;
 		span{
 			display: block;
