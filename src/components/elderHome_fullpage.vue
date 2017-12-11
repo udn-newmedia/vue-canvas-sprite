@@ -1383,7 +1383,7 @@ export default {
 		margin-right: calc(50% - 440px)
 	}
 	.question{
-		padding-bottom: 50px;
+		padding-bottom: 55px;
 		h2{
 			margin-top: 30px;
 		}
@@ -1396,7 +1396,7 @@ export default {
 		}		
 	}
 	.horizen{
-		bottom: 40px;
+		bottom: 50px;
 	}
 	.quizCount{
 		height: 50px;
