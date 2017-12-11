@@ -9,7 +9,10 @@
 		</div>
 		<div id="herDog" :style="{left: landing.herDog + '%'}">
 			<img :src="dog" alt="狗">
-		</div>			
+		</div>
+		<div id="introArrow" :style="{opacity: arrowOpacity}">
+			<img :src="introArrow">
+		</div>	
 		<div class="scrollContainer"
 			 :style="{ 
 			 			transition: scrollSpeed+'s',
@@ -109,6 +112,7 @@ import imgHorizen from '../assets/h_line.png'
 import imgGrandma from '../assets/stage/grandma.gif'
 import imgOpening from '../assets/stage/opening.gif'
 import imgDog from '../assets/stage/dog.gif'
+import imgArrow from '../assets/stage/arrow.png'
 
 import roomBg from '../assets/stage/room/roomBg.png'
 import bed from '../assets/stage/room/bed.png'
@@ -161,8 +165,10 @@ export default {
 			showIntro: 0,
 			abstractX: 100,
 			isLast: 40,
+			arrowOpacity: 1,
 			horizen: imgHorizen,
 			grandMa: imgGrandma,
+			introArrow: imgArrow,
 			op: imgOpening,
 			dog: imgDog,
 			canScroll: false,
@@ -437,6 +443,7 @@ export default {
 		]),
 		showScrollLeft: function(e) {
 			const scrollW = e.target.clientWidth - e.target.scrollLeft
+			this.arrowOpacity = 0
 			if(e.target.scrollLeft > scrollW * 7){
 				this.showIntro = 1
 				this.abstractX = 0
@@ -591,7 +598,7 @@ export default {
 #grandma{
 	position: absolute;
 	z-index: 48;
-	bottom: 29px;
+	bottom: 40px;
 	left: -45%;
 	transition: left 6s linear;
 	width: 30%;
@@ -603,13 +610,22 @@ export default {
 #herDog{
 	position: absolute;
 	z-index: 49;
-	bottom: 31px;
+	bottom: 40px;
 	left: -50%;
 	transition: left 2.5s ease-out;
 	width: 30%;
 	img{
 		display: block;
 	}
+}
+#introArrow{
+	position: fixed;
+	z-index: auto;
+	top: 50%;
+	right: 15px;
+	animation: next .8s linear infinite;
+	transition: 2s;
+	width: 20%;
 }
 @keyframes rush {
 	0%{
@@ -1245,11 +1261,11 @@ export default {
 	}
 	#grandma{
 		width: 25%;
-		bottom: 32px;
+		bottom: 30px;
 	}
 	#herDog{
 		width: 25%;
-		bottom: 34px;	
+		bottom: 30px;	
 	}	
 	.stage {
 		img{
@@ -1365,12 +1381,12 @@ export default {
 		padding-top: 5%;
 	}
 	#grandma{
-		bottom: 42px;
+		bottom: 55px;
 		width: 10%;
 		margin-left: -15%;
 	}
 	#herDog{
-		bottom: 44px;
+		bottom: 55px;
 		width: 10%;
 	}	
 	.forShare{
