@@ -1103,6 +1103,7 @@ export default {
 		padding: 0 10px;
 		width: 40%;
 		height: 100%;
+		min-height: 50px;
 		border: 2px solid #898989;
 		cursor: pointer;
 		line-height: 1.5;
@@ -1206,6 +1207,13 @@ export default {
 	padding: 0 15px;
 }
 @media screen and (max-width: 374px){
+	.question{
+		padding-bottom: 30px;
+		h2{
+			margin-top: 10px;
+			font-size: 26px;
+		}
+	}
 	p{
 		font-size: 15px;
 	}
@@ -1230,6 +1238,9 @@ export default {
 		p{
 			line-height: 1;
 		}
+		span{
+			font-size: 12px;
+		}
 	}
 	#grandma{
 		width: 25%;
@@ -1244,37 +1255,66 @@ export default {
 			bottom: 0;
 		}
 	}
-	.room{
-		.bed{
-			width: 35%;
-			margin-left: -5%;
-		}
-		.handsup{
-			width: 25%;
-			margin-left: -25%;
-			margin-bottom: 5%;
-		}
-		.weighter{
-			width: 15%;
-			margin-left: -10%;
-			margin-bottom: 10%;
-		}
-		.lamp{
-			width: 15%;
-			margin-left: -15%;
-			margin-bottom: 20%;
-		}
-		.locker{
-			width: 20%;
-			margin-left: 0;
-			margin-bottom: 10%;
-		}
-		.slipper{
-			width: 20%;
-			margin-left: 15%;
-			margin-bottom: 5%;
-		}
-	}	
+	.quizCount{
+		height: 25px;
+	}
+	.horizen{
+		bottom: 25px;
+	}
+.room{
+	background: transparent center no-repeat;
+	background-size: contain;
+	.bed{
+		width: 55%;
+		margin-left: -15%;
+		z-index: 10;
+		visibility: visible;
+	}
+	.handsup{
+		width: 35%;
+		margin-left: -48%;
+		margin-bottom: 5%;
+		z-index: 9;
+		animation-duration: 1s;
+		animation-name: dropIn;
+	}
+	.weighter{
+		width: 30%;
+		margin-left: -27%;
+		margin-bottom: 10%;
+		z-index: 8;
+		visibility: visible;
+	}
+	.lamp{
+		width: 25%;
+		margin-left: -35%;
+		margin-bottom: 30%;
+		z-index: 5;
+		opacity: 1;
+		animation-name: grow;
+		animation-delay: 1.2s;
+		transform: rotate(-45deg);
+		transform-origin: right bottom;
+	}
+	.locker{
+		width: 35%;
+		margin-left: -5%;
+		margin-bottom: 10%;
+		z-index: 7;
+		animation-name: dropIn;
+		animation-delay: 1.4s;
+	}
+	.slipper{
+		width: 25%;
+		margin-left: 25%;
+		margin-bottom: 15%;
+		z-index: 6;
+		transform-origin: left bottom;
+		animation-delay: 1.6s;
+		animation-name: grow;
+		opacity: 1;
+	}
+}	
 }
 @media screen and (min-width: 768px) and (max-width: 1023px){
 	.optionBlock{
