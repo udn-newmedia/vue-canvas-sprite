@@ -25,10 +25,10 @@
 						<h1>讓家<br/>準備好與你一起變老</h1>
 						<p>安全居家 長輩樂活 家人快活</p>						
 					</div>
-					<div class="chair" :style="{backgroundImage: 'url('+ op +')'}"></div>	
-					<div class="horizen" style="background-color: #eb6202">
-						<img :src="horizen">
-					</div>								
+					<div class="chair" :style="{backgroundImage: 'url('+ op +')'}"></div>					
+				</div>
+				<div class="horizen" style="background-color: #eb6202">
+					<img :src="horizen">
 				</div>
 				<div class="abstract">
 					<p :style="{transform: 'translate('+ abstractX +'%, 0)'}">
@@ -45,10 +45,10 @@
 					<div id="start" @click.once="startGame">
 						<span>開始遊戲</span>
 						<span class='arrow'>→</span>
-					</div>
-					<div class="horizen" style="background-color: #ebd202;left: 100%;">
-						<img :src="horizen">
-					</div>									
+					</div>					
+				</div>	
+				<div class="horizen" style="background-color: #ebd202;left: 100%;">
+					<img :src="horizen">
 				</div>				
 			</div>
 			<div class="quizSection"
