@@ -626,7 +626,8 @@ export default {
 	animation: next .8s linear infinite;
 	transition: 2s;
 	width: 75px;
-	font-size: 2em;
+	font-size: 36px;
+	text-align: right;
 }
 @keyframes rush {
 	0%{
@@ -1395,8 +1396,9 @@ export default {
 	}	
 	#introArrow{
 		width: 30%;
-		right: -30%;
-		font-size: 2em;
+		right: 0;
+		font-size: 36px;
+		text-align: right;
 	}
 	.forShare{
 		width: 880px;
