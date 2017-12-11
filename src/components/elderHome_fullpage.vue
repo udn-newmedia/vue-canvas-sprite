@@ -1396,7 +1396,7 @@ export default {
 		}		
 	}
 	.horizen{
-		bottom: 50px;
+		bottom: 40px;
 	}
 	.quizCount{
 		height: 50px;
