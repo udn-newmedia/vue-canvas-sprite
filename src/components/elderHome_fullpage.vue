@@ -46,7 +46,7 @@
 						<span>開始遊戲</span>
 						<span class='arrow'>→</span>
 					</div>
-					<div class="horizen" style="background-color: #ebd202">
+					<div class="horizen" style="background-color: #ebd202;left: 100%;">
 						<img :src="horizen">
 					</div>									
 				</div>				
@@ -645,7 +645,6 @@ export default {
 	flex-direction: column;
 	align-items: center;
 	overflow: hidden;
-	position: relative;
 	.titleBox{
 		margin-top: 15%;
 		z-index: 1;
@@ -673,7 +672,6 @@ export default {
 	width: 100%;
 	height: 100%;		
 	overflow: hidden;
-	position: relative;
 	p{
 		position: relative;
 		top: 0;
@@ -717,14 +715,15 @@ export default {
 }
 .quizSection {
 	flex-shrink: 0;
+	display: flex;
 	z-index: 40;
 	height: 100%;
-	width: 100vw;
+	width: 200%;
 	position: relative;
 }
 .question {
 	flex-shrink: 0;
-	width: 100%;
+	width: 100vw;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -1131,8 +1130,6 @@ export default {
 	z-index: auto;
 	display: flex;
 	flex-direction: column;
-	top: 0;
-	left: 0;
 	width: 100%;
 	height: 100%;
 	max-width: 880px;
@@ -1264,6 +1261,9 @@ export default {
 	.quizCount{
 		height: 25px;
 	}
+	.horizen{
+		bottom: 25px;
+	}	
 .room{
 	background: transparent center no-repeat;
 	background-size: contain;
@@ -1385,9 +1385,6 @@ export default {
 	.question{
 		padding-bottom: 50px;
 	}	
-	// .quizSection{
-	// 	padding-top: 50px;
-	// }
 	.optionBlock{
 		align-items: flex-start;
 		p{
@@ -1395,6 +1392,9 @@ export default {
 			padding: 0 20px;
 			box-shadow: 1px 2px 6px 3px rgba(0,0,0,0.1);
 		}		
+	}
+	.horizen{
+		bottom: 50px;
 	}
 	.quizCount{
 		height: 50px;
