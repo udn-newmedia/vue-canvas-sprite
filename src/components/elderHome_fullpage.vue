@@ -17,16 +17,16 @@
 			 		    zIndex: isLast,
 			 		}"
 			 >	
-			<div id="introArrow" :style="{opacity: arrowOpacity}">
-				<img :src="introArrow">
-			</div>				 	 
 			<div class="scane"
 				 @scroll="showScrollLeft"
 				 @mousewheel.stop="handleMouseWheel">
 				<div class="banner">
 					<div class="titleBox">
 						<h1>讓家<br/>準備好與你一起變老</h1>
-						<p>安全居家 長輩樂活 家人快活</p>						
+						<p>安全居家 長輩樂活 家人快活</p>
+					<div id="introArrow" :style="{opacity: arrowOpacity}">
+						<img :src="introArrow">
+					</div>				 	 											
 					</div>
 					<div class="chair" :style="{backgroundImage: 'url('+ op +')'}"></div>					
 				</div>
@@ -619,10 +619,10 @@ export default {
 	}
 }
 #introArrow{
-	position: fixed;
+	position: absolute;
 	z-index: auto;
-	top: 50%;
-	right: 15px;
+	top: 100%;
+	right: 20px;
 	animation: next .8s linear infinite;
 	transition: 2s;
 	width: 75px;
@@ -659,6 +659,7 @@ export default {
 	align-items: center;
 	overflow: hidden;
 	.titleBox{
+		position: relative;
 		margin-top: 15%;
 		z-index: 1;
 		h1{
@@ -1390,8 +1391,8 @@ export default {
 		width: 10%;
 	}	
 	#introArrow{
-		width: 10%;
-		right: 10%;
+		width: 30%;
+		right: -30%;
 	}
 	.forShare{
 		width: 880px;
