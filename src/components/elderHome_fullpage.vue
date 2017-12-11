@@ -1207,11 +1207,14 @@ export default {
 	padding: 0 15px;
 }
 @media screen and (max-width: 374px){
+	h2{
+		font-size: 24px;
+	}
 	.question{
 		padding-bottom: 30px;
 		h2{
 			margin-top: 10px;
-			font-size: 26px;
+			font-size: 24px;
 		}
 	}
 	p{
@@ -1219,9 +1222,10 @@ export default {
 	}
 	.banner{
 		.titleBox{
-			margin-top: 5%;
+			margin-top: 10%;
 			h1{
 				font-size: 30px;
+				line-height: 1;
 			}
 			p{
 				font-size: 18px;
