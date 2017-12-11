@@ -1226,6 +1226,11 @@ export default {
 			font-size: 24px;
 		}		
 	}
+	.optionBlock{
+		p{
+			line-height: 1;
+		}
+	}
 	#grandma{
 		width: 25%;
 		bottom: 32px;
