@@ -41,7 +41,7 @@
 					</p>
 					<div class="forShare"
 						 :style="{opacity: showIntro}">
-						<Share href="../../index.html"/>	
+						<Share href="./index.html"/>	
 					</div>
 					<div id="start" @click.once="startGame">
 						<span>開始遊戲</span>
@@ -53,7 +53,7 @@
 				 v-for="(quiz, index) in quizs">
 				<div class="question">
 					<h2>{{quiz.question.ask}}</h2>
-					<span class="hint">擇一選項以繼續</span>
+					<span class="hint">選一個答案以進入下一頁</span>
 					<div class="optionBlock">
 						<p class="optionA"
 						   @click.once="choseA(index)">
@@ -431,6 +431,7 @@ export default {
 	  	  'quizIndex',
 	  	  'platform',
 	  	  'headerBgc',
+	  	  'webTitle'
 	  	]),
   	},
 	methods: {
@@ -479,7 +480,7 @@ export default {
 	            "hitType": "event",
 	            "eventCategory": "button", 
 	            "eventAction": "點擊開始遊戲",	 
-	            "eventLabel": "[" + this.platform + "][點擊開始遊戲]"
+	            "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][點擊開始遊戲]"
 	        });		
 		},
 		toNext: function(index) {
@@ -488,7 +489,7 @@ export default {
 	            "hitType": "event",
 	            "eventCategory": "button", 
 	            "eventAction": "點擊下一題按鈕",	 
-	            "eventLabel": "[" + this.platform + "][點擊下一題按鈕]"
+	            "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][點擊下一題按鈕]"
 	        });			
 		},
 		choseA: function(index) {
@@ -497,7 +498,7 @@ export default {
 	            "hitType": "event",
 	            "eventCategory": "button", 
 	            "eventAction": "選擇左邊答案",	 
-	            "eventLabel": "[" + this.platform + "][選擇左邊答案]"
+	            "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][選擇左邊答案]"
 	        });	
 		},
 		choseB: function(index) {
@@ -507,7 +508,7 @@ export default {
 	            "hitType": "event",
 	            "eventCategory": "button", 
 	            "eventAction": "選擇右邊答案",	 
-	            "eventLabel": "[" + this.platform + "][選擇右邊答案]"
+	            "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][選擇右邊答案]"
 	        });			
 		},
 		handleMouseWheel: function(e){
@@ -525,7 +526,7 @@ export default {
 				            "hitType": "event",
 				            "eventCategory": "wheel", 
 				            "eventAction": "藉由滾輪開始遊戲",	 
-				            "eventLabel": "[" + this.platform + "][藉由滾輪開始遊戲]"
+				            "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][藉由滾輪開始遊戲]"
 				        });						
 					}
 				}				
@@ -763,28 +764,26 @@ export default {
 }
 .optionBlock {
 	width: 100%;
-	height: 20%;
+	height: 25%;
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
 	align-items: center;
-	align-content: center;
-	flex-wrap: wrap;
+	justify-content: space-around;
 	position: relative;
 	z-index: 20;
 	background-color: transparent;
 	p {
 		position: relative;
 		display: flex;
-		justify-content: center;
 		align-items: center;				
-		margin: 0 10px;
-		padding: 0 10px;
-		width: 40%;
+		width: 80%;
 		height: 100%;
-		border: 2px solid #898989;
+		border: 1px solid #898989;
 		cursor: pointer;
+		padding: 0 10px;
 		line-height: 1.5;
-		box-shadow: 1px 2px 6px 3px rgba(0,0,0,0.1);
+		// box-shadow: 1px 2px 6px 3px rgba(0,0,0,0.1);
+		border-radius: 6px;
 	}
 	p:hover {
 		background-color: rgba(#898989, .2);
@@ -1263,11 +1262,10 @@ export default {
 	.optionBlock{
 		p{
 			line-height: 1;
-			width: 40%;
 		}
-		span{
-			font-size: 12px;
-		}
+	}
+	.hint{
+		font-size: 8px;
 	}
 	#grandma{
 		width: 25%;
@@ -1419,9 +1417,8 @@ export default {
 	}	
 	.optionBlock{
 		p{
-			width: 20%;
+			width: 40%;
 			padding: 0 20px;
-			box-shadow: 1px 2px 6px 3px rgba(0,0,0,0.1);
 		}		
 	}
 	.horizen{

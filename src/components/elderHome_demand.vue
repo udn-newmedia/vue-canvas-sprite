@@ -6,7 +6,7 @@
 			<p>跌倒除造成外傷，也讓銀髮族因害怕再跌倒，自我限制行動，導致老化加速，也惡化原有的慢性疾病等。提早預防，不僅減少跌倒發生率，也維持長輩日常生活品質。</p>										
 		</article>		
 		<div class="forShare">
-			<Share href="../../index.html"/>	
+			<Share href="./index.html"/>	
 		</div>
 		<div class="shopping"
 			 v-for="(product, index) in products">
@@ -223,7 +223,7 @@ export default {
 		    "hitType": "event",
 		    "eventCategory": "button", 
 		    "eventAction": "點擊按鈕看下一個商品",	 
-		    "eventLabel": "[" + this.platform + "][點擊按鈕看下一個商品]"
+		    "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][下一個商品]"
 		});		
   	},
   	handleRight(index) {
@@ -234,7 +234,7 @@ export default {
 		    "hitType": "event",
 		    "eventCategory": "button", 
 		    "eventAction": "點擊按鈕看上一個商品",	 
-		    "eventLabel": "[" + this.platform + "][點擊按鈕看上一個商品]"
+		    "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][上一個商品]"
 		});
   	},
   	handleTouchStart(index) {
@@ -259,8 +259,8 @@ export default {
 		ga("send", {
 		    "hitType": "event",
 		    "eventCategory": "商品超連結", 
-		    "eventAction": name,	 
-		    "eventLabel": "[" + this.platform + "]["+ link +"]"
+		    "eventAction": "商品超連結",	 
+		    "eventLabel": "[" + this.platform + "]["+ this.webTitle +"]["+ name +"]["+ link +"]"
 		});
   	},
   	handleTransitionEnd() {

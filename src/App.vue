@@ -27,19 +27,23 @@ export default {
         ...mapGetters([
           'platform',
           'quizIndex',
+          'webTitle'
         ]),
     },
     methods: {
         ...mapActions([
             'detectDevice',
+            'getWebTitle'
         ]),  
     },
     created() {
         this.viewHeight = window.innerHeight
         this.detectDevice()
+        this.getWebTitle()
     },
     mounted() {
         console.log(this.platform)
+        console.log(this.webTitle)
     },
     updated() {
 

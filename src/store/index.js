@@ -9,6 +9,7 @@ Vue.use(Vuex)
 const state = {
   quizIndex: 0,
   platform: null,
+  webTitle: null,
   headerBgc: 'transparent'
 }
 

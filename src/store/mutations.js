@@ -9,6 +9,9 @@ export const handle_lookDemand = state => {
 export const detectDevice = state => {
 	state.platform = Utils.detectPlatform()
 }
+export const getWebTitle = state => {
+	state.webTitle = document.getElementsByTagName('title')[0].text
+}
 export const handle_headerBgc = state => {
 	state.headerBgc === '#fff' ?
 		state.headerBgc = 'transparent' : state.headerBgc = '#fff'		

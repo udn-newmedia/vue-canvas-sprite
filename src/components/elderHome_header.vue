@@ -39,7 +39,7 @@
 			 :style="{height: viewHeight+'px'}"
 			 @transitionend="handleEnd"
 			 @click="commentOpen">
-			<FBComment href="https://udn.com/upf/newmedia/2017_data/farewell/index.html"/>
+			<FBComment href="https://udn.com/upf/newmedia/2017_data/elderhome/index.html"/>
 		</div>
 	</header>
 </template>
@@ -72,7 +72,8 @@ export default {
 	...mapGetters([
   	  'quizIndex',
   	  'platform',
-  	  'headerBgc'
+  	  'headerBgc',
+  	  'webTitle'
   	]),
   },  
   methods: {
@@ -87,7 +88,7 @@ export default {
 		    "hitType": "event",
 		    "eventCategory": "button", 
 		    "eventAction": "漢堡",	 
-		    "eventLabel": "[" + this.platform + "][點擊漢堡按鈕]"
+		    "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][點擊漢堡按鈕]"
 		});
   	},
   	commentOpen () {
@@ -95,13 +96,13 @@ export default {
   		this.menu_isOpen ? this.menu_isOpen = false : this.menu_isOpen = false;
   		if(window.innerWidth >= 1024){
 	  		this.headerBgc === 'transparent' ? 
-	  			this.headerBgc = this.handle_headerBgc() : null  			
+	  			this.handle_headerBgc() : null  			
 	  	}
 		ga("send", {
 		    "hitType": "event",
 		    "eventCategory": "button", 
 		    "eventAction": "討論",	 
-		    "eventLabel": "[" + this.platform + "][點擊討論按鈕]"
+		    "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][點擊討論按鈕]"
 		});	
   	},
   	menuClose () {
@@ -112,7 +113,7 @@ export default {
 		    "hitType": "event",
 		    "eventCategory": "button", 
 		    "eventAction": "打造大人宅",	 
-		    "eventLabel": "[" + this.platform + "][打造大人宅]"
+		    "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][打造大人宅]"
 		}); 		
   	},
   	playAgain () {
@@ -120,7 +121,7 @@ export default {
 		    "hitType": "event",
 		    "eventCategory": "button", 
 		    "eventAction": "重頭開始",	 
-		    "eventLabel": "[" + this.platform + "][重頭開始]"
+		    "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][重頭開始]"
 		});
   	},
   	handleEnd () {
@@ -209,7 +210,7 @@ export default {
 		order: 1;
 		cursor: pointer;
 		&:active{
-			transform: scale(.1);
+			transform: scale(.6);
 		}
 	}
 	.comment_Open{
@@ -225,6 +226,8 @@ export default {
 		-webkit-overflow-scrolling: touch;
 		transform: translate(100%, 0);
 		transition: .6s;
+		background-color: rgba(black, .2);
+		background-clip: content-box;
 	}
 	.menu-btn{
 		position: relative;
@@ -355,7 +358,7 @@ export default {
 	}		
 	.commentContainer{
 		padding-top: 55px;
-		padding-left: 60%;
+		padding-left: 55%;
 		.fb-comment-block{
 			margin-top: 0;
 		}
