@@ -777,12 +777,10 @@ export default {
 		display: flex;
 		align-items: center;				
 		width: 80%;
-		// height: 100%;
 		border: 1px solid #898989;
 		cursor: pointer;
 		padding: 5px;
 		line-height: 1.5;
-		// box-shadow: 1px 2px 6px 3px rgba(0,0,0,0.1);
 		border-radius: 6px;
 	}
 	p:hover {
@@ -1419,7 +1417,7 @@ export default {
 	.optionBlock{
 		p{
 			width: 45%;
-			padding: 10px;
+			padding: 5px;
 		}		
 	}
 	.horizen{
