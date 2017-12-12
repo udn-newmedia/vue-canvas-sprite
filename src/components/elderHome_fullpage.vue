@@ -243,7 +243,7 @@ export default {
 					"question": {
 							"ask": "午餐時間，該吃甚麼好呢？",
 							"optionA": "年紀大了，粗茶淡飯，清淡最好",
-							"optionB": "食量變小，更要重視營養攝取夠不夠",
+							"optionB": "食量小，更要重視營養攝取夠不夠",
 							"horizen": "#23ac39",
 						},
 					"answer": {
@@ -373,7 +373,7 @@ export default {
 					"question": {
 							"ask": "洗個熱呼呼的熱水澡，但浴室老是濕濕滑滑的···",
 							"optionA": "我身體勇健，不需要身心障礙扶手",
-							"optionB": "醜又如何，扶手不只要裝，還要選最亮色！",
+							"optionB": "扶手要裝！還要選最亮色！",
 							"horizen": "#04a1e9",
 						},
 					"answer": {
@@ -768,7 +768,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: center;
 	position: relative;
 	z-index: 20;
 	background-color: transparent;
@@ -777,10 +777,10 @@ export default {
 		display: flex;
 		align-items: center;				
 		width: 80%;
-		height: 100%;
+		// height: 100%;
 		border: 1px solid #898989;
 		cursor: pointer;
-		padding: 0 10px;
+		padding: 5px;
 		line-height: 1.5;
 		// box-shadow: 1px 2px 6px 3px rgba(0,0,0,0.1);
 		border-radius: 6px;
@@ -794,6 +794,7 @@ export default {
 	width: 100%;
 	text-align: center;
 	font-size: 16px;
+	margin-top: 10px;
 }
 .stage{
 	position: relative;
@@ -1239,7 +1240,7 @@ export default {
 		}
 	}
 	p{
-		font-size: 15px;
+		font-size: 16px;
 	}
 	.banner{
 		.titleBox{
@@ -1265,7 +1266,7 @@ export default {
 		}
 	}
 	.hint{
-		font-size: 8px;
+		font-size: 12px;
 	}
 	#grandma{
 		width: 25%;
@@ -1417,8 +1418,8 @@ export default {
 	}	
 	.optionBlock{
 		p{
-			width: 40%;
-			padding: 0 20px;
+			width: 45%;
+			padding: 10px;
 		}		
 	}
 	.horizen{
