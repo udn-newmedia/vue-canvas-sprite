@@ -21,7 +21,7 @@
 				 @scroll="showScrollLeft"
 				 @wheel.stop="handleMouseWheel"
 				 @mousewheel.stop="handleMouseWheel"
-				 @MozMousePixelScroll.stop="handleMouseWheel">
+				 @DOMMouseScroll.stop="handleMouseWheel">
 				<div class="banner">
 					<div class="titleBox">
 						<h1>讓家<br/>準備好與你一起變老</h1>
