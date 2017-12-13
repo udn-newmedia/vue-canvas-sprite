@@ -326,6 +326,9 @@ export default {
 		padding-left: 45px;
 	}
 @media screen and (min-width: 1024px) {
+	header{
+		padding: 0 15px;
+	}
 	.logo{
 		opacity: .5;
 	}
