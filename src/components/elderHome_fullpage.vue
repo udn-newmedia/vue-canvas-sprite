@@ -440,7 +440,7 @@ export default {
   	watch: {
   		watchScrollLeft() {
   			this.watchScrollLeft === window.innerWidth ? 
-  				setTimeout(()=>{this.canScroll = true}, 888) : (this.canScroll = false)
+  				setTimeout(()=>{this.canScroll = true}, 500) : (this.canScroll = false)
   		}
   	},
 	methods: {
@@ -454,7 +454,7 @@ export default {
 			const scrollW = scrollTarget.clientWidth - scrollTarget.scrollLeft
 			this.watchScrollLeft = scrollTarget.scrollLeft
 			this.arrowOpacity = 0
-			if(scrollTarget.scrollLeft > scrollW * 7){
+			if(scrollTarget.scrollLeft > scrollW * 5){
 				this.showIntro = 1
 				this.abstractX = 0
 				this.startBgc = '#fff799'
@@ -525,7 +525,7 @@ export default {
 		handleMouseWheel: function(e){
 			let w = window.innerWidth
 			const scrollTarget = document.getElementById('scane')
-			if(e.deltaY > 3 && e.deltaX < 5){
+			if(e.deltaY >= 1 && e.deltaX < 5){
 				scrollTarget.scrollLeft += w/21		
 				if(this.canScroll === true){
 					this.canScroll = false
@@ -537,7 +537,7 @@ export default {
 			            "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][藉由滾輪開始遊戲]"
 			        });						
 				}		
-			} else if (e.deltaY < -3 && e.deltaX < 5){
+			} else if (e.deltaY <= -1 && e.deltaX < 5){
 				scrollTarget.scrollLeft -= w/21
 			}
 		},
