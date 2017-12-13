@@ -37,7 +37,7 @@ export default {
         ]),  
     },
     created() {
-        this.viewHeight = window.innerHeight
+        this.viewHeight = window.innerHeight - 4
         this.detectDevice()
         this.getWebTitle()
     },

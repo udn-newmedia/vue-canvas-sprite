@@ -17,8 +17,9 @@
 			 		    zIndex: isLast,
 			 		}"
 			 >	
-			<div class="scane"
+			<div id="scane"
 				 @scroll="showScrollLeft"
+				 @wheel.stop="handleMouseWheel"
 				 @mousewheel.stop="handleMouseWheel">
 				<div class="banner">
 					<div class="titleBox">
@@ -155,6 +156,7 @@ export default {
 	},
 	data: function() {
 		return {
+			watchScrollLeft: 0,
 			gradLine: gradLine,
 			startBgc: '#fff',
 			scrollSpeed: .8,
@@ -434,6 +436,12 @@ export default {
 	  	  'webTitle'
 	  	]),
   	},
+  	watch: {
+  		watchScrollLeft() {
+  			this.watchScrollLeft === window.innerWidth ? 
+  				setTimeout(()=>{this.canScroll = true}, 888) : (this.canScroll = false)
+  		}
+  	},
 	methods: {
 		...mapActions([
 			'handle_quizIndex',
@@ -441,9 +449,11 @@ export default {
 			'handle_headerBgc'
 		]),
 		showScrollLeft: function(e) {
-			const scrollW = e.target.clientWidth - e.target.scrollLeft
+			const scrollTarget = document.getElementById('scane')
+			const scrollW = scrollTarget.clientWidth - scrollTarget.scrollLeft
+			this.watchScrollLeft = scrollTarget.scrollLeft
 			this.arrowOpacity = 0
-			if(e.target.scrollLeft > scrollW * 7){
+			if(scrollTarget.scrollLeft > scrollW * 7){
 				this.showIntro = 1
 				this.abstractX = 0
 				this.startBgc = '#fff799'
@@ -498,7 +508,7 @@ export default {
 	            "hitType": "event",
 	            "eventCategory": "button", 
 	            "eventAction": "選擇左邊答案",	 
-	            "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][選擇左邊答案]"
+	            "eventLabel": "[" + this.platform + "][" + this.webTitle + "][選擇左邊答案]"
 	        });	
 		},
 		choseB: function(index) {
@@ -508,34 +518,30 @@ export default {
 	            "hitType": "event",
 	            "eventCategory": "button", 
 	            "eventAction": "選擇右邊答案",	 
-	            "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][選擇右邊答案]"
+	            "eventLabel": "[" + this.platform + "][" + this.webTitle + "][選擇右邊答案]"
 	        });			
 		},
 		handleMouseWheel: function(e){
 			let w = window.innerWidth
+			const scrollTarget = document.getElementById('scane')
 			if(e.deltaY > 3 && e.deltaX < 5){
-				e.srcElement.parentElement.scrollLeft += w/21						
-				if(e.srcElement.parentElement.scrollLeft == w){
-					setTimeout(()=>{
-						this.canScroll = true
-					}, 500)
-					if(this.canScroll === true){
-						this.canScroll = false
-						this.nextQuiz(0)
-				        ga("send", {
-				            "hitType": "event",
-				            "eventCategory": "wheel", 
-				            "eventAction": "藉由滾輪開始遊戲",	 
-				            "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][藉由滾輪開始遊戲]"
-				        });						
-					}
-				}				
+				scrollTarget.scrollLeft += w/21		
+				if(this.canScroll === true){
+					this.canScroll = false
+					this.nextQuiz(0)
+			        ga("send", {
+			            "hitType": "event",
+			            "eventCategory": "wheel", 
+			            "eventAction": "藉由滾輪開始遊戲",	 
+			            "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][藉由滾輪開始遊戲]"
+			        });						
+				}		
 			} else if (e.deltaY < -3 && e.deltaX < 5){
-				e.srcElement.parentElement.scrollLeft -= w/21
-			}			
+				scrollTarget.scrollLeft -= w/21
+			}
 		},
 		handleIntroArrow(e) {
-			document.getElementsByClassName('scane')[0].scrollLeft = window.innerWidth
+			document.getElementById('scane')[0].scrollLeft = window.innerWidth
 		}
 	},	
 	mounted() {
@@ -649,7 +655,7 @@ export default {
 		transform: translate(0, 0);
 	}
 }
-.scane {
+#scane {
 	flex-shrink: 0;
 	position: relative;
 	display: flex;

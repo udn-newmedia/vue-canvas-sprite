@@ -356,7 +356,6 @@ export default {
 		padding: 0;
 		margin: 0 auto;
 		display: flex;
-		-webkit-touch-callout: none;
 		align-items: center;
 		transition: transform .7s ease-in-out;
 		li{
@@ -520,6 +519,7 @@ export default {
 		ul{
 			width: 100%;
 			height: 100%;
+			overflow: hidden;
 			li{
 				position: relative;
 				flex: 1 0 auto;
