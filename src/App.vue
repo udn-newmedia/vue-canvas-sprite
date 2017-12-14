@@ -1,8 +1,5 @@
 <template>
-    <div id="app"
-         :style="{
-            height: viewHeight + 'px',
-        }">
+    <div id="app">
         <elderHomeHeader></elderHomeHeader>
         <elderHomeFullpage></elderHomeFullpage>
     </div>
@@ -11,7 +8,9 @@
 import { mapGetters, mapActions } from 'vuex'
 import elderHomeHeader from './components/elderHome_header.vue'
 import elderHomeFullpage from './components/elderHome_fullpage.vue'
-
+        //  :style="{
+        //     height: viewHeight + 'px',
+        // }"
 export default {
     name: 'app',
     components: {
