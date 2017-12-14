@@ -37,7 +37,7 @@ export default {
         ]),  
     },
     created() {
-        this.viewHeight = window.innerHeight - 4
+        // this.viewHeight = window.innerHeight - 4
         this.detectDevice()
         this.getWebTitle()
     },
@@ -54,6 +54,7 @@ export default {
 <style lang="scss" scoped>
 #app{
     width: 100%;
+    height: 100vh;
     position: relative;
     overflow: hidden;
 }
