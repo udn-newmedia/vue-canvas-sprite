@@ -39,6 +39,7 @@
 			 :style="{height: viewHeight+'px'}"
 			 @transitionend="handleEnd"
 			 @click="commentOpen">
+			 <div class="cblank" style="background-color: #fff;"></div>
 			<FBComment href="https://udn.com/upf/newmedia/2017_data/elderhome/index.html"/>
 		</div>
 	</header>
@@ -80,6 +81,7 @@ export default {
 	...mapActions([
 		'handle_lookDemand',
 		'handle_headerBgc',
+		'handle_headerTrans'
 	]),  	
   	menuOpen () {
   		this.comment_isOpen ? this.comment_isOpen = false : this.comment_isOpen = false;
@@ -94,10 +96,7 @@ export default {
   	commentOpen () {
   		this.comment_isOpen ? this.comment_isOpen = false : this.comment_isOpen = true;
   		this.menu_isOpen ? this.menu_isOpen = false : this.menu_isOpen = false;
-  		if(window.innerWidth >= 1024){
-	  		this.headerBgc === 'transparent' ? 
-	  			this.handle_headerBgc() : null  			
-	  	}
+  		// this.handle_headerBgc()
 		ga("send", {
 		    "hitType": "event",
 		    "eventCategory": "button", 
@@ -125,11 +124,9 @@ export default {
 		});
   	},
   	handleEnd () {
-  		if(window.innerWidth >= 1024) {
-	  		this.comment_isOpen ? 
-	  			null : this.handle_headerBgc()  			
-  		}
-
+  		if(this.comment_isOpen === false) {
+  			this.handle_headerTrans()  			
+  		} 	
   	}
   },
   created: function () {
@@ -192,9 +189,12 @@ export default {
 	}	
 	.blank{
 		position: absolute;
+		top: 0;
+		left: 0;
 		z-index: 120;
 		width: 100%;
 		height: 100%;
+		transition: .3s;
 	}
 	.comment-btn{
 		position: relative;
@@ -213,6 +213,11 @@ export default {
 			transform: scale(.6);
 		}
 	}
+	.cblank{
+		width: 100%;
+		height: 50px;
+		background-color: #fff;
+	}
 	.comment_Open{
 		opacity: .3;
 	}
@@ -226,7 +231,8 @@ export default {
 		-webkit-overflow-scrolling: touch;
 		transform: translate(100%, 0);
 		transition: .6s;
-		background-color: rgba(black, .2);
+		// background-color: rgba(black, .2);
+		background-color: #fff;
 		background-clip: content-box;
 	}
 	.menu-btn{
@@ -360,8 +366,8 @@ export default {
 		margin-left: 15px;
 	}		
 	.commentContainer{
-		padding-top: 55px;
 		padding-left: 55%;
+		background-color: rgba(black, .5);
 		.fb-comment-block{
 			margin-top: 0;
 		}

@@ -13,6 +13,8 @@ export const getWebTitle = state => {
 	state.webTitle = document.getElementsByTagName('title')[0].text
 }
 export const handle_headerBgc = state => {
-	state.headerBgc === '#fff' ?
-		state.headerBgc = 'transparent' : state.headerBgc = '#fff'		
+	state.headerBgc = '#fff'
+}
+export const handle_headerTrans = state => {
+	state.headerBgc = 'transparent'
 }

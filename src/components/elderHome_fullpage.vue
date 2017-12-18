@@ -4,7 +4,7 @@
 					backgroundColor: startBgc,
 					backgroundImage: 'url('+ gradLine +')',
 		 		}">
-		<div id="grandma" :style="{left: landing.grandma + '%'}">
+		<div id="grandma" :class="{backgrandma : grandmaOpacity}" :style="{left: landing.grandma + '%', opacity: grandmaOp}">
 			<img :src="grandMa" alt="奶奶">
 		</div>
 		<div id="herDog" :style="{left: landing.herDog + '%'}">
@@ -25,7 +25,7 @@
 				<div class="banner">
 					<div class="titleBox">
 						<h1>讓家<br/>準備好與你一起變老</h1>
-						<p>安全居家 長輩樂活 家人快活</p>
+						<p>為爸媽打造安全的家</p>
 						<p class="toNext" @click.once="handleIntroArrow" :style="{opacity: arrowOpacity}"><span>→</span></p>			
 					</div>
 					<div class="chair" :style="{backgroundImage: 'url('+ op +')'}"></div>					
@@ -36,10 +36,10 @@
 				<div class="abstract">
 					<p :style="{opacity: showIntro}">
 						國健署統計，每年「三個老人一個跌」，
-						輕則受傷恐懼、畫地限縮活動空間，加速退化，重則從此失能，需要家人照顧一輩子。
-						打造適合高齡居住的「大人宅」，成為迎接高齡社會關鍵。
+						輕則受傷恐懼、畫地限縮活動空間，加速退化；重則失能，要人照顧一輩子。
+						打造適合高齡居住的「大人宅」，成迎接高齡社會關鍵。
 						<br/>
-						你的老後一日，會是甚麼模樣？			
+						但家中潛在危險，到底藏在哪？
 					</p>
 					<div class="forShare"
 						 :style="{opacity: showIntro}">
@@ -177,6 +177,8 @@ export default {
 				grandma: -45,
 				herDog: -50,
 			},
+			grandmaOpacity: false,
+			grandmaOp: 1,
 			quizs: [
 				{
 					"name": 'room',
@@ -254,7 +256,7 @@ export default {
 						"answerA": '觀念過時啦！',
 						"answerB": '正確！',
 						"horizen": "#638c0b",
-						"anay1": '別再只吃白飯配湯！營養師陳郁旋表示，粗茶淡飯，容易造成營養不良，反而會加速老化。若家中長輩食量變小，則建議少量多餐，補足身體所需營養。',
+						"anay1": '別再只吃白飯配湯！營養師陳郁琁表示，粗茶淡飯，容易造成營養不良，反而會加速老化。若家中長輩食量變小，則建議少量多餐，補足身體所需營養。',
 						"anay2": '此外，與其奉行少鹽少油，她更建議活用天然食物的特性調味，增加食慾，例如九層塔、番茄、香菇等，並依烹調方式，選用新鮮未經精煉的好油。',
 					},
 					'img': [		
@@ -557,6 +559,14 @@ export default {
 		if(this.quizIndex >= this.quizs.length*2){
 			this.isLast = 50
 		}
+		if(this.quizIndex === 5) {
+			this.grandmaOpacity = true
+			this.grandmaOp = 0
+			this.landing.grandma = 0
+		}
+		if(this.quizIndex === 6) {
+			this.grandmaOpacity = false
+		}
 	},
 	updated: function() {
 		if(this.quizIndex >= this.quizs.length*2 +1){
@@ -575,6 +585,8 @@ export default {
 				break;
 			case 6: 
 				this.startBgc = '#fff799'
+				this.landing.grandma = 50
+				this.grandmaOp = 1
 				break;
 			case 8:
 				this.startBgc = '#aee5ff'
@@ -611,12 +623,16 @@ export default {
 	z-index: 48;
 	bottom: 40px;
 	left: -45%;
-	transition: left 6s linear;
+	transition: left 4.5s linear;
 	width: 30%;
 	margin-left: -25%;
 	img{
 		display: block;
 	}
+}
+.backgrandma{
+	// transition: none !important;
+	transition: .5s linear !important;
 }
 #herDog{
 	position: absolute;

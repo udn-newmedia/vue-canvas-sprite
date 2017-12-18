@@ -1,5 +1,5 @@
 <template>
-    <div class="fb-comment-block">
+    <div class="fb-comment-block" style="margin-top: 0;">
         <div class="fb-comments" :data-href="href" data-numposts="5" data-width="100%" data-order-by="reverse_time"></div>
     </div>
 </template>
