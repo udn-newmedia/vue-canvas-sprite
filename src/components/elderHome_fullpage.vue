@@ -1053,8 +1053,9 @@ export default {
 }
 @keyframes dropIn{
   0% {
-    transform:  translate(0px,-200%)  scaleX(1.00) scaleY(1.00) ;
+  	display: block;
     visibility: visible;
+    transform:  translate(0px,-200%)  scaleX(1.00) scaleY(1.00) ;
   }
   27% {
     transform:  translate(0px,0px)  scaleX(1) scaleY(1.05) ;
@@ -1069,70 +1070,94 @@ export default {
     transform:  translate(0px,-10px)  scaleX(1) scaleY(1.02) ;
   }
   100% {
-    transform:  translate(0px,0px)  scaleX(1.00) scaleY(1.00);
+  	display: block;
     visibility: visible;
+    transform:  translate(0px,0px)  scaleX(1.00) scaleY(1.00);
   }
 }
 @keyframes scaler{
 	0%{
+		display: block;
+		visibility: visible;
 		transform: scale(1) translate(10px,0) rotate(2deg);
 	}
 	100%{
+		display: block;
+		visibility: visible;
 		transform: scale(1.05) translate(-10px,0) rotate(-2deg);
 	}
 }
 @keyframes slideTo0 {
 	to{
+		display: block;
 		visibility: visible;
 		transform: translate(0, 0);	
 		opacity: 1;
+		display: block;
 	}
 }
 @keyframes fadeInRag {
 	from {
+		display: block;
 		visibility: visible;
 		opacity: 0;
 		transform: translate(10px, 10px);
+		display: block;
 	}
 	to {
+		display: block;
+		visibility: visible;		
 		opacity: 1;
 		transform: translate(0, 0);
-		visibility: visible;	
 	}
 }
 @keyframes grow {
 	0%{
-		transform: scale(0);
+		display: block;
 		visibility: visible;
+		transform: scale(0);
 	}
 	80%{
+		display: block;
+		visibility: visible;		
 		transform: scale(1.05);
 	}
 	100%{
-		transform: scale(1);
+		display: block;
 		visibility: visible;
+		transform: scale(1);
 	}
 }
 @keyframes rollIn {
 	0%{
+		display: block;
+		visibility: visible;		
 		transform: translate(300px, 0) rotate(360deg);
-		visibility: visible;
 	}
 	20%{
+		display: block;
+		visibility: visible;		
 		transform: translate(240px, 0) rotate(300deg);
 	}
 	40%{
+		display: block;
+		visibility: visible;		
 		transform: translate(180px, 0) rotate(240deg);
 	}
 	60%{
+		display: block;
+		visibility: visible;		
 		transform: translate(120px, 0) rotate(180deg);
 	}
 	80%{
+		display: block;
+		visibility: visible;		
 		transform: translate(60px, 0) rotate(90deg);
 	}
 	100%{
+		display: block;
+		visibility: visible;		
 		transform: translate(0, 0) rotate(0deg);
-		visibility: visible;
 	}
 }
 .horizen{

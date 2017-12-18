@@ -1,5 +1,8 @@
 <template>
-    <div id="app">
+    <div id="app"
+         :style="{
+            height: viewHeight + 'px',
+        }">
         <elderHomeHeader></elderHomeHeader>
         <elderHomeFullpage></elderHomeFullpage>
     </div>
@@ -8,9 +11,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import elderHomeHeader from './components/elderHome_header.vue'
 import elderHomeFullpage from './components/elderHome_fullpage.vue'
-        //  :style="{
-        //     height: viewHeight + 'px',
-        // }"
+
 export default {
     name: 'app',
     components: {
@@ -36,17 +37,18 @@ export default {
         ]),  
     },
     created() {
-        // this.viewHeight = window.innerHeight - 4
+        this.viewHeight = window.innerHeight - 4
         this.detectDevice()
         this.getWebTitle()
     },
     mounted() {
         console.log(this.platform)
         console.log(this.webTitle)
+        // window.addEventListener('resize', ()=> {
+        //     this.viewHeight = window.innerHeight - 4
+        //     console.log('resize')
+        // })
     },
-    updated() {
-
-    }
 };
 
 </script>
@@ -56,5 +58,6 @@ export default {
     height: 100vh;
     position: relative;
     overflow: hidden;
+    transition: height .6s linear;
 }
 </style>

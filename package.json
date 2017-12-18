@@ -13,7 +13,7 @@
     "animate.css": "^3.5.2",
     "animate.min.css": "0.0.3",
     "node-loader": "^0.6.0",
-    "node-sass": "^4.6.0",
+    "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6",
     "scss-loader": "0.0.1",
     "udn-newmedia-utils": "^1.0.9",
