@@ -471,10 +471,12 @@ export default {
 			if(this.quizIndex < this.quizs.length*2 +1){
 				this.quizs[index].answering = true
 				this.quizs[index].display = 'block'
+				console.log('block')
 				if(index > 0) {
 					this.quizs[index-1].answered = true
 					this.quizs[index-1].answering = false
 					this.quizs[index-1].display = 'none'
+					console.log('none')
 				}
 			} else if(this.quizIndex === this.quizs.length*2 +1) {
 				this.scrollSpeed = 2.5	
