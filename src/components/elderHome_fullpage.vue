@@ -4,10 +4,10 @@
 					backgroundColor: startBgc,
 					backgroundImage: 'url('+ gradLine +')',
 		 		}">
-		<div id="grandma" :class="{backgrandma : grandmaOpacity}" :style="{left: landing.grandma + '%', opacity: grandmaOp}">
+		<div id="grandma" :style="{left: landing.grandma + '%'}">
 			<img :src="grandMa" alt="奶奶">
 		</div>
-		<div id="herDog" :style="{left: landing.herDog + '%'}">
+		<div id="herDog" :class="{dogRush: dogRush, dogChase: dogChase}" :style="{left: landing.herDog + '%'}">
 			<img :src="dog" alt="狗">
 		</div>
 		<div class="scrollContainer"
@@ -138,7 +138,7 @@ import bus from '../assets/stage/outDoor/bus.png'
 import cart from '../assets/stage/outDoor/cart.png'
 import crutch from '../assets/stage/outDoor/crutch.png'
 import signal from '../assets/stage/outDoor/signal.png'
-import parkChair from '../assets/stage/outDoor/parkChair.png'
+import parkChair from '../assets/stage/outDoor/parkChair.gif'
 
 import bathBg from '../assets/stage/bathroom/bathBg.png'
 import wash from '../assets/stage/bathroom/wash.png'
@@ -177,8 +177,8 @@ export default {
 				grandma: -45,
 				herDog: -50,
 			},
-			grandmaOpacity: false,
-			grandmaOp: 1,
+			dogRush: false,
+			dogChase: false,
 			quizs: [
 				{
 					"name": 'room',
@@ -469,16 +469,14 @@ export default {
 		nextQuiz: function(index) {
 			this.showStep = 1
 			this.countQuiz = true
-			this.handle_quizIndex()		
+			this.handle_quizIndex()
 			if(this.quizIndex < this.quizs.length*2 +1){
 				this.quizs[index].answering = true
 				this.quizs[index].display = 'block'
-				console.log('block')
 				if(index > 0) {
 					this.quizs[index-1].answered = true
 					this.quizs[index-1].answering = false
 					this.quizs[index-1].display = 'none'
-					console.log('none')
 				}
 			} else if(this.quizIndex === this.quizs.length*2 +1) {
 				this.scrollSpeed = 2.5	
@@ -559,13 +557,8 @@ export default {
 		if(this.quizIndex >= this.quizs.length*2){
 			this.isLast = 50
 		}
-		if(this.quizIndex === 5) {
-			this.grandmaOpacity = true
-			this.grandmaOp = 0
-			this.landing.grandma = 0
-		}
-		if(this.quizIndex === 6) {
-			this.grandmaOpacity = false
+		if(this.quizIndex === 3) {
+			this.dogRush = true
 		}
 	},
 	updated: function() {
@@ -585,8 +578,8 @@ export default {
 				break;
 			case 6: 
 				this.startBgc = '#fff799'
-				this.landing.grandma = 50
-				this.grandmaOp = 1
+				this.dogRush = false
+				this.dogChase = true
 				break;
 			case 8:
 				this.startBgc = '#aee5ff'
@@ -630,9 +623,31 @@ export default {
 		display: block;
 	}
 }
-.backgrandma{
-	// transition: none !important;
-	transition: .5s linear !important;
+.dogRush{
+	animation-name: Rush;
+	animation-duration: 1500ms;
+	animation-fill-mode: forwards;
+}
+.dogChase{
+	animation-name: Chase;
+	animation-duration: 1500ms;
+	animation-fill-mode: forwards;	
+}
+@keyframes Rush {
+	0%{
+		transform: translate(0, 0);
+	}
+	100%{
+		transform: translate(100vw, 0);
+	}
+}
+@keyframes Chase {
+	from{
+		transform: translate(-100vw, 0)
+	}
+	to{
+		transform: translate(0, 0);
+	}
 }
 #herDog{
 	position: absolute;
