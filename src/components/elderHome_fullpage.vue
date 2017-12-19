@@ -944,7 +944,7 @@ export default {
 		transform-origin: center bottom;
 	}
 	.parkChair{
-		width: 30%;
+		width: 35%;
 		margin-left: 10%;
 		margin-bottom: 12%;
 		z-index: 10;
