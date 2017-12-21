@@ -284,7 +284,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .demand{
 	flex-shrink: 0;
 	position: relative;

@@ -2,7 +2,7 @@
 	<main id="scrollPage"
 		 :style="{
 					backgroundColor: startBgc,
-					// backgroundImage: 'url('+ gradLine +')',
+					// backgroundImage: 'url('+ imgSrc.gradLine +')',
 				}">
 		<div class="scrollContainer"
 			 :style="{ 
@@ -14,13 +14,13 @@
 			<div class="grandma"
 				 :class="{stageTrans: stageTrans}"
 				 :style="{left: landing.grandma + quizIndex * 100 + '%'}">
-				<img :src="grandMa" alt="奶奶">
+				<img :src="imgSrc.grandma" alt="奶奶">
 			</div>
 			<div class="herDog"
 				 v-if="dogIn"
 				 :class="{dogRush: dogRush, dogChase: dogChase, stageTrans: stageTrans}"
 				 :style="{left: landing.herDog + quizIndex * 100 + '%'}">
-				<img :src="dog" alt="狗">
+				<img :src="imgSrc.dog" alt="狗">
 			</div>			 
 			<div id="scane"
 				 @scroll="showScrollLeft"
@@ -33,10 +33,10 @@
 						<p>為爸媽打造安全的家</p>
 						<p class="toNext" style="margin-right: 15px;margin-left: auto;" @click.once="handleIntroArrow" :style="{opacity: arrowOpacity}"><span>→</span></p>			
 					</div>
-					<div class="chair" :style="{backgroundImage: 'url('+ op +')'}"></div>					
+					<div class="chair" :style="{backgroundImage: 'url('+ imgSrc.opening +')'}"></div>					
 				</div>
 				<div class="horizen" style="position: fixed;width: 100%;">
-					<img :src="horizen1">
+					<img :src="imgSrc.horizen1">
 				</div>
 				<div class="abstract">
 					<p :style="{opacity: showIntro}">
@@ -112,8 +112,8 @@
 </template>
 <script>
 
-import debounce from 'lodash.debounce'
-import delay from 'lodash.delay'
+import _debounce from 'lodash.debounce'
+import _delay from 'lodash.delay'
 
 import { mapGetters, mapActions } from 'vuex'
 import Share from '../components/Share.vue';
@@ -131,13 +131,12 @@ import horizen11 from '../assets/stage/horizen/11.png'
 import imgGrandma from '../assets/stage/grandma.gif'
 import imgOpening from '../assets/stage/opening.gif'
 import imgDog from '../assets/stage/dog.gif'
-import imgArrow from '../assets/stage/arrow.png'
 
 import roomBg from '../assets/stage/room/roomBg.png'
 import bed from '../assets/stage/room/bed.png'
 import handsup from '../assets/stage/room/handsup.png'
 import lamp from'../assets/stage/room/lamp.png'
-import locker from'../assets/stage/room/locker.png'
+import locker from'../assets/stage/room/locker.gif'
 import slipper from'../assets/stage/room/slipper.png'
 import weighter from'../assets/stage/room/weighter.png'
 
@@ -177,8 +176,14 @@ export default {
 	data: function() {
 		return {
 			stageTrans: false,
+			imgSrc: {
+				grandma: imgGrandma,
+				dog: imgDog,
+				opening: imgOpening,
+				gradLine: gradLine,
+				horizen1: horizen1,
+			},
 			watchScrollLeft: 0,
-			gradLine: gradLine,
 			startBgc: '#fff',
 			scrollSpeed: .8,
 			countQuiz: false,
@@ -187,11 +192,6 @@ export default {
 			abstractX: 100,
 			isLast: 40,
 			arrowOpacity: 1,
-			horizen1: horizen1,
-			grandMa: imgGrandma,
-			introArrow: imgArrow,
-			op: imgOpening,
-			dog: imgDog,
 			canScroll: false,
 			landing:{
 				grandma: -45,
@@ -467,7 +467,7 @@ export default {
   	watch: {
   		watchScrollLeft() {
   			this.watchScrollLeft === window.innerWidth ? 
-  				setTimeout(()=>{this.canScroll = true}, 500) : (this.canScroll = false)
+  				_delay(() => {this.canScroll = true}, 600) : (this.canScroll = false)
   		}
   	},
 	methods: {
@@ -492,7 +492,7 @@ export default {
 				this.startBgc = '#fff'				
 			}
 		},
-		lastQuiz: debounce(function(index) {
+		lastQuiz: _debounce(function(index) {
 			this.handle_dequizIndex()
 	        ga("send", {
 	            "hitType": "event",
@@ -502,16 +502,16 @@ export default {
 	        });			
 			switch(index){
 				case 1:
-					delay(() => {
+					_delay(() => {
 						this.startBgc = '#fffabf'
 					}, 400)
-					delay(() => {
+					_delay(() => {
 						this.quizs[0].display = 'none'
 					}, 800)			
 					break;
 				case 2:
 					this.quizs[0].display = 'block'
-					delay(() => {
+					_delay(() => {
 						this.quizs[0].answer.display = 'none'
 					}, 800)					
 					break;
@@ -520,13 +520,13 @@ export default {
 					this.quizs[0].answering = true
 					this.quizs[1].answering = false
 					this.quizs[0].answer.display = 'none'
-					delay(() => {
+					_delay(() => {
 						this.quizs[1].display = 'none'
 					}, 800)			
 					break;
 				case 4:
 					this.quizs[1].display = 'block'
-					delay(() => {
+					_delay(() => {
 						this.quizs[1].answer.display = 'none'
 					}, 800)										
 					this.dogIn = true
@@ -538,13 +538,13 @@ export default {
 					this.quizs[1].answering = true
 					this.quizs[2].answering = false	
 					this.quizs[1].answer.display = 'none'
-					delay(() => {
+					_delay(() => {
 						this.quizs[2].display = 'none'
 					}, 800)					
 					break;
 				case 6:
 					this.quizs[2].display = 'block'
-					delay(() => {
+					_delay(() => {
 						this.quizs[2].answer.display = 'none'
 					}, 800)										
 					this.dogIn = false
@@ -554,19 +554,19 @@ export default {
 					this.quizs[2].answering = true
 					this.quizs[2].answer.display = 'none'
 					this.quizs[3].answering = false	
-					delay(() => {
+					_delay(() => {
 						this.quizs[3].display = 'none'
 					}, 800)					
 					break;
 				case 8:
 					this.quizs[3].display = 'block'
-					delay(() => {
+					_delay(() => {
 						this.quizs[3].answer.display = 'none'
 					}, 800)										
 					break;
 			}
 		}, 800, {leading: true, trailing: false}),
-		nextQuiz: debounce(function(index) {
+		nextQuiz: _debounce(function(index) {
 			this.countQuiz = true
 			this.stageTrans = true
 			this.handle_quizIndex()
@@ -585,7 +585,7 @@ export default {
 				this.handle_lookDemand()
 			}
 		}, 800, {leading:true, trailing:false}),
-		startGame: debounce(function() {
+		startGame: _debounce(function() {
 			this.nextQuiz(0)
 	        ga("send", {
 	            "hitType": "event",
@@ -594,7 +594,7 @@ export default {
 	            "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][點擊開始遊戲]"
 	        });
 		}, 800, {leading:true, trailing:false}),
-		toNext: debounce(function(index) {
+		toNext: _debounce(function(index) {
 			this.nextQuiz(index + 1)
 	        ga("send", {
 	            "hitType": "event",
@@ -603,7 +603,7 @@ export default {
 	            "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][點擊下一題按鈕]"
 	        });			
 		}, 800, {leading:true, trailing:false}),
-		choseA: debounce(function(index) {
+		choseA: _debounce(function(index) {
 			this.handle_quizIndex()
 			this.quizs[index].answer.showA = true;
 			delay(() => {
@@ -613,20 +613,20 @@ export default {
 	            "hitType": "event",
 	            "eventCategory": "button", 
 	            "eventAction": "選擇左邊答案",	 
-	            "eventLabel": "[" + this.platform + "][" + this.webTitle + "][選擇左邊答案]"
+	            "eventLabel": "[" + this.platform + "][" + this.webTitle + "][選擇第一個答案]"
 	        });	
 		}, 800, {leading:true, trailing:false}),
-		choseB: debounce(function(index) {
+		choseB: _debounce(function(index) {
 			this.handle_quizIndex()
 			this.quizs[index].answer.showA = false;
-			delay(() => {
+			_delay(() => {
 				this.quizs[index].display = 'none'
 			}, 800)			
 	        ga("send", {
 	            "hitType": "event",
 	            "eventCategory": "button", 
 	            "eventAction": "選擇右邊答案",	 
-	            "eventLabel": "[" + this.platform + "][" + this.webTitle + "][選擇右邊答案]"
+	            "eventLabel": "[" + this.platform + "][" + this.webTitle + "][選擇第二個答案]"
 	        });			
 		}, 800, {leading:true, trailing:false}),
 		handleMouseWheel: function(e){
@@ -650,13 +650,19 @@ export default {
 		},
 		handleIntroArrow(e) {
 			document.getElementById('scane').scrollLeft = window.innerWidth
+	        ga("send", {
+	            "hitType": "event",
+	            "eventCategory": "button", 
+	            "eventAction": "點擊",	 
+	            "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][點擊主標題按鈕到底]"
+	        });			
 		}
 	},	
 	mounted() {
-		setTimeout(()=>{
-		this.landing.grandma = 50
-		this.landing.herDog = 50
-		}, 133)
+		_delay(() => {
+			this.landing.grandma = 50
+			this.landing.herDog = 50			
+		}, 333)
 	},
 	beforeUpdate() {
 		if(this.quizIndex > this.quizs.length*2){
@@ -673,7 +679,7 @@ export default {
 			this.scrollSpeed = 1.5
 			this.stageTrans = false
 		}
-		delay(() => {
+		_delay(() => {
 			switch(this.quizIndex){
 				case 0:
 					this.countQuiz = false
@@ -689,7 +695,7 @@ export default {
 				case 6: 
 					this.startBgc = '#fffabf'
 					this.quizs[2].answer.display = 'flex'
-					delay(() => {
+					_delay(() => {
 						this.dogChase = true	
 						this.dogIn = true;
 					}, 700)				
@@ -706,7 +712,7 @@ export default {
 	}
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 #scrollPage {
 	flex-shrink: 0;
 	position: relative;

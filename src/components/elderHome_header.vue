@@ -1,7 +1,7 @@
 <template>
 	<header>
 		<div class="logo">
-			<a href="./"><img :src="udnLogo" alt="聯合報" title="聯合報"></a>
+			<a href="./index.html"><img :src="udnLogo" alt="聯合報" title="聯合報"></a>
 		</div>
 		<div id="elderLogo">
 			<img src="../assets/elderHome_logo.png" alt="大人宅">
@@ -24,7 +24,7 @@
 			 :class="{itemContainer_isOpen: menu_isOpen}">
 			<ul>
 				<li>
-					<a @click="playAgain" href="./">重新開始</a>
+					<a @click="playAgain" href="./index.html">重新開始</a>
 				</li>
 				<li>
 					<a @click.prevent="menuClose">我的大人宅</a>
@@ -122,7 +122,7 @@ export default {
 		    "hitType": "event",
 		    "eventCategory": "button", 
 		    "eventAction": "重頭開始",	 
-		    "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][重頭開始]"
+		    "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][重新開始]"
 		});
   	},
   	handleEnd () {
@@ -132,12 +132,25 @@ export default {
   	}
   },
   created: function () {
-  	this.viewHeight = window.innerHeight
+        if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
+            this.viewHeight = window.innerHeight - 4
+        } else {
+            this.viewHeight = window.innerHeight
+        }
   },
+  mounted() {
+        window.addEventListener('resize', ()=> {
+            if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
+                this.viewHeight = window.innerHeight - 4
+            } else {
+                this.viewHeight = window.innerHeight
+            }
+        })  	
+  	}
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	header{
 		position: fixed;
 		z-index: 999;
