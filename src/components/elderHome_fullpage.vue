@@ -112,7 +112,9 @@
 </template>
 <script>
 
-import _ from 'lodash'
+import debounce from 'lodash.debounce'
+import delay from 'lodash.delay'
+
 import { mapGetters, mapActions } from 'vuex'
 import Share from '../components/Share.vue';
 import elderHomeDemand from '../components/elderHome_demand.vue'
@@ -120,7 +122,6 @@ import elderHomeDemand from '../components/elderHome_demand.vue'
 import horizen1 from '../assets/stage/horizen/1-2.png'
 import horizen3 from '../assets/stage/horizen/3.png'
 import horizen4 from '../assets/stage/horizen/4.png'
-// import horizen5 from '../assets/stage/horizen/5.png'
 import horizen6 from '../assets/stage/horizen/6.png'
 import horizen7 from '../assets/stage/horizen/7.png'
 import horizen8 from '../assets/stage/horizen/8.png'
@@ -491,7 +492,7 @@ export default {
 				this.startBgc = '#fff'				
 			}
 		},
-		lastQuiz: _.debounce(function(index) {
+		lastQuiz: debounce(function(index) {
 			this.handle_dequizIndex()
 	        ga("send", {
 	            "hitType": "event",
@@ -501,16 +502,16 @@ export default {
 	        });			
 			switch(index){
 				case 1:
-					_.delay(() => {
+					delay(() => {
 						this.startBgc = '#fffabf'
 					}, 400)
-					_.delay(() => {
+					delay(() => {
 						this.quizs[0].display = 'none'
 					}, 800)			
 					break;
 				case 2:
 					this.quizs[0].display = 'block'
-					_.delay(() => {
+					delay(() => {
 						this.quizs[0].answer.display = 'none'
 					}, 800)					
 					break;
@@ -519,13 +520,13 @@ export default {
 					this.quizs[0].answering = true
 					this.quizs[1].answering = false
 					this.quizs[0].answer.display = 'none'
-					_.delay(() => {
+					delay(() => {
 						this.quizs[1].display = 'none'
 					}, 800)			
 					break;
 				case 4:
 					this.quizs[1].display = 'block'
-					_.delay(() => {
+					delay(() => {
 						this.quizs[1].answer.display = 'none'
 					}, 800)										
 					this.dogIn = true
@@ -537,13 +538,13 @@ export default {
 					this.quizs[1].answering = true
 					this.quizs[2].answering = false	
 					this.quizs[1].answer.display = 'none'
-					_.delay(() => {
+					delay(() => {
 						this.quizs[2].display = 'none'
 					}, 800)					
 					break;
 				case 6:
 					this.quizs[2].display = 'block'
-					_.delay(() => {
+					delay(() => {
 						this.quizs[2].answer.display = 'none'
 					}, 800)										
 					this.dogIn = false
@@ -553,19 +554,19 @@ export default {
 					this.quizs[2].answering = true
 					this.quizs[2].answer.display = 'none'
 					this.quizs[3].answering = false	
-					_.delay(() => {
+					delay(() => {
 						this.quizs[3].display = 'none'
 					}, 800)					
 					break;
 				case 8:
 					this.quizs[3].display = 'block'
-					_.delay(() => {
+					delay(() => {
 						this.quizs[3].answer.display = 'none'
 					}, 800)										
 					break;
 			}
 		}, 800, {leading: true, trailing: false}),
-		nextQuiz: _.debounce(function(index) {
+		nextQuiz: debounce(function(index) {
 			this.countQuiz = true
 			this.stageTrans = true
 			this.handle_quizIndex()
@@ -584,7 +585,7 @@ export default {
 				this.handle_lookDemand()
 			}
 		}, 800, {leading:true, trailing:false}),
-		startGame: _.debounce(function() {
+		startGame: debounce(function() {
 			this.nextQuiz(0)
 	        ga("send", {
 	            "hitType": "event",
@@ -593,7 +594,7 @@ export default {
 	            "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][點擊開始遊戲]"
 	        });
 		}, 800, {leading:true, trailing:false}),
-		toNext: _.debounce(function(index) {
+		toNext: debounce(function(index) {
 			this.nextQuiz(index + 1)
 	        ga("send", {
 	            "hitType": "event",
@@ -602,10 +603,10 @@ export default {
 	            "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][點擊下一題按鈕]"
 	        });			
 		}, 800, {leading:true, trailing:false}),
-		choseA: _.debounce(function(index) {
+		choseA: debounce(function(index) {
 			this.handle_quizIndex()
 			this.quizs[index].answer.showA = true;
-			_.delay(() => {
+			delay(() => {
 				this.quizs[index].display = 'none'
 			}, 800)
 	        ga("send", {
@@ -615,10 +616,10 @@ export default {
 	            "eventLabel": "[" + this.platform + "][" + this.webTitle + "][選擇左邊答案]"
 	        });	
 		}, 800, {leading:true, trailing:false}),
-		choseB: _.debounce(function(index) {
+		choseB: debounce(function(index) {
 			this.handle_quizIndex()
 			this.quizs[index].answer.showA = false;
-			_.delay(() => {
+			delay(() => {
 				this.quizs[index].display = 'none'
 			}, 800)			
 	        ga("send", {
@@ -672,7 +673,7 @@ export default {
 			this.scrollSpeed = 1.5
 			this.stageTrans = false
 		}
-		_.delay(() => {
+		delay(() => {
 			switch(this.quizIndex){
 				case 0:
 					this.countQuiz = false
@@ -688,7 +689,7 @@ export default {
 				case 6: 
 					this.startBgc = '#fffabf'
 					this.quizs[2].answer.display = 'flex'
-					_.delay(() => {
+					delay(() => {
 						this.dogChase = true	
 						this.dogIn = true;
 					}, 700)				
@@ -1308,17 +1309,15 @@ export default {
 	position: absolute;
 	z-index: auto;
 	width: 100vw;
-	height: 10px;
+	height: 12px;
 	bottom: 35px;
 	left: 0;
-	overflow: hidden;
 	img{
 		position: absolute;
 		top: 0;
 		left: 0;
-		display: block;
 		width: 100%;
-		height: 10px;
+		height: 100%;
 	}
 }
 .answer {
