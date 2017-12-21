@@ -37,17 +37,25 @@ export default {
         ]),  
     },
     created() {
-        this.viewHeight = window.innerHeight - 4
+        if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
+            this.viewHeight = window.innerHeight - 4
+        } else {
+            this.viewHeight = window.innerHeight
+        }
         this.detectDevice()
         this.getWebTitle()
     },
     mounted() {
         console.log(this.platform)
         console.log(this.webTitle)
-        // window.addEventListener('resize', ()=> {
-        //     this.viewHeight = window.innerHeight - 4
-        //     console.log('resize')
-        // })
+        window.addEventListener('resize', ()=> {
+            if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
+                this.viewHeight = window.innerHeight - 4
+            } else {
+                this.viewHeight = window.innerHeight
+            }
+            console.log('resize')
+        })
     },
 };
 

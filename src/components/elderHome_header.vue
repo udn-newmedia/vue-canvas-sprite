@@ -1,7 +1,7 @@
 <template>
 	<header>
 		<div class="logo">
-			<a href="./index.html"><img :src="udnLogo" alt="聯合報" title="聯合報"></a>
+			<a href="./"><img :src="udnLogo" alt="聯合報" title="聯合報"></a>
 		</div>
 		<div id="elderLogo">
 			<img src="../assets/elderHome_logo.png" alt="大人宅">
@@ -24,10 +24,10 @@
 			 :class="{itemContainer_isOpen: menu_isOpen}">
 			<ul>
 				<li>
-					<a @click="playAgain" href="./index.html">重頭開始</a>
+					<a @click="playAgain" href="./">重新開始</a>
 				</li>
 				<li>
-					<a @click="menuClose">我的大人宅</a>
+					<a @click.prevent="menuClose">我的大人宅</a>
 				</li>				
 			</ul>
 			<div class="menu_logo hidden-lg hidden-md">
@@ -81,7 +81,8 @@ export default {
 	...mapActions([
 		'handle_lookDemand',
 		'handle_headerBgc',
-		'handle_headerTrans'
+		'handle_headerTrans',
+		'handle_again'
 	]),  	
   	menuOpen () {
   		this.comment_isOpen ? this.comment_isOpen = false : this.comment_isOpen = false;
@@ -116,6 +117,7 @@ export default {
 		}); 		
   	},
   	playAgain () {
+  		this.menu_isOpen = false;
 		ga("send", {
 		    "hitType": "event",
 		    "eventCategory": "button", 

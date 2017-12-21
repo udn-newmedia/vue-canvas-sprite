@@ -151,7 +151,7 @@ export default {
     			'shopSlideIndex': 0,
     			'noLast': .3,
     			'noNext': 1,    			
-    			'catagory': '戶外(助行)',
+    			'catagory': '外出',
     			'cataImg': outDoor,
     			'productItem': [
     				{
@@ -247,7 +247,7 @@ export default {
   		this.forTouchEndCY = Math.round(event.changedTouches[0].clientY)
   		const touchRangeY = Math.abs(this.forTouchStartCY - this.forTouchEndCY)
   		if(window.innerWidth < 1024) {
-	  		if(touchRangeY < 10) {
+	  		if(touchRangeY < 15) {
 	  			if(this.forTouchEndCX > this.forTouchStartCX){
 	  				this.handleLeft(index)
 	  			} else if (this.forTouchEndCX < this.forTouchStartCX){
@@ -471,7 +471,7 @@ export default {
 }
 @media screen and (min-width: 1024px) {
 	.demandTitle{
-		margin-top: 80px;
+		margin-top: 60px;
 		width: 100%;
 		text-align: center;	
 	}

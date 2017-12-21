@@ -2,21 +2,26 @@
 	<main id="scrollPage"
 		 :style="{
 					backgroundColor: startBgc,
-					backgroundImage: 'url('+ gradLine +')',
-		 		}">
-		<div id="grandma" :style="{left: landing.grandma + '%'}">
-			<img :src="grandMa" alt="奶奶">
-		</div>
-		<div id="herDog" :class="{dogRush: dogRush, dogChase: dogChase}" :style="{left: landing.herDog + '%'}">
-			<img :src="dog" alt="狗">
-		</div>
+					// backgroundImage: 'url('+ gradLine +')',
+				}">
 		<div class="scrollContainer"
 			 :style="{ 
-			 			transition: scrollSpeed+'s',
+			 			transition: scrollSpeed +'s linear',
 			 		    transform: 'translateX('+ quizIndex * -100 + '%)',
 			 		    zIndex: isLast,
 			 		}"
 			 >	
+			<div class="grandma"
+				 :class="{stageTrans: stageTrans}"
+				 :style="{left: landing.grandma + quizIndex * 100 + '%'}">
+				<img :src="grandMa" alt="奶奶">
+			</div>
+			<div class="herDog"
+				 v-if="dogIn"
+				 :class="{dogRush: dogRush, dogChase: dogChase, stageTrans: stageTrans}"
+				 :style="{left: landing.herDog + quizIndex * 100 + '%'}">
+				<img :src="dog" alt="狗">
+			</div>			 
 			<div id="scane"
 				 @scroll="showScrollLeft"
 				 @wheel.stop="handleMouseWheel"
@@ -26,12 +31,12 @@
 					<div class="titleBox">
 						<h1>讓家<br/>準備好與你一起變老</h1>
 						<p>為爸媽打造安全的家</p>
-						<p class="toNext" @click.once="handleIntroArrow" :style="{opacity: arrowOpacity}"><span>→</span></p>			
+						<p class="toNext" style="margin-right: 15px;margin-left: auto;" @click.once="handleIntroArrow" :style="{opacity: arrowOpacity}"><span>→</span></p>			
 					</div>
 					<div class="chair" :style="{backgroundImage: 'url('+ op +')'}"></div>					
 				</div>
-				<div class="horizen" style="background-color: #f8b551;position: fixed;width: 100%;">
-					<img :src="horizen">
+				<div class="horizen" style="position: fixed;width: 100%;">
+					<img :src="horizen1">
 				</div>
 				<div class="abstract">
 					<p :style="{opacity: showIntro}">
@@ -39,13 +44,13 @@
 						輕則受傷恐懼、畫地限縮活動空間，加速退化；重則失能，要人照顧一輩子。
 						打造適合高齡居住的「大人宅」，成迎接高齡社會關鍵。
 						<br/>
-						但家中潛在危險，到底藏在哪？
+						但家中的潛在危險，究竟藏在哪？
 					</p>
 					<div class="forShare"
 						 :style="{opacity: showIntro}">
 						<Share href="./index.html"/>	
 					</div>
-					<div id="start" @click.once="startGame">
+					<div id="start" @click="startGame">
 						<span>開始遊戲</span>
 						<span class='arrow'>→</span>
 					</div>					
@@ -55,16 +60,16 @@
 				 v-for="(quiz, index) in quizs">
 				<div class="question">
 					<h2>{{quiz.question.ask}}</h2>
-					<span class="hint">選一個答案以進入下一頁</span>
 					<div class="optionBlock">
 						<p class="optionA"
-						   @click.once="choseA(index)">
+						   @click="choseA(index)">
 						    {{quiz.question.optionA}}
 						</p>
 						<p class="optionB"
-						   @click.once="choseB(index)">
+						   @click="choseB(index)">
 						    {{quiz.question.optionB}}
 						</p>						
+						<span class="hint">選一個答案以進入下一頁</span>
 					</div>
 					<div class="stage" :class="quiz.name"
 						 :style="{backgroundImage: 'url('+ quiz.background +')'}">
@@ -73,27 +78,29 @@
 							 :alt="img.alt" :title="img.title"
 							 :style="{display: quiz.display}">
 					</div>
-					<div class="horizen"
-						 :style="{backgroundColor: quiz.question.horizen}">
-						<img :src="horizen">
+					<div class="horizen">
+						<img :src="quiz.question.horizen">
 					</div>					
 				</div>
 				<div class="answer">
-					<div class="answerPage">
+					<div class="answerPage" :style="{display: quiz.answer.display}">
 						<h2 v-if="quiz.answer.showA">{{quiz.answer.answerA}}</h2>
 						<h2 v-else>{{quiz.answer.answerB}}</h2>
 						<p class="answer_article">{{quiz.answer.anay1}}</p>
 						<p class="answer_article">{{quiz.answer.anay2}}</p>
-						<p class="toNext" @click.once="toNext(index)"><span>→</span></p>
+						<div class="directionBox">
+							<p class="toNext" @click="toNext(index)"><span>→</span></p>							
+						</div>
 					</div>	
-					<div class="horizen" :style="{backgroundColor: quiz.answer.horizen}">
-						<img :src="horizen">
-					</div>						
+					<div class="horizen">
+						<img :src="quiz.answer.horizen">
+					</div>					
 				</div>							
 			</div>
 			<div class="quizCount"
 				 v-if="showStep"
-				 :style="{transition: scrollSpeed+'s', transform: 'translate('+quizIndex*100+'%)'}">
+				 :style="{transform: 'translateX(' + quizIndex * 100 + '%)'}">
+				 <p class="toPrev" @click="lastQuiz(quizIndex)" v-if="countQuiz">←</p>
 				<span v-if="countQuiz"
 					  v-for="(navi, index) in quizs" 
 					  :class="{answered: navi.answered, answering: navi.answering}">
@@ -104,11 +111,22 @@
 	</main>
 </template>
 <script>
+
+import _ from 'lodash'
 import { mapGetters, mapActions } from 'vuex'
 import Share from '../components/Share.vue';
 import elderHomeDemand from '../components/elderHome_demand.vue'
 
-import imgHorizen from '../assets/h_line.png'
+import horizen1 from '../assets/stage/horizen/1-2.png'
+import horizen3 from '../assets/stage/horizen/3.png'
+import horizen4 from '../assets/stage/horizen/4.png'
+// import horizen5 from '../assets/stage/horizen/5.png'
+import horizen6 from '../assets/stage/horizen/6.png'
+import horizen7 from '../assets/stage/horizen/7.png'
+import horizen8 from '../assets/stage/horizen/8.png'
+import horizen9 from '../assets/stage/horizen/9.png'
+import horizen10 from '../assets/stage/horizen/10.png'
+import horizen11 from '../assets/stage/horizen/11.png'
 import imgGrandma from '../assets/stage/grandma.gif'
 import imgOpening from '../assets/stage/opening.gif'
 import imgDog from '../assets/stage/dog.gif'
@@ -157,6 +175,7 @@ export default {
 	},
 	data: function() {
 		return {
+			stageTrans: false,
 			watchScrollLeft: 0,
 			gradLine: gradLine,
 			startBgc: '#fff',
@@ -167,7 +186,7 @@ export default {
 			abstractX: 100,
 			isLast: 40,
 			arrowOpacity: 1,
-			horizen: imgHorizen,
+			horizen1: horizen1,
 			grandMa: imgGrandma,
 			introArrow: imgArrow,
 			op: imgOpening,
@@ -179,6 +198,7 @@ export default {
 			},
 			dogRush: false,
 			dogChase: false,
+			dogIn: true,
 			quizs: [
 				{
 					"name": 'room',
@@ -190,15 +210,16 @@ export default {
 						"ask": "早安！經過一夜好眠，開啟新的一天，我要···",
 						"optionA": "一張開眼就跳下床，展現活力！",
 						"optionB": "賴床一下好了",
-						"horizen": "#e4544d",
+						"horizen": horizen3,
 					},
 					"answer": {
+						"display": 'none',
 						"showA": true,
 						"answerA": '這樣不行啦！',
 						"answerB": '沒錯！',
-						"horizen": "#ea68a2",
-						"anay1": '八里療養院職能治療科主任張自強叮嚀，早晨是心腦血管疾病高發時段，且入冬後，身體離開被窩接觸到外面空氣，冷熱溫差更大，銀髮族應格外當心。',
-						"anay2": '張自強建議長輩，每日醒來後，雙手各握拳、放開10下，腳趾與膝蓋也彎曲、伸直10下，讓四肢暖和後，再起身坐好、坐穩，才扶著床櫃等，可支撐的輔助物下床。',
+						"horizen": horizen4,
+						"anay1": '八里療養院職能治療科主任張自強叮嚀，早晨是心腦血管疾病高發時段，且入冬後，身體離開被窩接觸到外面空氣，冷熱溫差更大，長輩們應格外當心。',
+						"anay2": '張自強建議，每日醒來後，雙手各握拳、放開10下，腳趾與膝蓋也彎曲、伸直10下，讓四肢暖和後，再起身坐好、坐穩，才扶著床櫃等，可支撐的輔助物下床。',
 					},
 					'img': [
 						{
@@ -246,16 +267,17 @@ export default {
 					"answered": false,
 					"answering": false,
 					"question": {
-							"ask": "午餐時間，該吃甚麼好呢？",
+							"ask": "午餐時間，該吃什麼好呢？",
 							"optionA": "年紀大了，粗茶淡飯，清淡最好",
 							"optionB": "食量小，更要重視營養攝取夠不夠",
-							"horizen": "#23ac39",
+							"horizen": horizen6,
 						},
 					"answer": {
+						"display": 'none',
 						"showA": true,
 						"answerA": '觀念過時啦！',
 						"answerB": '正確！',
-						"horizen": "#638c0b",
+						"horizen": horizen7,
 						"anay1": '別再只吃白飯配湯！營養師陳郁琁表示，粗茶淡飯，容易造成營養不良，反而會加速老化。若家中長輩食量變小，則建議少量多餐，補足身體所需營養。',
 						"anay2": '此外，與其奉行少鹽少油，她更建議活用天然食物的特性調味，增加食慾，例如九層塔、番茄、香菇等，並依烹調方式，選用新鮮未經精煉的好油。',
 					},
@@ -326,13 +348,14 @@ export default {
 							"ask": "清爽的午後，來活動一下筋骨好了！",
 							"optionA": "努力維持運動習慣，保持活力！",
 							"optionB": "好懶得動，在家還比較安全",
-							"horizen": "#e1bc33",
+							"horizen": horizen8,
 						},
 					"answer": {
+						"display": 'none',
 						"showA": true,
 						"answerA": '給你一百個讚！',
 						"answerB": '不行啦！',
-						"horizen": "#cfa972",
+						"horizen": horizen9,
 						"anay1": '物理治療師彭品維表示，對抗老化，關鍵仍在維持運動習慣。除最簡單的快走，也推薦游泳，就算只是泡在水裡行走，水壓可助血液跟淋巴循環、浮力助減緩關節載重，是很適合長者的運動。',
 						"anay2": '八里療養院職能治療科主任張自強也補充，長輩外出建議穿鮮艷、螢光色系衣物，也建議使用助行輔具，老人家若抗拒，則可考慮拐杖傘，或平地用登山杖等，形象較正面、健康的輔具。',
 					},
@@ -379,14 +402,15 @@ export default {
 							"ask": "洗個熱呼呼的熱水澡，但浴室老是濕濕滑滑的···",
 							"optionA": "我身體勇健，不需要身心障礙扶手",
 							"optionB": "扶手要裝！還要選最亮色！",
-							"horizen": "#04a1e9",
+							"horizen": horizen10,
 						},
 					"answer": {
+						"display": 'none',
 						"showA": true,
 						"answerA": '不是這樣的！',
 						"answerB": '沒錯！',
-						"horizen": "#00b7ee",
-						"anay1": '張自強表示，無論長輩是不是身心障礙者，都建議在浴廁安裝身心障礙扶手，尤其馬桶側邊，與淋浴空間如浴缸等，設施與牆面對比色盡量明顯，以確保長輩在視覺能力較差的狀況下，仍能有效的在危及時刻抓到扶手。',
+						"horizen": horizen11,
+						"anay1": '張自強表示，無論長輩是不是身心障礙者，都建議在浴廁安裝身心障礙扶手，尤其馬桶側邊，與淋浴空間如浴缸等，設施與牆面對比色盡量明顯，以確保長輩在視覺能力較差的狀況下，仍能有效的在危急時刻抓到扶手。',
 						"anay2": '物理治療師彭品維也建議，除了扶手，最好也在所有水會噴濺到的地面、浴缸底部都貼上止滑墊。',
 					},
 					'img': [
@@ -448,6 +472,7 @@ export default {
 	methods: {
 		...mapActions([
 			'handle_quizIndex',
+			'handle_dequizIndex',
 			'handle_lookDemand',
 			'handle_headerBgc'
 		]),
@@ -459,16 +484,90 @@ export default {
 			if(scrollTarget.scrollLeft > scrollW * 5){
 				this.showIntro = 1
 				this.abstractX = 0
-				this.startBgc = '#fff799'
+				this.startBgc = '#fffabf'
 			} else {
 				this.showIntro = 0
 				this.abstractX = 100
 				this.startBgc = '#fff'				
 			}
-		},	
-		nextQuiz: function(index) {
-			this.showStep = 1
+		},
+		lastQuiz: _.debounce(function(index) {
+			this.handle_dequizIndex()
+	        ga("send", {
+	            "hitType": "event",
+	            "eventCategory": "button", 
+	            "eventAction": "返回上一頁",	 
+	            "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][返回上一頁]"
+	        });			
+			switch(index){
+				case 1:
+					_.delay(() => {
+						this.startBgc = '#fffabf'
+					}, 400)
+					_.delay(() => {
+						this.quizs[0].display = 'none'
+					}, 800)			
+					break;
+				case 2:
+					this.quizs[0].display = 'block'
+					_.delay(() => {
+						this.quizs[0].answer.display = 'none'
+					}, 800)					
+					break;
+				case 3:
+					this.quizs[0].answered = false
+					this.quizs[0].answering = true
+					this.quizs[1].answering = false
+					this.quizs[0].answer.display = 'none'
+					_.delay(() => {
+						this.quizs[1].display = 'none'
+					}, 800)			
+					break;
+				case 4:
+					this.quizs[1].display = 'block'
+					_.delay(() => {
+						this.quizs[1].answer.display = 'none'
+					}, 800)										
+					this.dogIn = true
+					this.dogRush = false
+					this.dogChase = false					
+					break;
+				case 5:
+					this.quizs[1].answered = false
+					this.quizs[1].answering = true
+					this.quizs[2].answering = false	
+					this.quizs[1].answer.display = 'none'
+					_.delay(() => {
+						this.quizs[2].display = 'none'
+					}, 800)					
+					break;
+				case 6:
+					this.quizs[2].display = 'block'
+					_.delay(() => {
+						this.quizs[2].answer.display = 'none'
+					}, 800)										
+					this.dogIn = false
+					break;
+				case 7:
+					this.quizs[2].answered = false
+					this.quizs[2].answering = true
+					this.quizs[2].answer.display = 'none'
+					this.quizs[3].answering = false	
+					_.delay(() => {
+						this.quizs[3].display = 'none'
+					}, 800)					
+					break;
+				case 8:
+					this.quizs[3].display = 'block'
+					_.delay(() => {
+						this.quizs[3].answer.display = 'none'
+					}, 800)										
+					break;
+			}
+		}, 800, {leading: true, trailing: false}),
+		nextQuiz: _.debounce(function(index) {
 			this.countQuiz = true
+			this.stageTrans = true
 			this.handle_quizIndex()
 			if(this.quizIndex < this.quizs.length*2 +1){
 				this.quizs[index].answering = true
@@ -476,27 +575,25 @@ export default {
 				if(index > 0) {
 					this.quizs[index-1].answered = true
 					this.quizs[index-1].answering = false
-					this.quizs[index-1].display = 'none'
 				}
 			} else if(this.quizIndex === this.quizs.length*2 +1) {
-				this.scrollSpeed = 2.5	
+				this.scrollSpeed = 1.5	
 				this.landing.herDog = 100
-				this.quizs[index-1].display = 'none'
 				this.handle_headerBgc()
 			} else {
 				this.handle_lookDemand()
 			}
-		},
-		startGame: function() {
+		}, 800, {leading:true, trailing:false}),
+		startGame: _.debounce(function() {
 			this.nextQuiz(0)
 	        ga("send", {
 	            "hitType": "event",
 	            "eventCategory": "button", 
 	            "eventAction": "點擊開始遊戲",	 
 	            "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][點擊開始遊戲]"
-	        });		
-		},
-		toNext: function(index) {
+	        });
+		}, 800, {leading:true, trailing:false}),
+		toNext: _.debounce(function(index) {
 			this.nextQuiz(index + 1)
 	        ga("send", {
 	            "hitType": "event",
@@ -504,26 +601,33 @@ export default {
 	            "eventAction": "點擊下一題按鈕",	 
 	            "eventLabel": "[" + this.platform + "]["+ this.webTitle +"][點擊下一題按鈕]"
 	        });			
-		},
-		choseA: function(index) {
+		}, 800, {leading:true, trailing:false}),
+		choseA: _.debounce(function(index) {
 			this.handle_quizIndex()
+			this.quizs[index].answer.showA = true;
+			_.delay(() => {
+				this.quizs[index].display = 'none'
+			}, 800)
 	        ga("send", {
 	            "hitType": "event",
 	            "eventCategory": "button", 
 	            "eventAction": "選擇左邊答案",	 
 	            "eventLabel": "[" + this.platform + "][" + this.webTitle + "][選擇左邊答案]"
 	        });	
-		},
-		choseB: function(index) {
+		}, 800, {leading:true, trailing:false}),
+		choseB: _.debounce(function(index) {
 			this.handle_quizIndex()
 			this.quizs[index].answer.showA = false;
+			_.delay(() => {
+				this.quizs[index].display = 'none'
+			}, 800)			
 	        ga("send", {
 	            "hitType": "event",
 	            "eventCategory": "button", 
 	            "eventAction": "選擇右邊答案",	 
 	            "eventLabel": "[" + this.platform + "][" + this.webTitle + "][選擇右邊答案]"
 	        });			
-		},
+		}, 800, {leading:true, trailing:false}),
 		handleMouseWheel: function(e){
 			let w = window.innerWidth
 			const scrollTarget = document.getElementById('scane')
@@ -554,10 +658,10 @@ export default {
 		}, 133)
 	},
 	beforeUpdate() {
-		if(this.quizIndex >= this.quizs.length*2){
+		if(this.quizIndex > this.quizs.length*2){
 			this.isLast = 50
 		}
-		if(this.quizIndex === 3) {
+		if(this.quizIndex === 4) {
 			this.dogRush = true
 		}
 	},
@@ -565,29 +669,39 @@ export default {
 		if(this.quizIndex >= this.quizs.length*2 +1){
 			this.showStep = false
 			this.countQuiz = false
-			this.scrollSpeed = 4
-		}			
-		switch(this.quizIndex){
-			case 0:
-				break
-			case 2:
-				this.startBgc = '#ffc9e0'
-				break;
-			case 4:
-				this.startBgc = '#cce198'
-				break;
-			case 6: 
-				this.startBgc = '#fff799'
-				this.dogRush = false
-				this.dogChase = true
-				break;
-			case 8:
-				this.startBgc = '#aee5ff'
-				break;
-			default:
-				this.startBgc = '#fff'
-				break;
-		}			
+			this.scrollSpeed = 1.5
+			this.stageTrans = false
+		}
+		_.delay(() => {
+			switch(this.quizIndex){
+				case 0:
+					this.countQuiz = false
+					break
+				case 2:
+					this.startBgc = '#ffe4ea'
+					this.quizs[0].answer.display = 'flex'
+					break;
+				case 4:
+					this.startBgc = '#e9fdbb'
+					this.quizs[1].answer.display = 'flex'
+					break;
+				case 6: 
+					this.startBgc = '#fffabf'
+					this.quizs[2].answer.display = 'flex'
+					_.delay(() => {
+						this.dogChase = true	
+						this.dogIn = true;
+					}, 700)				
+					break;
+				case 8:
+					this.startBgc = '#cbf3ff'
+					this.quizs[3].answer.display = 'flex'
+					break;
+				default:
+					this.startBgc = '#fff'
+					break;
+			}				
+		}, 400)		
 	}
 }
 </script>
@@ -609,12 +723,16 @@ export default {
 		width: 100%;
 		height: 100%;
 		transform: translate(-100%, 0);
+		transition: .8s linear;
 	}
 }
-#grandma{
-	position: absolute;
+.stageTrans{
+	transition: left .8s linear !important;
+}
+.grandma{
+	position: fixed;
 	z-index: 48;
-	bottom: 40px;
+	bottom: 39px;
 	left: -45%;
 	transition: left 4.5s linear;
 	width: 30%;
@@ -627,11 +745,13 @@ export default {
 	animation-name: Rush;
 	animation-duration: 1500ms;
 	animation-fill-mode: forwards;
+	animation-timing-function: ease-in;
 }
 .dogChase{
 	animation-name: Chase;
 	animation-duration: 1500ms;
 	animation-fill-mode: forwards;	
+	animation-timing-function: ease-in-out;
 }
 @keyframes Rush {
 	0%{
@@ -643,16 +763,16 @@ export default {
 }
 @keyframes Chase {
 	from{
-		transform: translate(-100vw, 0)
+		transform: translate(-100vw, 0);
 	}
 	to{
 		transform: translate(0, 0);
 	}
 }
-#herDog{
-	position: absolute;
+.herDog{
+	position: fixed;
 	z-index: 49;
-	bottom: 40px;
+	bottom: 39px;
 	left: -50%;
 	transition: left 2.5s ease-out;
 	width: 30%;
@@ -675,20 +795,6 @@ export default {
 	text-align: right;
 	cursor: pointer;
 }
-@keyframes rush {
-	0%{
-		transform: translate(0, 0);
-	}
-	40%{
-		transform: translate(0, 0);
-	}
-	60%{
-		transform: translate(50%, 0);
-	}
-	100%{
-		transform: translate(0, 0);
-	}
-}
 #scane {
 	flex-shrink: 0;
 	position: relative;
@@ -697,6 +803,9 @@ export default {
 	height: 100%;
 	overflow-x: scroll;
 	overflow-y: hidden;		
+}
+#scane::-webkit-scrollbar{
+	display: none;
 }
 .banner{
 	flex-shrink: 0;
@@ -819,12 +928,15 @@ export default {
 		width: 80%;
 		border: 1px solid #898989;
 		cursor: pointer;
-		padding: 5px;
+		padding: 5px 10px;
 		line-height: 1.5;
-		border-radius: 6px;
+		border-radius: 20px;
+		background-color: rgba(#fff, .8);
+		transition: all .3s ease-in-out;
+		transform-origin: center;
 	}
 	p:hover {
-		background-color: rgba(#898989, .2);
+		background-color: rgba(#d2d2d2, .8);
 	}
 }
 .hint{
@@ -832,7 +944,6 @@ export default {
 	width: 100%;
 	text-align: center;
 	font-size: 16px;
-	margin-top: 10px;
 }
 .stage{
 	position: relative;
@@ -944,9 +1055,9 @@ export default {
 		transform-origin: center bottom;
 	}
 	.parkChair{
-		width: 35%;
+		width: 40%;
 		margin-left: 10%;
-		margin-bottom: 12%;
+		margin-bottom: 7%;
 		z-index: 10;
 		visibility: visible;
 	}
@@ -1200,10 +1311,14 @@ export default {
 	height: 10px;
 	bottom: 35px;
 	left: 0;
+	overflow: hidden;
 	img{
+		position: absolute;
+		top: 0;
+		left: 0;
 		display: block;
 		width: 100%;
-		height: 105%;
+		height: 10px;
 	}
 }
 .answer {
@@ -1211,11 +1326,12 @@ export default {
 	z-index: 0;
 	flex-shrink: 0;
 	width: 100vw;
+	overflow: hidden;
 }
 .answerPage{
 	position: relative;
 	z-index: auto;
-	display: flex;
+	display: none;
 	flex-direction: column;
 	width: 100%;
 	height: 100%;
@@ -1224,11 +1340,43 @@ export default {
 	h2 {
 		padding: 0 15px;
 		margin-bottom: 10px;
+		animation-name: pageFadeIn;
+		animation-duration:  450ms;
+		animation-fill-mode: forwards;
+		animation-timing-function: ease-in-out;
+		animation-delay: 400ms;
+		visibility: hidden;		
 	}	
+	p{
+		animation-name: pageFadeIn;
+		animation-duration:  450ms;
+		animation-fill-mode: forwards;
+		animation-timing-function: ease-in-out;
+		animation-delay: 600ms;
+		visibility: hidden;		
+	}
+}
+@keyframes pageFadeIn {
+	from{
+		transform: translate(0, 50px);
+		opacity: 0;
+		visibility: visible;
+	}
+	to{
+		transform: translate(0, 0);
+		opacity: 1;
+		visibility: visible;
+	}
 }
 .answer_article{
 	padding: 0 15px;
 	line-height: 1.5;
+}
+.directionBox{
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: flex-end;
 }
 .toNext{
 	display: flex;
@@ -1236,10 +1384,10 @@ export default {
 	align-items: center;
 	position: relative;
 	z-index: 30;
-	width: 60px;
-	height: 60px;
+	padding: 0 !important;
+	width: 50px;
+	height: 50px;
 	margin-right: 15px;
-	margin-left: auto;
 	cursor: pointer;
 	transition: .8s;
 	border: 1px solid gray;
@@ -1251,6 +1399,35 @@ export default {
 		width: 30px;
 		font-size: 26px;
 		animation: next 1s linear infinite;	
+	}
+}
+.toPrev{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 40px;
+	width: 40px;
+	margin-left: 15px;
+	border: none;
+	cursor: pointer;
+	color: black;
+	font-size: 26px;
+	z-index: 30;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 1;
+	transition: opacity .6s linear;
+	&:hover{
+		opacity: 1;
+	}
+}
+@keyframes prev {
+	from{
+		transform: translate(0, 0);
+	}
+	to{
+		transform: translate(-5px, 0);
 	}
 }
 @keyframes next {
@@ -1265,26 +1442,29 @@ export default {
 	position: absolute;
 	bottom: 0;
 	left: 0;
+	z-index: 45;
 	width: 100%;
 	height: 40px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	transition: transform .8s linear;
+	overflow: visible;
 	span{
 		width: 8px;
 		height: 8px;
 		background-color: black;
 		border-radius: 50%;
-		margin: 0 10px;
+		margin: 10px;
 		opacity: .3;
 		transition: .6s;
+		overflow: visible;
 	}
 	.answered{
 		opacity: 1;
 	}
 	.answering{
-		width: 12px;
-		height: 12px;
+		transform: scale(1.4);
 	}
 }
 .forShare{
@@ -1325,6 +1505,7 @@ export default {
 	}
 	.optionBlock{
 		p{
+			width: 90%;
 			line-height: 1;
 		}
 	}
@@ -1339,6 +1520,9 @@ export default {
 		width: 25%;
 		bottom: 30px;	
 	}	
+	#start{
+		transform: scale(.8);
+	}
 	.stage {
 		img{
 			bottom: 0;
@@ -1418,12 +1602,18 @@ export default {
 	}
 }
 @media screen and (min-width: 1024px) {
+	.dogChase{
+		animation-duration: 2000ms;
+	}
 	#scrollPage{
-		padding-top: 50px;
+		padding-top: 55px;
 	}
 	.banner{
 		.titleBox{
 			margin-top: 5%;
+			h1{
+				padding: 0;
+			}
 			p{
 				padding: 0;
 			}
@@ -1449,15 +1639,18 @@ export default {
 			width: 880px;
 		}
 	}
+	.toPrev{
+		opacity: .4;
+	}
 	.answerPage{
 		padding-top: 5%;
 	}
-	#grandma{
+	.grandma{
 		bottom: 55px;
 		width: 10%;
 		margin-left: -15%;
 	}
-	#herDog{
+	.herDog{
 		bottom: 55px;
 		width: 10%;
 	}	
@@ -1482,7 +1675,7 @@ export default {
 	.optionBlock{
 		p{
 			width: 45%;
-			padding: 5px;
+			padding: 5px 15px;
 		}		
 	}
 	.horizen{
@@ -1529,7 +1722,7 @@ export default {
 		.bus{
 			width: 45%;
 			margin-left: -35%;
-			margin-bottom: 7%;
+			margin-bottom: 3%;
 		}
 		.crutch{
 			width: 12%;
@@ -1542,14 +1735,14 @@ export default {
 			margin-bottom: 0;
 		}
 		.parkChair{
-			width: 30%;
+			width: 25%;
 			margin-left: 10%;
 			margin-bottom: 5%;
 		}
 		.signal{
 			width: 35%;
 			margin-left: 5%;
-			margin-bottom: 10%;
+			margin-bottom: 6%;
 		}
 	}	
 	.meal{

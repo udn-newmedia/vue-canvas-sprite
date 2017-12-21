@@ -3,6 +3,9 @@ import Utils from 'udn-newmedia-utils'
 export const handle_quizIndex = state => {
 	state.quizIndex ++
 }
+export const handle_dequizIndex = state => {
+	state.quizIndex --
+}
 export const handle_lookDemand = state => {
 	state.quizIndex = 9
 }
@@ -17,4 +20,7 @@ export const handle_headerBgc = state => {
 }
 export const handle_headerTrans = state => {
 	state.headerBgc = 'transparent'
+}
+export const handle_again = state => {
+	state.quizIndex = 0
 }
