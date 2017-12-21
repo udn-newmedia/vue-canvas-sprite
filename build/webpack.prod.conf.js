@@ -101,10 +101,10 @@ const webpackConfig = merge(baseWebpackConfig, {
       path.join(__dirname, '../dist'),
       // List of routes to prerender
       [ '/' ],
-      {
-        captureAfterTime: 5000,
-      }
-    )       
+      // {
+      //   captureAfterDocumentEvent: 'vue-post-render',
+      // }
+    )
   ]
 })
 
