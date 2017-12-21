@@ -30,6 +30,9 @@ export default {
                 window.open("https://lineit.line.me/share/ui?url="+window.location.href);
             }
         }
+    },
+    mounted() {
+        window.FB.XFBML.parse();
     }
 }
 </script>

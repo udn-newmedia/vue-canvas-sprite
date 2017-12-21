@@ -165,7 +165,7 @@ import toothBrush from '../assets/stage/bathroom/toothBrush.png'
 import tessiue from '../assets/stage/bathroom/tessiue.png'
 import bubble from '../assets/stage/bathroom/bubble.png'
 import bathChair from '../assets/stage/bathroom/bathChair.png'
-import gradLine from '../assets/stage/p3.png'
+// import gradLine from '../assets/stage/p3.png'
 
 export default {
 	name: 'elderHome_fullpage',
@@ -180,7 +180,7 @@ export default {
 				grandma: imgGrandma,
 				dog: imgDog,
 				opening: imgOpening,
-				gradLine: gradLine,
+				// gradLine: gradLine,
 				horizen1: horizen1,
 			},
 			watchScrollLeft: 0,

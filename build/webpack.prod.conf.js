@@ -95,18 +95,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ]),
-    new PrerenderSpaPlugin(
-      path.join(__dirname, '../dist'),
-      [ '/' ],
-      {
-        captureAfterTime: 10000,
-        ignoreJSErrors: false,
-        phantomPageSettings: {
-          loadImages: false
-        },        
-      }
-    ),              
+    ]),  
   ]
 })
 
