@@ -606,7 +606,7 @@ export default {
 		choseA: _debounce(function(index) {
 			this.handle_quizIndex()
 			this.quizs[index].answer.showA = true;
-			delay(() => {
+			_delay(() => {
 				this.quizs[index].display = 'none'
 			}, 800)
 	        ga("send", {

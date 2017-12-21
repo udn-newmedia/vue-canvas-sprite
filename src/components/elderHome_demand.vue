@@ -278,9 +278,6 @@ export default {
   			this.products[i].noNext = 1;
   	}
   },
-  mounted() {
-  	console.log(window.innerWidth)
-  }
 }
 </script>
 

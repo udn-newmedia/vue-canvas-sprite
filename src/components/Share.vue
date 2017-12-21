@@ -31,9 +31,6 @@ export default {
             }
         }
     },
-    mounted() {
-        window.FB.XFBML.parse();
-    }
 }
 </script>
 
