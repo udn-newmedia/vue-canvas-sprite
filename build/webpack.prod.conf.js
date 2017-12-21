@@ -100,9 +100,13 @@ const webpackConfig = merge(baseWebpackConfig, {
       path.join(__dirname, '../dist'),
       [ '/' ],
       {
-        captureAfterTime: 5000,
+        captureAfterTime: 10000,
+        ignoreJSErrors: false,
+        phantomPageSettings: {
+          loadImages: false
+        },        
       }
-    ),    
+    ),              
   ]
 })
 
