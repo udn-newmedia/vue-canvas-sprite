@@ -734,7 +734,7 @@ export default {
 	}
 }
 .stageTrans{
-	transition: left .8s linear !important;
+	transition: left .75s linear !important;
 }
 .grandma{
 	position: absolute;
