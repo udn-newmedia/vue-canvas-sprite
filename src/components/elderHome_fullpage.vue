@@ -931,7 +931,7 @@ export default {
 	p {
 		position: relative;
 		display: flex;
-		align-items: center;				
+		align-items: center;			
 		width: 80%;
 		border: 1px solid #898989;
 		cursor: pointer;
@@ -1510,18 +1510,22 @@ export default {
 	}
 	.optionBlock{
 		p{
-			width: 90%;
+			width: 100%;
+			white-space:nowrap;
 			line-height: 1;
 		}
+	}
+	.toPrev{
+		height: 20px;
 	}
 	.hint{
 		font-size: 12px;
 	}
-	#grandma{
+	.grandma{
 		width: 25%;
 		bottom: 30px;
 	}
-	#herDog{
+	.herDog{
 		width: 25%;
 		bottom: 30px;	
 	}	

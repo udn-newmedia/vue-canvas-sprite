@@ -96,19 +96,20 @@ const webpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ]),
-    new PrerenderSpaPlugin(
-      // Absolute path to compiled SPA
-      path.join(__dirname, '../dist'),
-      // List of routes to prerender
-      [ '/' ],
-      {
-        postProcessHtml: function (context) {
-          return context.html.replace(
-            /http:\/\/localhost:8000/gi, '.'
-          )
-        }
-      }
-    )
+    // new PrerenderSpaPlugin(
+    //   // Absolute path to compiled SPA
+    //   path.join(__dirname, '../dist'),
+    //   // List of routes to prerender
+    //   [ '/' ],
+    //   {
+    //     navigationLocked: true,
+    //     postProcessHtml: function (context) {
+    //       return context.html.replace(
+    //         /http:\/\/localhost:8000/gi, '.'
+    //       )
+    //     }
+    //   }
+    // )
   ]
 })
 

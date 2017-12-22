@@ -13,10 +13,3 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
-
-document.addEventListener('DOMContentLoaded', function () {
-  console.log('loaded')
-  setTimeout(function () {
-    document.dispatchEvent(new Event('vue-post-render'))
-  }, 1)
-})
