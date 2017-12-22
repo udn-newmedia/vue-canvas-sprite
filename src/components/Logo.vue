@@ -21,7 +21,7 @@ export default {
 }
 </script>
 
-<style lang="scss"scoped>
+<style lang="scss" scoped>
     .logo-block{
         display: flex; 
         align-items: center;
@@ -38,10 +38,16 @@ export default {
         .logo-block{
             margin-top: 0;
         }
+        .logo{
+            width: 120px;
+        }        
     }
     @media screen and (min-width: 1025px){
         .logo-block{
             margin-top: 0;
+        }
+        .logo{
+            width: 120px;
         }
     }
 </style>
