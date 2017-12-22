@@ -1479,7 +1479,7 @@ export default {
 .forShare{
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-start;
+	align-items: flex-end;
 	transition: 3s;
 	padding: 0 15px;
 }

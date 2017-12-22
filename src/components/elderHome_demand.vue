@@ -8,7 +8,6 @@
 		</article>		
 		<div class="forShare">
 			<Share href="./index.html"/>
-			<Logo class='hidden-xs hidden-sm'/>	
 		</div>
 		<div class="shopping"
 			 v-for="(product, index) in products">
@@ -313,7 +312,7 @@ export default {
 .forShare{
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-start;	
+	align-items: flex-end;	
 	padding: 0 15px;
 	margin-bottom: 10px;
 }

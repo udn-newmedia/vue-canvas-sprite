@@ -34,16 +34,16 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     .share-block{
+        display: flex;
+        align-items: flex-end;
         height: 28px;
         margin-top: 0 !important;
     }
     .fb-like-block{
-        float: left;
     }
     .line-block{
-        float: left;
         cursor: pointer;
         margin-left: 5px;
         margin-top: 1px;

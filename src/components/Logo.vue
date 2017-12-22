@@ -40,6 +40,7 @@ export default {
         }
         .logo{
             width: 120px;
+            margin-left: 15px;
         }        
     }
     @media screen and (min-width: 1025px){
@@ -48,6 +49,7 @@ export default {
         }
         .logo{
             width: 120px;
+            margin-left: 15px;
         }
     }
 </style>
