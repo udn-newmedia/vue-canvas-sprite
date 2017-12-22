@@ -48,7 +48,8 @@
 					</p>
 					<div class="forShare"
 						 :style="{opacity: showIntro}">
-						<Share href="./index.html"/>	
+						<Share href="./index.html"/>
+						<Logo class='hidden-xs hidden-sm'/>	
 					</div>
 					<div id="start" @click="startGame">
 						<span>開始遊戲</span>
@@ -117,6 +118,7 @@ import _delay from 'lodash.delay'
 
 import { mapGetters, mapActions } from 'vuex'
 import Share from '../components/Share.vue';
+import Logo from '../components/Logo.vue'
 import elderHomeDemand from '../components/elderHome_demand.vue'
 
 import horizen1 from '../assets/stage/horizen/1-2.png'
@@ -172,6 +174,7 @@ export default {
 	components: {
 		Share,
 		elderHomeDemand,
+		Logo,
 	},
 	data: function() {
 		return {
@@ -829,6 +832,7 @@ export default {
 		h1{
 			font-weight: bold;
 			text-shadow: none;
+			text-align: left;
 		}		
 		p{
 			padding: 0 30px;
@@ -1473,6 +1477,9 @@ export default {
 	}
 }
 .forShare{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
 	transition: 3s;
 	padding: 0 15px;
 }

@@ -344,8 +344,12 @@ export default {
 	}
 	.menu_logo{
 		position: relative;
-		padding-left: 45px;
 	}
+@media screen and (max-width: 374px) {
+		.menu_logo{
+			padding-left: 0;
+		}
+	}	
 @media screen and (min-width: 1024px) {
 	header{
 		padding: 0 15px;

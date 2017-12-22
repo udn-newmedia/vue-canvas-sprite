@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import imgUdnShopping from '../assets/stage/udnshopping_logo.jpg';
+import imgUdnShopping from '../assets/stage/udnshopping_logo.png';
 export default {
     name: 'logo',
     data () {
@@ -18,24 +18,30 @@ export default {
             imgUdnShopping : imgUdnShopping,
         }
     },
-
 }
 </script>
 
-<style scoped>
+<style lang="scss"scoped>
+    .logo-block{
+        display: flex; 
+        align-items: center;
+        justify-content: center;
+        float: none;
+    }
     .logo{
         width: 140px;
-        display: inline-block;
+        display: block;
+        margin-left: auto;
+        opacity: 1;
     }
     @media screen and (max-width: 1024px){
         .logo-block{
-            margin-top: 32px;
+            margin-top: 0;
         }
     }
     @media screen and (min-width: 1025px){
         .logo-block{
-            float: right;
-            margin-top: -45px;
+            margin-top: 0;
         }
     }
 </style>

@@ -2,12 +2,13 @@
 	<div class="demand">
 		<h2 class="demandTitle">打造專屬「大人宅」</h2>	
 		<article class="explain">
-			<p>每次回家，爸媽的頭髮又更白一些，怎麼樣的關心，才最貼心？</p>
 			<p>國民健康署調查顯示，近六成長輩，最近一次發生跌傷的地點，都是在家裡。最常見的3個地點，是浴廁、臥室與客廳，跌倒當下，多只是純粹在走動。</p>
-			<p>跌倒除造成外傷，也讓銀髮族因害怕再跌倒，自我限制行動，導致老化加速、惡化原有的慢性疾病等。提早預防，不僅減少跌倒發生率，也維持長輩日常生活品質。</p>	
+			<p>每次回家，爸媽的頭髮又更白一些，怎麼樣的關心，才最貼心？</p>
+			<p>50歲以上的長輩容易因為小跌倒衍伸出嚴重病痛，打造適合高齡居住的「大人宅」，為長輩的家居生活品質扣緊「安全帶」，不僅預防了大大小小的外傷，也可以預防原有的慢性疾病惡化，更重要的是讓長輩在家也能放心走動，讓家成為真正的避風港。</p>	
 		</article>		
 		<div class="forShare">
-			<Share href="./index.html"/>	
+			<Share href="./index.html"/>
+			<Logo class='hidden-xs hidden-sm'/>	
 		</div>
 		<div class="shopping"
 			 v-for="(product, index) in products">
@@ -55,6 +56,8 @@ import { mapGetters, mapActions } from 'vuex'
 
 import contentContainer from '../components/ContentContainer.vue'
 import Share from '../components/Share.vue'
+import Logo from '../components/Logo.vue'
+
 import U009319399 from '../assets/product/U009319399.jpg'
 import U009677586 from '../assets/product/U009677586.jpg'
 import U009545836 from '../assets/product/U009545836.jpg'
@@ -78,6 +81,7 @@ export default {
   name: 'elderHome_demand',
   components: {
   	Share,
+  	Logo
   },
   data () {
     return {
@@ -307,6 +311,9 @@ export default {
 	}
 }
 .forShare{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;	
 	padding: 0 15px;
 	margin-bottom: 10px;
 }

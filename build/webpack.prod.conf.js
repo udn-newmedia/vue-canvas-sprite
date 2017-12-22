@@ -103,6 +103,9 @@ const webpackConfig = merge(baseWebpackConfig, {
     //   [ '/' ],
     //   {
     //     navigationLocked: true,
+    //     phantomPageSettings: {
+    //       javascriptEnabled: false
+    //     },        
     //     postProcessHtml: function (context) {
     //       return context.html.replace(
     //         /http:\/\/localhost:8000/gi, '.'
