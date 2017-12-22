@@ -57,9 +57,9 @@ const webpackConfig = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true,
       minify: {
-        removeComments: false,
-        collapseWhitespace: false,
-        removeAttributeQuotes: false
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
@@ -102,10 +102,11 @@ const webpackConfig = merge(baseWebpackConfig, {
       // List of routes to prerender
       [ '/' ],
       {
-        // captureAfterDocumentEvent: 'vue-post-render',
-        phantomPageSettings: {
-          loadImages: false
-        },        
+        postProcessHtml: function (context) {
+          return context.html.replace(
+            /http:\/\/localhost:8000/gi, '.'
+          )
+        }
       }
     )
   ]
