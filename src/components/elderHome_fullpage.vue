@@ -60,7 +60,7 @@
 			<div class="quizSection"
 				 v-for="(quiz, index) in quizs">
 				<div class="question">
-					<span class="sug">大人臥房注意事項...</span>
+					<span class="sug">{{quiz.sug}}</span>
 					<h2>{{quiz.question.ask}}</h2>
 					<div class="optionBlock">
 						<p class="optionA"
@@ -211,6 +211,7 @@ export default {
 			quizs: [
 				{
 					"name": 'room',
+					"sug": "大人臥房注意事項...",
 					"display": "none",
 					"background": roomBg,
 					"answered": false,
@@ -271,6 +272,7 @@ export default {
 				},
 				{
 					"name": "meal",
+					"sug": "大人用餐注意事項...",
 					"display": "none",
 					"background": mealBg,
 					"answered": false,
@@ -349,6 +351,7 @@ export default {
 				},
 				{
 					"name": "outDoor",
+					"sug": "大人運動注意事項...",
 					"display": "none",
 					"background": outDoorBg,
 					"answered": false,
@@ -403,6 +406,7 @@ export default {
 				},
 				{
 					"name": "bathroom",
+					"sug": "大人浴廁注意事項...",
 					"display": "none",
 					"background": bathBg,
 					"answered": false,
