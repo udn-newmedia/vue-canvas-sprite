@@ -63,6 +63,5 @@ export default {
     height: 100vh;
     position: relative;
     overflow: hidden;
-    transition: height .6s linear;
 }
 </style>

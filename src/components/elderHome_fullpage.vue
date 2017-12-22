@@ -30,7 +30,7 @@
 				<div class="banner">
 					<div class="titleBox">
 						<h1>讓家<br/>準備好與你一起變老</h1>
-						<p>為爸媽打造安全的家</p>
+						<p>過年前，為老爸老媽打造更安全的「大人宅」</p>
 						<p class="toNext" style="margin-right: 15px;margin-left: auto;" @click.once="handleIntroArrow" :style="{opacity: arrowOpacity}"><span>→</span></p>			
 					</div>
 					<div class="chair" :style="{backgroundImage: 'url('+ imgSrc.opening +')'}"></div>					
@@ -60,6 +60,7 @@
 			<div class="quizSection"
 				 v-for="(quiz, index) in quizs">
 				<div class="question">
+					<span class="sug">大人臥房注意事項...</span>
 					<h2>{{quiz.question.ask}}</h2>
 					<div class="optionBlock">
 						<p class="optionA"
@@ -90,7 +91,7 @@
 						<p class="answer_article">{{quiz.answer.anay1}}</p>
 						<p class="answer_article">{{quiz.answer.anay2}}</p>
 						<div class="directionBox">
-							<p class="toNext" @click="toNext(index)"><span>→</span></p>							
+							<p class="toNext" @click="toNext(index)"><img :src="imgSrc.rightArrow" alt=""></p>							
 						</div>
 					</div>	
 					<div class="horizen">
@@ -101,7 +102,7 @@
 			<div class="quizCount"
 				 v-if="showStep"
 				 :style="{transform: 'translateX(' + quizIndex * 100 + '%)'}">
-				 <p class="toPrev" @click="lastQuiz(quizIndex)" v-if="countQuiz">←</p>
+				 <p class="toPrev" @click="lastQuiz(quizIndex)" v-if="countQuiz"><img :src="imgSrc.leftArrow" alt=""> 上一頁</p>
 				<span v-if="countQuiz"
 					  v-for="(navi, index) in quizs" 
 					  :class="{answered: navi.answered, answering: navi.answering}">
@@ -133,6 +134,8 @@ import horizen11 from '../assets/stage/horizen/11.png'
 import imgGrandma from '../assets/stage/grandma.gif'
 import imgOpening from '../assets/stage/opening.gif'
 import imgDog from '../assets/stage/dog.gif'
+import imgRightArrow from '../assets/stage/rightArrow.png'
+import imgLeftArrow from '../assets/stage/leftArrow.png'
 
 import roomBg from '../assets/stage/room/roomBg.png'
 import bed from '../assets/stage/room/bed.png'
@@ -185,6 +188,8 @@ export default {
 				opening: imgOpening,
 				// gradLine: gradLine,
 				horizen1: horizen1,
+				rightArrow : imgRightArrow,
+				leftArrow: imgLeftArrow
 			},
 			watchScrollLeft: 0,
 			startBgc: '#fff',
@@ -737,7 +742,7 @@ export default {
 	}
 }
 .stageTrans{
-	transition: left .75s linear !important;
+	transition: left .8s linear !important;
 }
 .grandma{
 	position: absolute;
@@ -836,6 +841,7 @@ export default {
 		}		
 		p{
 			padding: 0 30px;
+			font-size: 15px;
 		}
 	}
 	.chair{
@@ -918,8 +924,10 @@ export default {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		text-align: left;
 		width: 100%;
 		padding: 0 15px;
+		margin-top: 10px;
 	}
 }
 .optionBlock {
@@ -954,7 +962,15 @@ export default {
 	display: block;
 	width: 100%;
 	text-align: center;
-	font-size: 16px;
+	font-size: 14px;
+}
+.sug{
+	display: block;
+	border-bottom: .6px solid #9fa0a0;
+	margin-top: 10px;
+	font-size: 14px;
+	margin-left: auto;
+	margin-right: auto;
 }
 .stage{
 	position: relative;
@@ -1403,10 +1419,9 @@ export default {
 	border-radius: 50%;
 	color: black;
 	font-size: 2em;
-	span{
+	img{
 		display: block;
 		width: 30px;
-		font-size: 26px;
 		animation: next 1s linear infinite;	
 	}
 }
@@ -1415,21 +1430,26 @@ export default {
 	top: 0;
 	left: 0;
 	height: 40px;
-	width: 40px;
 	margin-left: 15px;
 	border: none;
 	cursor: pointer;
 	color: black;
-	font-size: 26px;
+	font-size: 18px;
 	z-index: 30;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	opacity: 1;
 	transition: opacity .6s linear;
+	margin-bottom: 0;
 	&:hover{
 		opacity: 1;
 	}
+	img{
+		display: block;
+		width: 30px;
+		// animation: next 1s linear infinite;	
+	}	
 }
 @keyframes prev {
 	from{
@@ -1501,11 +1521,11 @@ export default {
 		.titleBox{
 			margin-top: 10%;
 			h1{
-				font-size: 30px;
+				font-size: 28px;
 				line-height: 1;
 			}
 			p{
-				font-size: 18px;
+				font-size: 13px;
 			}
 		}
 		p{
@@ -1523,7 +1543,8 @@ export default {
 		}
 	}
 	.toPrev{
-		height: 20px;
+		height: 25px;
+		font-size: 15px;
 	}
 	.hint{
 		font-size: 12px;
@@ -1656,7 +1677,8 @@ export default {
 		}
 	}
 	.toPrev{
-		opacity: .4;
+		opacity: .6;
+		height: 50px;
 	}
 	.answerPage{
 		padding-top: 5%;
@@ -1685,7 +1707,7 @@ export default {
 	.question{
 		padding-bottom: 55px;
 		h2{
-			margin-top: 30px;
+			margin-top: 20px;
 		}
 	}	
 	.optionBlock{
