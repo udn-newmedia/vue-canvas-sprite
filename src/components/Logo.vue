@@ -43,7 +43,7 @@ export default {
     .ulab{
         img{
             display: block;
-            height: 22px;
+            height: 26px;
             width: auto;
         }   
     }
