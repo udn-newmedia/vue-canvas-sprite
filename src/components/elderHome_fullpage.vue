@@ -737,7 +737,7 @@ export default {
 	transition: left .8s linear !important;
 }
 .grandma{
-	position: fixed;
+	position: absolute;
 	z-index: 48;
 	bottom: 39px;
 	left: -45%;
@@ -777,7 +777,7 @@ export default {
 	}
 }
 .herDog{
-	position: fixed;
+	position: absolute;
 	z-index: 49;
 	bottom: 39px;
 	left: -50%;
@@ -1510,7 +1510,7 @@ export default {
 	}
 	.optionBlock{
 		p{
-			width: 100%;
+			width: 90%;
 			white-space:nowrap;
 			line-height: 1;
 		}
