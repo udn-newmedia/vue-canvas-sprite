@@ -9,6 +9,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import $ from 'jquery'
 import elderHomeHeader from './components/elderHome_header.vue'
 import elderHomeFullpage from './components/elderHome_fullpage.vue'
 
@@ -52,7 +53,7 @@ export default {
             } else {
                 this.viewHeight = window.innerHeight
             }
-        })
+        })      
     },
 };
 
