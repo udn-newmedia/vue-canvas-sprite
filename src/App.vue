@@ -37,15 +37,15 @@ export default {
         ]),  
     },
     created() {
-        if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
-            this.viewHeight = window.innerHeight - 4
-        } else {
-            this.viewHeight = window.innerHeight
-        }
         this.detectDevice()
         this.getWebTitle()        
     },
     mounted() {
+        if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
+            this.viewHeight = window.innerHeight - 4
+        } else {
+            this.viewHeight = window.innerHeight
+        }        
         window.addEventListener('resize', ()=> {
             if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
                 this.viewHeight = window.innerHeight - 4
