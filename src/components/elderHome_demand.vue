@@ -2,13 +2,18 @@
 	<div class="demand">
 		<h2 class="demandTitle">打造專屬「大人宅」</h2>	
 		<article class="explain">
+			<p><br/></p>
 			<p>國民健康署調查顯示，近六成長輩，最近一次發生跌傷的地點，都是在家裡。最常見的3個地點，是浴廁、臥室與客廳，跌倒當下，多只是純粹在走動。</p>
+			<p><br/></p>
 			<p>每次回家，爸媽的頭髮又更白一些，怎麼樣的關心，才最貼心？趕在過年前，幫老爸老媽觀察生活小細節，從小物到空間微改造，就能提升安全度。</p>
+			<p><br/></p>
 			<p>60歲以上長輩容易因為跌倒衍伸嚴重病痛，尤其是濕滑的浴廁空間。為習慣坐著洗澡的長輩，添購一張防滑洗澡椅、浴室進出口貼上止滑墊，長輩不必再步步驚心。</p>
-			<p>70歲的老爸媽行動漸緩，下床需要支撐物，外出也帶個手杖，預防了大大小小的外傷，也讓家人更安心，讓家成為真正的避風港。</p>		
+			<p><br/></p>
+			<p>70歲的老爸媽行動漸緩，下床需要支撐物，外出也帶個手杖，預防了大大小小的外傷，也讓家人更安心，讓家成為真正的避風港。</p>
 		</article>		
 		<div class="forShare">
 			<Share href="./index.html"/>
+			<Logo class='hidden-xs hidden-sm'/>	
 		</div>
 		<div class="shopping"
 			 v-for="(product, index) in products">
@@ -387,13 +392,18 @@ export default {
 	}
 	span{
 		position: absolute;
-		right: 10px;
+		display: block;
+		left: 50%;
 		bottom: 0;
-		background-color: rgba(235, 135, 0, 0.8);
-		box-shadow: 0 0 2px 1px rgba(0,0,0,0.3);
+		background-color: rgba(235, 135, 0, 1);
+		// box-shadow: 0 0 2px 1px rgba(0,0,0,0.3);
+		border-radius: 15px;
 		color: #fff;
-		font-size: 18px;
+		font-size: 15px;
 		padding: 5px 10px;
+		width: 90px;
+		margin-left: -45px;
+		text-align: center;
 	}
 }
 .itemTitle{
@@ -491,18 +501,22 @@ export default {
 	.shopping{
 		height: 45%;
 		width: 100%;
+		margin-top: 180px;
 		margin-left: auto;
 		margin-right: auto;
-		margin-bottom: 5%;
-		padding-bottom: 0;		
+		margin-bottom: 0;
+		padding-right: 30px;
+		padding-left: 30px;
 		flex-direction: row;
+		flex-wrap: wrap;
 		hr{
-			display: none;
+			width: 100%;
+			margin: 50px 0;
 		}
 	}
 	.shopCategory{
 		padding-top: 0;
-		width: 25%;
+		width: 30%;
 		height: 100%;
 		img{
 			width: 100%;
@@ -517,7 +531,7 @@ export default {
 		}
 	}	
 	.shopWindow{
-		width: 60%;
+		width: 70%;
 		height: 100%;
 		margin: 0 auto;
 		margin-left: 0;
@@ -541,7 +555,6 @@ export default {
 		height: 60%;
 	}
 	.itemTitle{
-		border-top: 1px solid black;
 		padding: 5px;
 		height: 25%;
 	}

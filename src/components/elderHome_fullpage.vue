@@ -49,7 +49,6 @@
 					<div class="forShare"
 						 :style="{opacity: showIntro}">
 						<Share href="./index.html"/>
-						<Logo class='hidden-xs hidden-sm'/>	
 					</div>
 					<div id="start" @click="startGame">
 						<span>開始遊戲</span>
