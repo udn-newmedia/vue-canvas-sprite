@@ -23,15 +23,20 @@
 				<img :src="imgSrc.dog" alt="狗">
 			</div>			 
 			<div id="scane"
-				 @scroll="showScrollLeft"
-				 @wheel.stop="handleMouseWheel"
-				 @mousewheel.stop="handleMouseWheel"
-				 @DOMMouseScroll.stop="handleMouseWheel">
+				 @scroll.passive="showScrollLeft"
+				 @wheel.passive="handleMouseWheel"
+				 @mousewheel.passive="handleMouseWheel"
+				 @DOMMouseScroll.passive="handleMouseWheel">
 				<div class="banner">
 					<div class="titleBox">
 						<h1>讓家<br/>準備好與你一起變老</h1>
 						<p>過年前，為老爸老媽打造更安全的「大人宅」</p>
-						<p class="toNext" style="margin-right: 15px;margin-left: auto;" @click.once="handleIntroArrow" :style="{opacity: arrowOpacity}"><span>→</span></p>			
+						<p class="toNext" style="margin-right: 15px;margin-left: auto;" @click.once="handleIntroArrow" :style="{opacity: arrowOpacity}">
+							<svg fill="#000000" height="36" viewBox="0 0 24 24" width="36" xmlns="http://www.w3.org/2000/svg">
+							    <path d="M8 5v14l11-7z"/>
+							    <path d="M0 0h24v24H0z" fill="none"/>
+							</svg>
+						</p>			
 					</div>
 					<div class="chair" :style="{backgroundImage: 'url('+ imgSrc.opening +')'}"></div>					
 				</div>
@@ -52,7 +57,12 @@
 					</div>
 					<div id="start" @click="startGame">
 						<span>開始遊戲</span>
-						<span class='arrow'>→</span>
+						<span class='arrow'>
+							<svg fill="#000000" height="30" width="30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							    <path d="M8 5v14l11-7z"/>
+							    <path d="M0 0h24v24H0z" fill="none"/>
+							</svg>							
+						</span>
 					</div>					
 				</div>	
 			</div>
@@ -90,7 +100,12 @@
 						<p class="answer_article">{{quiz.answer.anay1}}</p>
 						<p class="answer_article">{{quiz.answer.anay2}}</p>
 						<div class="directionBox">
-							<p class="toNext" @click="toNext(index)"><img :src="imgSrc.rightArrow" alt=""></p>							
+							<p class="toNext" @click="toNext(index)">
+								<svg fill="#000000" height="36" viewBox="0 0 24 24" width="36" xmlns="http://www.w3.org/2000/svg">
+								    <path d="M8 5v14l11-7z"/>
+								    <path d="M0 0h24v24H0z" fill="none"/>
+								</svg>								
+							</p>
 						</div>
 					</div>	
 					<div class="horizen">
@@ -101,7 +116,7 @@
 			<div class="quizCount"
 				 v-if="showStep"
 				 :style="{transform: 'translateX(' + quizIndex * 100 + '%)'}">
-				 <p class="toPrev" @click="lastQuiz(quizIndex)" v-if="countQuiz"><img :src="imgSrc.leftArrow" alt=""> 上一頁</p>
+				 <p class="toPrev" @click="lastQuiz(quizIndex)" v-if="countQuiz"><img :src="imgSrc.dArrow" alt="上一頁"> 上一頁</p>
 				<span v-if="countQuiz"
 					  v-for="(navi, index) in quizs" 
 					  :class="{answered: navi.answered, answering: navi.answering}">
@@ -133,8 +148,9 @@ import horizen11 from '../assets/stage/horizen/11.png'
 import imgGrandma from '../assets/stage/grandma.gif'
 import imgOpening from '../assets/stage/opening.gif'
 import imgDog from '../assets/stage/dog.gif'
-import imgRightArrow from '../assets/stage/rightArrow.png'
-import imgLeftArrow from '../assets/stage/leftArrow.png'
+// import imgRightArrow from '../assets/stage/rightArrow.png'
+// import imgLeftArrow from '../assets/stage/leftArrow.png'
+import dArrow from '../assets/dArrow.svg'
 
 import roomBg from '../assets/stage/room/roomBg.png'
 import bed from '../assets/stage/room/bed.png'
@@ -187,8 +203,9 @@ export default {
 				opening: imgOpening,
 				// gradLine: gradLine,
 				horizen1: horizen1,
-				rightArrow : imgRightArrow,
-				leftArrow: imgLeftArrow
+				dArrow: dArrow
+				// rightArrow : imgRightArrow,
+				// leftArrow: imgLeftArrow
 			},
 			watchScrollLeft: 0,
 			startBgc: '#fff',
@@ -288,7 +305,7 @@ export default {
 						"answerA": '觀念過時啦！',
 						"answerB": '正確！',
 						"horizen": horizen7,
-						"anay1": '別再只吃白飯配湯！營養師陳郁琁表示，粗茶淡飯，容易造成營養不良，反而會加速老化。若家中長輩食量變小，則建議少量多餐，補足身體所需營養。',
+						"anay1": '別再只吃白飯配湯！營養師王郁琁表示，粗茶淡飯，容易造成營養不良，反而會加速老化。若家中長輩食量變小，則建議少量多餐，補足身體所需營養。',
 						"anay2": '此外，與其奉行少鹽少油，她更建議活用天然食物的特性調味，增加食慾，例如九層塔、番茄、香菇等，並依烹調方式，選用新鮮未經精煉的好油。',
 					},
 					'img': [		
@@ -504,7 +521,9 @@ export default {
 			}
 		},
 		lastQuiz: _debounce(function(index) {
-			this.handle_dequizIndex()
+			if(this.quizIndex !== 0){
+				this.handle_dequizIndex()	
+			}
 	        ga("send", {
 	            "hitType": "event",
 	            "eventCategory": "button", 
@@ -901,8 +920,18 @@ export default {
 		display: block;
 		font-size: 30px;
 		margin-left: -15px;
-		margin-top: -5px;
-		animation: next 1s linear infinite;	
+		margin-top: 0;
+		svg{
+			animation: next 1s ease-in infinite alternate;;	
+		}
+	}
+}
+@keyframes startArrow {
+	from{
+		transform: translate(0, 0);
+	}
+	to{
+		transform: translate(5px ,0);
 	}
 }
 .quizSection {
@@ -1423,9 +1452,13 @@ export default {
 	color: black;
 	font-size: 2em;
 	img{
+
+	}
+	svg{
 		display: block;
-		width: 30px;
-		animation: next 1s linear infinite;	
+		height: 36px;
+		width: 36px;
+		animation: next 1s ease-in infinite alternate;;	
 	}
 }
 .toPrev{
@@ -1443,14 +1476,16 @@ export default {
 	justify-content: center;
 	align-items: center;
 	opacity: 1;
-	transition: opacity .6s linear;
+	transition: opacity .6s linear, color .6s linear;
 	margin-bottom: 0;
 	&:hover{
 		opacity: 1;
+		color: black;
 	}
 	img{
 		display: block;
 		width: 30px;
+		transform: rotatez(180deg);
 		// animation: next 1s linear infinite;	
 	}	
 }
@@ -1464,10 +1499,10 @@ export default {
 }
 @keyframes next {
 	from{
-		transform: translate(0, 0);
+		fill: #000000;
 	}
 	to{
-		transform: translate(5px, 0);
+		fill: transparent;
 	}
 }
 .quizCount{
@@ -1682,6 +1717,7 @@ export default {
 	.toPrev{
 		opacity: .6;
 		height: 50px;
+		// color: transparent;
 	}
 	.answerPage{
 		padding-top: 5%;

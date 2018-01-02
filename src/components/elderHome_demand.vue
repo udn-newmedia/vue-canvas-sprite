@@ -2,13 +2,9 @@
 	<div class="demand">
 		<h2 class="demandTitle">打造專屬「大人宅」</h2>	
 		<article class="explain">
-			<p><br/></p>
 			<p>國民健康署調查顯示，近六成長輩，最近一次發生跌傷的地點，都是在家裡。最常見的3個地點，是浴廁、臥室與客廳，跌倒當下，多只是純粹在走動。</p>
-			<p><br/></p>
 			<p>每次回家，爸媽的頭髮又更白一些，怎麼樣的關心，才最貼心？趕在過年前，幫老爸老媽觀察生活小細節，從小物到空間微改造，就能提升安全度。</p>
-			<p><br/></p>
-			<p>60歲以上長輩容易因為跌倒衍伸嚴重病痛，尤其是濕滑的浴廁空間。為習慣坐著洗澡的長輩，添購一張防滑洗澡椅、浴室進出口貼上止滑墊，長輩不必再步步驚心。</p>
-			<p><br/></p>
+			<p>60歲以上長輩容易因為跌倒衍生嚴重病痛，尤其是濕滑的浴廁空間。為習慣坐著洗澡的長輩，添購一張防滑洗澡椅、浴室進出口貼上止滑墊，長輩不必再步步驚心。</p>
 			<p>70歲的老爸媽行動漸緩，下床需要支撐物，外出也帶個手杖，預防了大大小小的外傷，也讓家人更安心，讓家成為真正的避風港。</p>
 		</article>		
 		<div class="forShare">
@@ -23,13 +19,14 @@
 			</div>
 			<div class="shopWindow">
 				<ul :style="{transform: 'translate('+ product.shopSlideIndex* -100 +'%, 0)'}"
-					@touchstart="handleTouchStart(index)"
-					@touchend="handleTouchEnd(index)"				
-					@transitionend="handleTransitionEnd"
-				>
+					@touchstart.passive="handleTouchStart(index)"
+					@touchend.passive="handleTouchEnd(index)"				
+					@transitionend="handleTransitionEnd">
 					<li v-for="(item, index) in product.productItem">
 						<div class="itemImg">
-							<img :src="item.itemImg"/>
+							<a target="_blank" :href="item.itemLink" @click="linkToUdnBuy(item.itemLink, item.itemName)">
+								<img :src="item.itemImg"/>
+							</a>
 							<span>{{item.itemSpec}}</span>
 						</div>	
 						<div class="itemTitle">
@@ -501,7 +498,7 @@ export default {
 	.shopping{
 		height: 45%;
 		width: 100%;
-		margin-top: 180px;
+		margin-top: 10%;
 		margin-left: auto;
 		margin-right: auto;
 		margin-bottom: 0;
