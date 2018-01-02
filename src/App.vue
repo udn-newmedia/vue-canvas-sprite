@@ -44,11 +44,14 @@ export default {
                 this.viewHeight = vh
             }
             console.log('this work')
-        }, 16, {leading: false, trailing: true}),
+        }, 133, {leading: false, trailing: true}),
     },
     created() {
         this.detectDevice()
         this.getWebTitle()        
+    },
+    berforeMount() {
+        window.removeEventListener('resize')
     },
     mounted() {
         this.resizeHeight()

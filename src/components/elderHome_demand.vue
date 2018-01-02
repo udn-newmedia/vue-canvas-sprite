@@ -24,9 +24,7 @@
 					@transitionend="handleTransitionEnd">
 					<li v-for="(item, index) in product.productItem">
 						<div class="itemImg">
-							<a target="_blank" :href="item.itemLink" @click="linkToUdnBuy(item.itemLink, item.itemName)">
-								<img :src="item.itemImg"/>
-							</a>
+							<img :src="item.itemImg"/>
 							<span>{{item.itemSpec}}</span>
 						</div>	
 						<div class="itemTitle">
@@ -34,10 +32,10 @@
 							<p>{{item.itemDescrip}}</p>
 						</div>
 						<a class="shoppingNow" target="_blank"
-						   :href="item.itemLink" 
-						   @click="linkToUdnBuy(item.itemLink, item.itemName)"
+						   :href="item.itemLink" @click="linkToUdnBuy(item.itemLink, item.itemName)"
 						>選購去</a>
-					</li>											
+						<a class="itemLink" target="_blank" :href="item.itemLink" @click="linkToUdnBuy(item.itemLink, item.itemName)"></a>
+					</li>									
 				</ul>
 				<div class="slideNav">
 					<span class="leftArrow" 
@@ -378,6 +376,14 @@ export default {
 		}
 	}
 }
+.itemLink{
+	position: absolute;
+	z-index: auto;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
 .itemImg{
 	position: relative;
 	width: 100%;
@@ -466,8 +472,10 @@ export default {
 	border: 1px solid rgba(black, .2);
 	color: rgba(black, .8);
 	transition: .6s;
+	z-index: 10;
 	&:hover{
 		border-color: black;
+		color: black;
 	}
 }
 @media screen and (max-width: 374px) {
