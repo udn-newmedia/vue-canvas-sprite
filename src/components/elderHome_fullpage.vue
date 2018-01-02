@@ -1484,6 +1484,7 @@ export default {
 	opacity: 1;
 	transition: opacity .6s linear, color .6s linear;
 	margin-bottom: 0;
+	white-space: nowrap;
 	&:hover{
 		opacity: 1;
 		color: black;
@@ -1492,7 +1493,6 @@ export default {
 		display: block;
 		width: 30px;
 		transform: rotatez(180deg);
-		// animation: next 1s linear infinite;	
 	}	
 }
 @keyframes prev {
