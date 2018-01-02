@@ -45,7 +45,7 @@ export default {
                 this.viewHeight = vh
             }
             console.log('this work')
-        }, 133, {leading: true, trailing: false}),
+        }, 16, {leading: true, trailing: false}),
     },
     created() {
         this.detectDevice()
@@ -53,7 +53,7 @@ export default {
     },
     mounted() {
         this.resizeHeight()
-        window.addEventListener('resize', this.resizeHeight)
+        window.addEventListener('resize', this.resizeHeight)    
     },
 };
 
