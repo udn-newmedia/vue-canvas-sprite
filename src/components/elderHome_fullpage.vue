@@ -4,24 +4,22 @@
 					backgroundColor: startBgc,
 					// backgroundImage: 'url('+ imgSrc.gradLine +')',
 				}">
+		<div class="grandma"
+			 :class="{stageTrans: stageTrans}"
+			 :style="{left: landing.grandma + '%',zIndex: isLast}">
+			<img :src="imgSrc.grandma" alt="奶奶">
+		</div>
+		<div class="herDog"
+			 v-if="dogIn"
+			 :class="{dogRush: dogRush, dogChase: dogChase, stageTrans: stageTrans}"
+			 :style="{left: landing.herDog + '%',zIndex: isLast}">
+			<img :src="imgSrc.dog" alt="狗">
+		</div>						
 		<div class="scrollContainer"
 			 :style="{ 
 			 			transition: scrollSpeed +'s linear',
 			 		    transform: 'translateX('+ quizIndex * -100 + '%)',
-			 		    zIndex: isLast,
-			 		}"
-			 >	
-			<div class="grandma"
-				 :class="{stageTrans: stageTrans}"
-				 :style="{left: landing.grandma + quizIndex * 100 + '%'}">
-				<img :src="imgSrc.grandma" alt="奶奶">
-			</div>
-			<div class="herDog"
-				 v-if="dogIn"
-				 :class="{dogRush: dogRush, dogChase: dogChase, stageTrans: stageTrans}"
-				 :style="{left: landing.herDog + quizIndex * 100 + '%'}">
-				<img :src="imgSrc.dog" alt="狗">
-			</div>			 
+			 		}">					 		
 			<div id="scane"
 				 @scroll.passive="showScrollLeft"
 				 @wheel.passive="handleMouseWheel"
@@ -116,7 +114,7 @@
 			<div class="quizCount"
 				 v-if="showStep"
 				 :style="{transform: 'translateX(' + quizIndex * 100 + '%)'}">
-				 <p class="toPrev" @click="lastQuiz(quizIndex)" v-if="countQuiz"><img :src="imgSrc.dArrow" alt="上一頁"> 上一頁</p>
+				 <p class="toPrev" @click="prevQuiz(quizIndex)" v-if="countQuiz"><img :src="imgSrc.dArrow" alt="上一頁"> 上一頁</p>
 				<span v-if="countQuiz"
 					  v-for="(navi, index) in quizs" 
 					  :class="{answered: navi.answered, answering: navi.answering}">
@@ -520,7 +518,7 @@ export default {
 				this.startBgc = '#fff'				
 			}
 		},
-		lastQuiz: _debounce(function(index) {
+		prevQuiz: _debounce(function(index) {
 			if(this.quizIndex !== 0){
 				this.handle_dequizIndex()	
 			}
@@ -696,7 +694,9 @@ export default {
 	},
 	beforeUpdate() {
 		if(this.quizIndex > this.quizs.length*2){
-			this.isLast = 50
+			_delay(() => {
+				this.isLast = 0	
+			}, 400)
 		}
 		if(this.quizIndex === 4) {
 			this.dogRush = true
@@ -761,6 +761,7 @@ export default {
 		height: 100%;
 		transform: translate(-100%, 0);
 		transition: .8s linear;
+		z-index: 30;
 	}
 }
 .stageTrans{
