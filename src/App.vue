@@ -52,7 +52,13 @@ export default {
         this.getWebTitle()        
     },
     mounted() {
+        const vm = this
         this.resizeHeight()
+        window.addEventListener('resize', function() {
+            console.log(vm)
+            vm.resizeHeight()
+            vm.$forceUpdate()
+        })
     },
 };
 
