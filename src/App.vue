@@ -9,6 +9,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import _throttle from 'lodash.throttle'
 // import $ from 'jquery'
 import elderHomeHeader from './components/elderHome_header.vue'
 import elderHomeFullpage from './components/elderHome_fullpage.vue'
@@ -36,24 +37,23 @@ export default {
             'detectDevice',
             'getWebTitle'
         ]),
+        resizeHeight: _throttle(function() {
+            let vh = window.innerHeight
+            if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
+                this.viewHeight = vh - 4
+            } else {
+                this.viewHeight = vh
+            }
+            console.log('this work')
+        }, 133, {leading: true, trailing: false}),
     },
     created() {
         this.detectDevice()
         this.getWebTitle()        
     },
     mounted() {
-        if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
-            this.viewHeight = window.innerHeight - 4
-        } else {
-            this.viewHeight = window.innerHeight
-        }        
-        window.addEventListener('resize', ()=> {
-            if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
-                this.viewHeight = window.innerHeight - 4
-            } else {
-                this.viewHeight = window.innerHeight
-            }
-        })   
+        this.resizeHeight()
+        window.addEventListener('resize', this.resizeHeight)
     },
 };
 
