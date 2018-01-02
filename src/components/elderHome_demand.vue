@@ -35,7 +35,7 @@
 						   :href="item.itemLink" @click="linkToUdnBuy(item.itemLink, item.itemName)"
 						>選購去</a>
 						<a class="itemLink" target="_blank" :href="item.itemLink" @click="linkToUdnBuy(item.itemLink, item.itemName)"></a>
-					</li>									
+					</li>													
 				</ul>
 				<div class="slideNav">
 					<span class="leftArrow" 
@@ -43,8 +43,8 @@
 						:style="{transform: 'translate('+ isSlide * -100 +'%, 0)', opacity: product.noLast}">﹤</span>
 					<span class="rightArrow"
 						@click.stop="handleRight(index)"
-						:style="{transform: 'translate('+ isSlide * 100 +'%, 0)', opacity: product.noNext}">﹥</span>
-				</div>				
+						:style="{transform: 'translate('+ isSlide * 100 +'%, 0)', opacity: product.noNext}">﹥</span>						
+				</div>
 			</div>
 			<hr>
 		</div>
@@ -357,6 +357,8 @@ export default {
 	z-index: 0;
 	overflow: hidden;
 	ul{
+		position: relative;
+		z-index: 5;
 		width: 70%;
 		height: 100%;
 		padding: 0;
@@ -378,7 +380,7 @@ export default {
 }
 .itemLink{
 	position: absolute;
-	z-index: auto;
+	z-index: 11;
 	top: 0;
 	left: 0;
 	height: 100%;
@@ -428,6 +430,7 @@ export default {
 		font-size: 16px;
 	}	
 }
+
 .slideNav{
 	position: absolute;
 	z-index: 10;
@@ -435,7 +438,6 @@ export default {
 	width: 100%;
 	height: 20%;
 	padding: 0 40px;
-	transition: opacity .2s ease-in-out;
 	span{
 		position: absolute;
 		height: 100%;
@@ -472,7 +474,7 @@ export default {
 	border: 1px solid rgba(black, .2);
 	color: rgba(black, .8);
 	transition: .6s;
-	z-index: 10;
+	z-index: 12;
 	&:hover{
 		border-color: black;
 		color: black;
