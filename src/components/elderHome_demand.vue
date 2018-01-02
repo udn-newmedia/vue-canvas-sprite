@@ -333,6 +333,7 @@ export default {
 		margin: 0 15px;
 		width: auto ;
 		border-color: black;
+		opacity: .2;
 	}		
 }
 .shopCategory{

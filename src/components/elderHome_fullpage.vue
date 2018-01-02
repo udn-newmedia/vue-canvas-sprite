@@ -69,7 +69,7 @@
 			<div class="quizSection"
 				 v-for="(quiz, index) in quizs">
 				<div class="question">
-					<span class="sug">{{quiz.sug}}</span>
+					<h5 class="sug"><span>{{quiz.sug}}</span></h5>
 					<h2>{{quiz.question.ask}}</h2>
 					<div class="optionBlock">
 						<p class="optionA"
@@ -767,7 +767,7 @@ export default {
 	transition: left .8s linear !important;
 }
 .grandma{
-	position: absolute;
+	position: fixed;
 	z-index: 48;
 	bottom: 39px;
 	left: -45%;
@@ -807,7 +807,7 @@ export default {
 	}
 }
 .herDog{
-	position: absolute;
+	position: fixed;
 	z-index: 49;
 	bottom: 39px;
 	left: -50%;
@@ -997,12 +997,17 @@ export default {
 	font-size: 14px;
 }
 .sug{
-	display: block;
-	border-bottom: .6px solid #9fa0a0;
-	margin-top: 10px;
-	font-size: 14px;
-	margin-left: auto;
-	margin-right: auto;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	width: 100%;
+	margin: 10px auto 0 auto;
+	span{
+		font-size: 14px;
+		border-bottom: .6px solid #9fa0a0;
+		text-align: center;
+		// text-decoration: #9fa0a0 underline;
+	}
 }
 .stage{
 	position: relative;
@@ -1456,8 +1461,8 @@ export default {
 	}
 	svg{
 		display: block;
-		height: 36px;
-		width: 36px;
+		height: 30px;
+		width: 30px;
 		animation: next 1s ease-in infinite alternate;;	
 	}
 }
@@ -1581,8 +1586,13 @@ export default {
 		}
 	}
 	.toPrev{
+		margin-left: 5px;
 		height: 25px;
 		font-size: 15px;
+		img{
+			height: 20px;
+			width: 20px;
+		}
 	}
 	.hint{
 		font-size: 12px;
