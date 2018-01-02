@@ -53,7 +53,6 @@ export default {
     },
     mounted() {
         this.resizeHeight()
-        window.addEventListener('resize', this.resizeHeight)    
     },
 };
 
